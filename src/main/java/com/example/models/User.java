@@ -84,11 +84,6 @@ public class User {
 	private int creditScore;
 	
 	
-	
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
 
 	
 	
