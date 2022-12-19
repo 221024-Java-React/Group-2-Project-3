@@ -19,9 +19,10 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("user")
 @CrossOrigin("*")
-@AllArgsConstructor(onConstructor=@__(@Autowired))
+@AllArgsConstructor
 public class UserController {
 
+	@Autowired
 	private UserService uServ;
 	
 	@PostMapping("/register")

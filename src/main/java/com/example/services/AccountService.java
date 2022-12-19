@@ -11,9 +11,10 @@ import lombok.AllArgsConstructor;
 
 @Service
 @Transactional
-@AllArgsConstructor(onConstructor=@__(@Autowired))
+@AllArgsConstructor
 public class AccountService {
 	
+	@Autowired
 	private AccountRepository accountRepo;
 	
 	public Account createAccount(Account a) {
