@@ -28,9 +28,9 @@ public class TransactionService {
 	public Transaction updateTransaction(Transaction updatedTransaction) {
 		Transaction originalTransaction = transactionRepo.findById(updatedTransaction.getId()).get();
 		
-		originalTransaction.setAccount(updatedTransaction.getAccount());
-		originalTransaction.setAmount(updatedTransaction.getAmount());
-		originalTransaction.setDescription(updatedTransaction.getDescription());
+		if(updatedTransaction.getAccount() != null) originalTransaction.setAccount(updatedTransaction.getAccount());
+		if(updatedTransaction.getAmount() != null) originalTransaction.setAmount(updatedTransaction.getAmount());
+		if(updatedTransaction.getDescription() != null) originalTransaction.setDescription(updatedTransaction.getDescription());
 		
 		return transactionRepo.save(originalTransaction);
 	}
