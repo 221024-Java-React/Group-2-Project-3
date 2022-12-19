@@ -6,6 +6,7 @@ const context = {
 	login: (email: string, password: string) => { },
     logout: () => { },
     register: (email: string, password: string) => { },
+    search: (value: string) => {},
 };
 
 export const AuthContext = React.createContext(context);
@@ -14,52 +15,79 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 	const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-	const loginHandler = async (email: string, password: string) => {
+	const loginHandler = async (userEmail: string, userPassword: string) => {
 
         try {
             
-            // TODO validate email & password
-
-			// TODO make axios calls
+            // const { data } = await axios.post(
+            //     'http://localhost:8000/user/login',
+            //     {
+            //         email: userEmail,
+            //         password: userPassword
+            //     }
+            // );
 
 			setLoggedIn(true);
 
 		} catch (e) {
 			console.log(e);
-		}
+        }
+        
+        // window.location.reload();
 	};
 
 	const logoutHandler = async () => {
 
 		try {
 
-			// TODO make axios calls
-
-			setLoggedIn(false);
+            // const { data } = await axios.post(
+            //     'http://localhost:8000/user/logout',
+            //     {}
+            // );
 
 		} catch (e) {
 			console.log(e);
-		}
+        }
+        
+        setLoggedIn(false);
+        // window.location.reload();
     };
     
-    const registerHandler = async (email: string, password: string) => {
-
-        const userEmail = email;
-        const userPassword = password;
+    const registerHandler = async (userEmail: string, userPassword: string) => {
 
         try {
-            const {data} = await axios.post(
-                'http://localhost:8000/user/register',
-                {
-                    email: userEmail,
-                    password: userPassword
-                }
-            )
+
+            // const { data } = await axios.post(
+            //     'http://localhost:8000/user/register',
+            //     {
+            //         email: userEmail,
+            //         password: userPassword
+            //     }
+            // );
+
         } catch (error) {
             console.log(error)   
         }
 
-        window.location.reload();
+        // window.location.reload();
+    }
+
+    const searchHandler = async (searchValue: string) => {
+
+        try {
+
+            // const { data } = await axios.post(
+            //     'http://localhost:8000/search',
+            //     {
+            //         value: searchValue,
+            //     }
+            // );
+
+        } catch (error) {
+            console.log(error)   
+        }
+
+        // window.location.reload();
     }
 
 	const contextValue = {
@@ -67,6 +95,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		login: loginHandler,
         logout: logoutHandler,
         register: registerHandler,
+        search: searchHandler,
 	};
 
 	return (
