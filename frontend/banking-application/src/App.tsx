@@ -7,6 +7,7 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 
 import './App.css';
+import Register from './Components/Register/Register';
 
 function App() {
 
@@ -23,9 +24,11 @@ function App() {
 			{!loggedIn && (
 				<>
 					<Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 					<Route path="*" element={<Login />} />
 				</>
 			)}
+   
 		</Routes>
 	);
 }

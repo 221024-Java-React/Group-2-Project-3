@@ -28,10 +28,10 @@ public class AccountService {
 	public Account updateAccount(Account updatedAccount) {
 		Account originalAccount = accountRepo.findById(updatedAccount.getId()).get();
 		
-		originalAccount.setBalance(updatedAccount.getBalance());
-		originalAccount.setInterestRate(updatedAccount.getInterestRate());
-		originalAccount.setTransactions(updatedAccount.getTransactions());
-		originalAccount.setType(updatedAccount.getType());
+		if(updatedAccount.getBalance() != null) originalAccount.setBalance(updatedAccount.getBalance());
+		if(updatedAccount.getInterestRate() != null) originalAccount.setInterestRate(updatedAccount.getInterestRate());
+		if(updatedAccount.getTransactions() != null) originalAccount.setTransactions(updatedAccount.getTransactions());
+		if(updatedAccount.getType() != null) originalAccount.setType(updatedAccount.getType());
 		
 		return accountRepo.save(originalAccount);
 	}
