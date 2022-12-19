@@ -1,28 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { AuthContext } from './Context/AuthContext';
+
+import Home from './Components/Home/Home';
+import Login from './Components/Login/Login';
+
 import './App.css';
 import Register from './Components/Register/Register';
 
 function App() {
-  return (
-    <div className="App">
-      <Register/>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
-  );
+
+	const { loggedIn } = useContext(AuthContext);
+
+	return (
+		<Routes>
+			{loggedIn && (
+				<>
+					<Route path="/" element={<Home />} />
+					<Route path="*" element={<Home />} />
+				</>
+			)}
+			{!loggedIn && (
+				<>
+					<Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+					<Route path="*" element={<Login />} />
+				</>
+			)}
+   
+		</Routes>
+	);
 }
 
 export default App;
