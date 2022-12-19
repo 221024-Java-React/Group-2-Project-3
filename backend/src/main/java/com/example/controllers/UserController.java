@@ -24,6 +24,12 @@ public class UserController {
 
 	@Autowired
 	private UserService uServ;
+
+	@GetMapping("/test")
+	public String getTest()
+	{
+		return "hello";
+	}
 	
 	@PostMapping("/register")
 	public User register(@RequestBody User u) {
