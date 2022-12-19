@@ -28,18 +28,16 @@ public class UserService {
 	public User updateUser(User updatedUser) {
 		User originalUser = userRepo.findById(updatedUser.getId()).get();
 		
-		
-		// This might be incorrect
-		originalUser.setFirstName(updatedUser.getFirstName());
-		originalUser.setLastName(updatedUser.getLastName());
-		originalUser.setPassword(updatedUser.getPassword());
-		originalUser.setAddress(updatedUser.getAddress());
-		originalUser.setCity(updatedUser.getCity());
-		originalUser.setState(updatedUser.getState());
-		originalUser.setZip(updatedUser.getZip());
-		originalUser.setPhone(updatedUser.getPhone());
-		originalUser.setOccupation(updatedUser.getOccupation());
-		originalUser.setIncome(updatedUser.getIncome());
+		if(updatedUser.getFirstName() != null) originalUser.setFirstName(updatedUser.getFirstName());
+		if(updatedUser.getLastName() != null) originalUser.setLastName(updatedUser.getLastName());
+		if(updatedUser.getPassword() != null) originalUser.setPassword(updatedUser.getPassword());
+		if(updatedUser.getAddress() != null) originalUser.setAddress(updatedUser.getAddress());
+		if(updatedUser.getCity() != null) originalUser.setCity(updatedUser.getCity());
+		if(updatedUser.getState() != null) originalUser.setState(updatedUser.getState());
+		if(updatedUser.getZip() != 0) originalUser.setZip(updatedUser.getZip());
+		if(updatedUser.getPhone() != null) originalUser.setPhone(updatedUser.getPhone());
+		if(updatedUser.getOccupation() != null) originalUser.setOccupation(updatedUser.getOccupation());
+		if(updatedUser.getIncome() != null) originalUser.setIncome(updatedUser.getIncome());
 		
 		return userRepo.save(originalUser);
 	}
