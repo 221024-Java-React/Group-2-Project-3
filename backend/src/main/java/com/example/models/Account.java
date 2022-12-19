@@ -55,5 +55,10 @@ public class Account {
 	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 	
+	public Account(User user, AccountType type) {
+		this.user = user;
+		this.type = type;
+	}
+	
 	
 }

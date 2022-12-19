@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.models.Account;
+import com.example.models.AccountType;
 import com.example.models.User;
+import com.example.repository.AccountRepository;
 import com.example.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +20,22 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	public User createUser(User u) {
+	@Autowired
+	private AccountRepository accountRepo;
+	
+	@Autowired
+	private AccountService accountServ;
+	
+	public User createUserAndAccounts(User u) {
+		
+		Account checking = new Account(u, AccountType.CHECKING);
+		Account savings = new Account(u, AccountType.SAVINGS);
+		Account loan = new Account(u, AccountType.LOAN);
+		
+		accountServ.createAccount(checking);
+		accountServ.createAccount(savings);
+		accountServ.createAccount(loan);
+		
 		return userRepo.save(u);
 	}
 	
