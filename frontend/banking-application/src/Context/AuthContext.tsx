@@ -1,9 +1,11 @@
 import React, { useState, FC } from "react";
+import axios from "axios";
 
 const context = {
 	loggedIn: false,
 	login: (email: string, password: string) => { },
-	logout: () => { },
+    logout: () => { },
+    register: (email: string, password: string) => { },
 };
 
 export const AuthContext = React.createContext(context);
@@ -38,12 +40,33 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		} catch (e) {
 			console.log(e);
 		}
-	};
+    };
+    
+    const registerHandler = async (email: string, password: string) => {
+
+        const userEmail = email;
+        const userPassword = password;
+
+        try {
+            const {data} = await axios.post(
+                'http://localhost:8000/user/register',
+                {
+                    email: userEmail,
+                    password: userPassword
+                }
+            )
+        } catch (error) {
+            console.log(error)   
+        }
+
+        window.location.reload();
+    }
 
 	const contextValue = {
 		loggedIn,
 		login: loginHandler,
-		logout: logoutHandler,
+        logout: logoutHandler,
+        register: registerHandler,
 	};
 
 	return (

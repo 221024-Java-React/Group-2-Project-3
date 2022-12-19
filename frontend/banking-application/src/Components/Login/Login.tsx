@@ -29,7 +29,7 @@ const Login = () => {
         <>
             <Navigation />
             <div className="login">
-                <h1>Login</h1>
+                <h2>Login</h2>
                 <form onSubmit={loginHandler}>
                     <input
                         type="text"
