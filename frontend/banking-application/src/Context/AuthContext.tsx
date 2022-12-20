@@ -1,5 +1,27 @@
 import React, { useState, FC } from "react";
 import axios from "axios";
+import User from "../Types/User";
+
+export const defaultUser: User = {
+    id: -1,
+    firstName: "Testfirst",
+    lastName: "Testlast",
+    email: "test@email.com",
+    password: "password",
+    type: 1,
+    accounts: [],
+    address: "123 Test St.",
+    city: "Testcity",
+    state: "TX",
+    zip: 11111,
+    phone: "111-111-1111",
+    occupation: "Test Occupation",
+    income: 50000,
+    dob: "1977/01/01",
+    ssn: 123456789,
+    usCitizen: true,
+    creditScore: 800
+}
 
 const context = {
 	loggedIn: false,
