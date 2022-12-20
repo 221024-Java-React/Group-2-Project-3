@@ -45,5 +45,12 @@ public class Transaction {
 	@Column(name="date")
 	private LocalDateTime date;
 	
+	public Transaction(Account account, BigDecimal amount, String description, LocalDateTime date) {
+		this.account = account;
+		this.amount = amount;
+		this.description = description;
+		this.date = date;
+	}
+	
 
 }
