@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.exceptions.InvalidCredentialsException;
 import com.example.models.Account;
 import com.example.models.AccountType;
 import com.example.models.User;
@@ -61,6 +62,15 @@ public class UserService {
 	public void deleteUser(Integer id) {
 		User u = userRepo.findById(id).get();
 		userRepo.delete(u);
+	}
+	
+	public User loginUser(User u) {
+		User userToLogin = userRepo.getByEmail(u.getEmail()).orElseThrow(InvalidCredentialsException::new);
+		
+		if(!userToLogin.getPassword().equals(u.getPassword())) {
+			throw new InvalidCredentialsException();
+		}
+		return userToLogin;
 	}
 	
 }

@@ -79,13 +79,13 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
         try {
 
-            // const { data } = await axios.post(
-            //     'http://localhost:8000/user/register',
-            //     {
-            //         email: userEmail,
-            //         password: userPassword
-            //     }
-            // );
+            const { data } = await axios.post(
+                'http://localhost:8000/user/register',
+                {
+                    email: userEmail,
+                    password: userPassword
+                }
+            );
 
         } catch (error) {
             console.log(error)   

@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import User from "../../Types/User";
-import { defaultUser } from "../../Context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Profile: React.FC = () => {
 
+    const {loggedInUser} = useContext(AuthContext);
 
     return (
         <div>
-            <h2>{defaultUser.firstName}</h2>
+            <h2>{loggedInUser.firstName}</h2>
         </div>
     )
 }

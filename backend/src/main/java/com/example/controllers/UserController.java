@@ -51,4 +51,9 @@ public class UserController {
 		uServ.deleteUser(id);
 	}
 	
+	@PostMapping("/login")
+	public User loginUser(@RequestBody User u) {
+		return uServ.loginUser(u);
+	}
+	
 }
