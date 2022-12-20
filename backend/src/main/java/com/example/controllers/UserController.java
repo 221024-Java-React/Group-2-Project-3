@@ -33,7 +33,7 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public User register(@RequestBody User u) {
-		return uServ.createUser(u);
+		return uServ.createUserAndAccounts(u);
 	}
 	
 	@GetMapping("")
