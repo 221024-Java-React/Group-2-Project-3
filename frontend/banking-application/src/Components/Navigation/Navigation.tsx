@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import "./Navigation.css";
 
 const Navigation = () => {
@@ -21,9 +24,10 @@ const Navigation = () => {
 
 	return (
 		<div className="navbar">
-			<Link to="/" className="navbar-brand">
-				<h1>Bank App</h1>
-			</Link>
+            
+			<Link to="/">
+				<h1 className="brand">MAJIC BANK</h1>
+            </Link>
 			{ loggedInUser.id != -1 && (
 				<div className="nav">
 					<form onSubmit={searchHandler}>
@@ -34,7 +38,7 @@ const Navigation = () => {
                         placeholder="Search"
                         onChange={searchValueHandler}
                     />
-					<button type="submit">Search</button>
+					<button className="icon-button" type="submit"><FontAwesomeIcon icon={faSearch} /></button>
 					</form>
 				</div>
 			)}
