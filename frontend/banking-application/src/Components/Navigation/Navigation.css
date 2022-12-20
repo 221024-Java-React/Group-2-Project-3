@@ -1,0 +1,33 @@
+.navbar {
+	background-color: var(--theme1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar-brand {
+	padding-left: 1em;
+}
+
+a:visited {
+	color: var(--black);
+}
+
+a:hover {
+	color: var(--dark-grey);
+}
+
+a {
+	text-decoration: none;
+}
+
+.navbar input {
+    background-color: white;
+}
+
+.navbar input:focus {
+	outline: none;
+	box-shadow: 0px 0px 0px 2px var(--dark-grey);
+	background-color: white;
+}
+
