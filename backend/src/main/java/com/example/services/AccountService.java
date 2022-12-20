@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.models.Account;
 import com.example.models.AccountType;
 import com.example.models.Transaction;
-import com.example.models.User;
 import com.example.repository.AccountRepository;
 
 import lombok.AllArgsConstructor;
