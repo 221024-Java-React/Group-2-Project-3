@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './Styling/Button1.css';
+import './Styling/Button2.css';
+import './Styling/Button3.css';
+import './Styling/Button4.css';
+import './Styling/IconButton.css';
+import './Styling/LoginButton.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './Context/AuthContext';

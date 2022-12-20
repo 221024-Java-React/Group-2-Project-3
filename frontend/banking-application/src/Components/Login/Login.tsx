@@ -47,10 +47,12 @@ const Login = () => {
                             placeholder="Password"
                             onChange={passwordHandler}
                         />
-                        <button type="submit">Login</button>
+                        <button className="login-button" type="submit">Login</button>
                     </form>
                     <h3 className="member">Don't Have An Account?</h3>
-                    <Link to="/register"><button>Sign Up</button></Link>
+                    <div className="form">
+                        <Link className="login-button" to="/register">Create An Account</Link>
+                    </div>
                 </div>
             </div>
         </>
