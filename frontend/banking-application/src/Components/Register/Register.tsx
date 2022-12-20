@@ -46,10 +46,10 @@ const Register: React.FC = () => {
 							placeholder="Password"
 							onChange={passwordHandler}
 						/>
-						<button type="submit">Register</button>
+						<button className="login-button" type="submit">Create Account</button>
 					</form>
-					<h3 className="member">Already Have An Account?</h3>
-					<Link to="/login"><button>Login</button></Link>
+                    <h3 className="member">Already Have An Account?</h3>
+                    <div className="form"><Link className="login-button" to="/login">Login</Link></div>
 				</div>
 			</div>
 		</>
