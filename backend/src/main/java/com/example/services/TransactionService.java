@@ -19,11 +19,6 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepo;
 	
-	@Autowired
-	private AccountRepository accountRepo;
-	
-	@Autowired
-	private AccountService accountServ;
 	
 	public Transaction createTransaction(Transaction t) {
 		return transactionRepo.save(t);

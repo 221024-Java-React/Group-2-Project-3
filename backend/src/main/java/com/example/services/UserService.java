@@ -20,8 +20,6 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private AccountRepository accountRepo;
 	
 	@Autowired
 	private AccountService accountServ;

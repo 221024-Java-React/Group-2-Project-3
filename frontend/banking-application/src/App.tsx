@@ -12,18 +12,18 @@ import Profile from './Components/Profile/Profile';
 
 function App() {
 
-	const { loggedIn } = useContext(AuthContext);
+	const { loggedInUser } = useContext(AuthContext);
 
 	return (
 		<Routes>
-			{loggedIn && (
+			{loggedInUser.id != -1 && (
 				<>
 					<Route path="/" element={<Home />} />
 					<Route path="*" element={<Home />} />
 					<Route path='/profile' element={<Profile />} />
 				</>
 			)}
-			{!loggedIn && (
+			{loggedInUser.id === -1 && (
 				<>
 					<Route path="/login" element={<Login />} />
           			<Route path="/register" element={<Register />} />

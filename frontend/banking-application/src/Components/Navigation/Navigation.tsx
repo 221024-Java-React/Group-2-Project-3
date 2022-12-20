@@ -7,7 +7,7 @@ import "./Navigation.css";
 const Navigation = () => {
 
 	const [searchValue, setSearchValue] = useState<string>("");
-	const { loggedIn, search } = useContext(AuthContext);
+	const { loggedInUser, search } = useContext(AuthContext);
 
 	const searchValueHandler = (event: any) => {
         setSearchValue(event.target.value);
@@ -24,7 +24,7 @@ const Navigation = () => {
 			<Link to="/" className="navbar-brand">
 				<h1>Bank App</h1>
 			</Link>
-			{ loggedIn && (
+			{ loggedInUser.id != -1 && (
 				<div className="nav">
 					<form onSubmit={searchHandler}>
 					<input
