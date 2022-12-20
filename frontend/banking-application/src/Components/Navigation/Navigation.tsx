@@ -34,7 +34,7 @@ const Navigation = () => {
                         placeholder="Search"
                         onChange={searchValueHandler}
                     />
-					<button type="submit">Search Icon</button>
+					<button type="submit">Search</button>
 					</form>
 				</div>
 			)}

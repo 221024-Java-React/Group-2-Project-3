@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
 import Navigation from "../Navigation/Navigation";
@@ -28,28 +29,28 @@ const Login = () => {
     return (
         <>
             <Navigation />
-            <div className="login">
-                <h2>Login</h2>
-                <form onSubmit={loginHandler}>
-                    <input
-                        type="text"
-                        name="email"
-                        value={email}
-                        placeholder="Email"
-                        onChange={emailHandler}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={passwordHandler}
-                    />
-                    <button type="submit">Login</button>
-                </form>
-                <div className="member">
-                    <h4>Don't Have An Account?</h4>
-                    <a href="/register">Sign Up</a>
+            <div className="content">
+                <div className="login box">
+                    <h2>Login</h2>
+                    <form className="form" onSubmit={loginHandler}>
+                        <input
+                            type="text"
+                            name="email"
+                            value={email}
+                            placeholder="Email"
+                            onChange={emailHandler}
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={passwordHandler}
+                        />
+                        <button type="submit">Login</button>
+                    </form>
+                    <h3 className="member">Don't Have An Account?</h3>
+                    <Link to="/register"><button>Sign Up</button></Link>
                 </div>
             </div>
         </>
