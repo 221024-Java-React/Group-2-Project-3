@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.models.Account;
 import com.example.models.Transaction;
+import com.example.repository.AccountRepository;
 import com.example.repository.TransactionRepository;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +18,12 @@ public class TransactionService {
 
 	@Autowired
 	private TransactionRepository transactionRepo;
+	
+	@Autowired
+	private AccountRepository accountRepo;
+	
+	@Autowired
+	private AccountService accountServ;
 	
 	public Transaction createTransaction(Transaction t) {
 		return transactionRepo.save(t);
