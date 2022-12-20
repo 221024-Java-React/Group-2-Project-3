@@ -8,6 +8,7 @@ import Login from './Components/Login/Login';
 
 import './App.css';
 import Register from './Components/Register/Register';
+import Profile from './Components/Profile/Profile';
 
 function App() {
 
@@ -19,12 +20,13 @@ function App() {
 				<>
 					<Route path="/" element={<Home />} />
 					<Route path="*" element={<Home />} />
+					<Route path='/profile' element={<Profile />} />
 				</>
 			)}
 			{!loggedIn && (
 				<>
 					<Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          			<Route path="/register" element={<Register />} />
 					<Route path="*" element={<Login />} />
 				</>
 			)}
