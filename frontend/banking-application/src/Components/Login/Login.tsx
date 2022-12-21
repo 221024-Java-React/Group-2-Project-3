@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import Advertisement from "../Advertisement/Advertisement";
+import Background from "../Background/Background";
 
 import Navigation from "../Navigation/Navigation";
 
@@ -29,10 +31,7 @@ const Login = () => {
 	return (
 		<>
 			<div className="page">
-				<div className="background">
-					<div className="background1"></div>
-					<div className="background2"></div>
-				</div>
+				<Background />
 				<Navigation />
 				<div className="content">
 					<div className="login box">
@@ -59,13 +58,8 @@ const Login = () => {
 							<Link className="login-button" to="/register">Create An Account</Link>
 						</div>
 					</div>
-					<div className="advertisement">
-						<h2>Sign Up Today</h2>
-						<p>Sign up today to create your Checkings Savings & Loan Accounts!</p>
-					</div>
+					<Advertisement />
 				</div>
-				
-				
 			</div>
 		</>
 	);

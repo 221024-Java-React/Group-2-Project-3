@@ -7,8 +7,6 @@ import './Styling/Button3.css';
 import './Styling/Button4.css';
 import './Styling/IconButton.css';
 import './Styling/LoginButton.css';
-import './Styling/Advertisement.css';
-import './Styling/Background.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './Context/AuthContext';
