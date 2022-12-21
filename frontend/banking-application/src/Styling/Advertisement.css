@@ -1,0 +1,14 @@
+.advertisement {
+	/* border: 5px solid var(--grey); */
+	border-radius: 1px;
+	/* position: relative; */
+	display: inline-block;
+	padding: 1em;
+	background-color: var(--primary-theme1);
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 20%;
+    /* width: 20%; */
+    /* margin: auto; */
+
+}

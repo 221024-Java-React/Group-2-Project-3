@@ -1,5 +1,4 @@
-import React from 'react';
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthContext } from './Context/AuthContext';
 
@@ -16,7 +15,7 @@ function App() {
 
 	return (
 		<Routes>
-			{loggedInUser.id != -1 && (
+			{loggedInUser.id !== -1 && (
 				<>
 					<Route path="/" element={<Home />} />
 					<Route path="*" element={<Home />} />
