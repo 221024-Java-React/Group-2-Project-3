@@ -1,6 +1,7 @@
 import React, { useState, FC } from "react";
 import axios from "axios";
 import User from "../Types/User";
+import { Account } from "../Types/Account";
 
 export const defaultUser: User = {
     id: -1,
@@ -23,12 +24,16 @@ export const defaultUser: User = {
     creditScore: -1
 }
 
+
+
 const context = {
 	loggedInUser: defaultUser,
+  //  userAccounts: [],
 	login: (email: string, password: string) => { },
     logout: () => { },
     register: (email: string, password: string) => { },
     search: (value: string) => {},
+    findAccounts: () => { }
 };
 
 export const AuthContext = React.createContext(context);
@@ -36,6 +41,9 @@ export const AuthContext = React.createContext(context);
 export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children }) => {
 
 	const [loggedInUser, setLoggedInUser] = useState<User>(defaultUser);
+
+    const [userAccounts, setUserAccounts] = useState<Account[]>([]);
+
 
 	const loginHandler = async (userEmail: string, userPassword: string) => {
 
@@ -112,12 +120,31 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         // window.location.reload();
     }
 
+    const findAccountsHandler = async () => {
+
+        try {
+
+            const { data } = await axios.get<Account[]>(
+                `http://localhost:8000/account/all?id=${loggedInUser.id}`
+
+            );
+
+            setUserAccounts(data);
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
 	const contextValue = {
 		loggedInUser,
+        userAccounts,
 		login: loginHandler,
         logout: logoutHandler,
         register: registerHandler,
         search: searchHandler,
+        findAccounts: findAccountsHandler
 	};
 
 	return (
