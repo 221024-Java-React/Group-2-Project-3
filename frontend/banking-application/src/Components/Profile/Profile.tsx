@@ -20,15 +20,15 @@ const Profile: React.FC = () => {
         <div>
             <h2>Welcome, {loggedInUser.firstName}</h2>
 
-            {/* <button onClick={findAccounts}>Retrieve Accounts</button> */}
-
-            {userAccounts.map((account)=> {
-                return (
+            <div className="card-flex">
+                {userAccounts.map((account)=> {
+                    return (
+                        
+                        <AccountCard key={account.type} account={account} />
+                    )
                     
-                    <AccountCard key={account.type} account={account} />
-                )
-                
-            })}
+                })}
+            </div>
             
         </div>
     )
