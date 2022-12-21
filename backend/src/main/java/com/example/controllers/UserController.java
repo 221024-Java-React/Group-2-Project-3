@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,6 +45,18 @@ public class UserController {
 	@PutMapping("/update")
 	public User updateUser(@RequestBody User u) {
 		return uServ.updateUser(u);
+	}
+	
+	@PutMapping("/update-password")
+	public User passUpdate(@RequestBody User u) {
+		
+		return uServ.updatePassword(u);
+	}
+	
+	@PutMapping("/reset-password")
+	public User passReset(@RequestBody User u) {
+		
+		return uServ.resetPassword(u);
 	}
 	
 	@DeleteMapping("/delete")

@@ -1,6 +1,7 @@
 package com.example.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,28 @@ public class UserService {
 	public User readUser(Integer id) {
 		return userRepo.findById(id).get();
 	}
+	
+	public User updatePassword(User updatedUser) {
+		
+		User originalUser = userRepo.findById(updatedUser.getId()).get();
+		
+		originalUser.setPassword(updatedUser.getPassword());
+		
+		return userRepo.save(originalUser);
+	}
+	
+	public User resetPassword(User updatedUser) {
+		
+		User originalUser = userRepo.getByEmail(updatedUser.getEmail()).get();
+		
+		if (updatedUser.getSsn() == originalUser.getSsn()) {
+			originalUser.setPassword(updatedUser.getPassword());
+			return userRepo.save(originalUser);
+		} else {
+			throw new InvalidCredentialsException();
+		}
+	}
+	
 	
 	public User updateUser(User updatedUser) {
 		User originalUser = userRepo.findById(updatedUser.getId()).get();
