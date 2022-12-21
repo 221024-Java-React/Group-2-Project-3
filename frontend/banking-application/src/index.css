@@ -16,6 +16,10 @@ code {
 
 h2 {
 	font-size: 30px;
+}
+
+.box h2 {
+	font-size: 30px;
     color: white;
     margin: 0;
     margin-bottom: 0.5em;
