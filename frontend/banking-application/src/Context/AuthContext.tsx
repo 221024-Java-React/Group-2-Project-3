@@ -24,11 +24,40 @@ export const defaultUser: User = {
     creditScore: -1
 }
 
+const defaultAccount: Account[] = [
+    {   
+        id: -1,
+        user: defaultUser,
+        balance: -1,
+        type: 0,
+        transactions: [],
+        interestRate: -1,
+        creationDate: ""
+    },
+    {   
+        id: -1,
+        user: defaultUser,
+        balance: -1,
+        type: 1,
+        transactions: [],
+        interestRate: -1,
+        creationDate: ""
+    },
+    {   
+        id: -1,
+        user: defaultUser,
+        balance: -1,
+        type: 2,
+        transactions: [],
+        interestRate: -1,
+        creationDate: ""
+    }
+]
 
 
 const context = {
 	loggedInUser: defaultUser,
-  //  userAccounts: [],
+    userAccounts: defaultAccount,
 	login: (email: string, password: string) => { },
     logout: () => { },
     register: (email: string, password: string) => { },
@@ -125,10 +154,17 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         try {
 
             const { data } = await axios.get<Account[]>(
-                `http://localhost:8000/account/all?id=${loggedInUser.id}`
+                `http://localhost:8000/account/all?id=${loggedInUser.id}`,
+                {
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
 
             );
-
+            
+            console.log("api call")
+            console.log(data)
             setUserAccounts(data);
 
         } catch (error) {

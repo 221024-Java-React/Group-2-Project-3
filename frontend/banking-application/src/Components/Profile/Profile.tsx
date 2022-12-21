@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import AccountCard from "../AccountCard/AccountCard";
+import { Account } from "../../Types/Account";
 
 const Profile: React.FC = () => {
 
@@ -10,36 +11,29 @@ const Profile: React.FC = () => {
     
     useEffect(() => {
         findAccounts()
+        
     }, [])
+
+    console.log(loggedInUser)
 
     return (
         <div>
             <h2>Welcome, {loggedInUser.firstName}</h2>
 
-            {/*<button onClick={findAccounts}>Retrieve Accounts</button> */}
+            {/* <button onClick={findAccounts}>Retrieve Accounts</button> */}
 
-            {/* productData.map((product, index) => {
-                            return (
-                                <ProductCard key={index} itemId={product.itemId} imageUrl={product.imageUrl} name={product.name} description={product.description} price={product.price} amount={1} />
-                            );
-                        }) */}
-            {userAccounts.map((account, index) => {
+            {userAccounts.map((account)=> {
                 return (
-                    <AccountCard key={index} accountType={} />
+                    
+                    <AccountCard key={account.type} account={account} />
                 )
+                
             })}
             
-            )
-
-
-            <AccountCard /> {/* How can we pass in CHECKING as the account type? */}
-
-            <AccountCard /> {/* How can we pass in SAVINGS as the account type? */}
-
-            <AccountCard /> {/* How can we pass in LOAN as the account type? */}
-
         </div>
     )
+
+        
 }
 
 export default Profile;

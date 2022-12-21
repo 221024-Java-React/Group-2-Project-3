@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import { Account } from "../../Types/Account";
 
-const AccountCard: React.FC = () => {
-
-    const {loggedInUser} = useContext(AuthContext);
+const AccountCard: React.FC<{account: Account}> = ({account}) => {
 
     return (
         <div>
             {/* Render name of account type here*/}
 
-            <h2><em>Balance</em></h2>
-            <h2>${loggedInUser.accounts[0].balance}</h2>
+            <h1>{}</h1>
+            <h2>{account.type}</h2>
+            <h2>{account.balance}</h2>
         </div>
     )
 }
