@@ -28,6 +28,9 @@ const Navigation = () => {
 			<Link to="/">
 				<h1 className="brand">MAJIC BANK</h1>
             </Link>
+			<Link to="/profile">
+				<h1>Go to /profile</h1>
+			</Link>
 			{ loggedInUser.id != -1 && (
 				<div className="nav">
 					<form onSubmit={searchHandler}>
