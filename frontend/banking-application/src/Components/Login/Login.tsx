@@ -29,6 +29,10 @@ const Login = () => {
 	return (
 		<>
 			<div className="page">
+				<div className="background">
+					<div className="background1"></div>
+					<div className="background2"></div>
+				</div>
 				<Navigation />
 				<div className="content">
 					<div className="login box">
@@ -60,7 +64,8 @@ const Login = () => {
 						<p>Sign up today to create your Checkings Savings & Loan Accounts!</p>
 					</div>
 				</div>
-				<div className="background"></div>
+				
+				
 			</div>
 		</>
 	);
