@@ -7,5 +7,5 @@ import com.example.models.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-
+	
 }
