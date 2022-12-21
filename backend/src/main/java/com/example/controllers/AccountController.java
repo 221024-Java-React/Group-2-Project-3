@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +35,11 @@ public class AccountController {
 	@GetMapping("")
 	public Account readAccount(@RequestParam(name="id") Integer id) {
 		return aServ.readAccount(id);
+	}
+	
+	@GetMapping("/all")
+	public List<Account> readAllAccountsByUserId(@RequestParam(name="id") Integer id) {
+		return aServ.readAccountByUserId(id);
 	}
 	
 	@PutMapping("/update")

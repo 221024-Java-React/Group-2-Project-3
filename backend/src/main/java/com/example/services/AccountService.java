@@ -2,15 +2,15 @@ package com.example.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.models.Account;
-import com.example.models.AccountType;
 import com.example.models.Transaction;
-import com.example.models.User;
 import com.example.repository.AccountRepository;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +35,18 @@ public class AccountService {
 		return accountRepo.findById(id).get();
 	}
 	
+	public List<Account> readAccountByUserId(Integer id) {
+		List<Account> allAccounts = accountRepo.findAll();
+		List<Account> userAccounts = new LinkedList<>();
+		
+		for(Account account : allAccounts) {
+			if(account.getUser().getId() == id) {
+				userAccounts.add(account);
+			}
+		}
+		
+		return userAccounts;
+	}
 	
 	public Account adjustBalance(Account updatedAccount) {
 		return adjustBalance(updatedAccount, BigDecimal.ZERO);

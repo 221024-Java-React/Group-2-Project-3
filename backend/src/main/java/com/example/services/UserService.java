@@ -8,7 +8,6 @@ import com.example.exceptions.InvalidCredentialsException;
 import com.example.models.Account;
 import com.example.models.AccountType;
 import com.example.models.User;
-import com.example.repository.AccountRepository;
 import com.example.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -70,6 +69,7 @@ public class UserService {
 		if(!userToLogin.getPassword().equals(u.getPassword())) {
 			throw new InvalidCredentialsException();
 		}
+		
 		return userToLogin;
 	}
 	
