@@ -62,7 +62,8 @@ const context = {
     logout: () => { },
     register: (email: string, password: string) => { },
     search: (value: string) => {},
-    findAccounts: () => { }
+    findAccounts: () => { },
+    updateInfo: (user: User) => {}
 };
 
 export const AuthContext = React.createContext(context);
@@ -91,8 +92,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		} catch (e) {
 			console.log(e);
         }
-        
-        // window.location.reload();
 	};
 
 	const logoutHandler = async () => {
@@ -109,7 +108,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         }
         
         setLoggedInUser(defaultUser);
-        // window.location.reload();
     };
     
     const registerHandler = async (userEmail: string, userPassword: string) => {
@@ -127,8 +125,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         } catch (error) {
             console.log(error)   
         }
-
-        // window.location.reload();
     }
 
     const searchHandler = async (searchValue: string) => {
@@ -145,8 +141,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         } catch (error) {
             console.log(error)   
         }
-
-        // window.location.reload();
     }
 
     const findAccountsHandler = async () => {
@@ -160,12 +154,27 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
                         Accept: 'application/json'
                     }
                 }
-
             );
-            
-            console.log("api call")
-            console.log(data)
+
             setUserAccounts(data);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const updateInfoHandler = async (user : User) => {
+
+        try {
+
+            // TODO make axios call
+
+            // const { data } = await axios.get<User>(
+            //     `http://localhost:8000/user/updateInfo`, user
+
+            // );
+            
+            // setLoggedInUser(data);
 
         } catch (error) {
             console.log(error)
@@ -180,7 +189,8 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         logout: logoutHandler,
         register: registerHandler,
         search: searchHandler,
-        findAccounts: findAccountsHandler
+        findAccounts: findAccountsHandler,
+        updateInfo: updateInfoHandler
 	};
 
 	return (

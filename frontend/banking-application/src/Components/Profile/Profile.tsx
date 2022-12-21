@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import AccountCard from "../AccountCard/AccountCard";
 
 import './Profile.css';
 import Background from "../Background/Background";
 import Navigation from "../Navigation/Navigation";
+import User from "../../Types/User";
 
 const Profile: React.FC = () => {
 
@@ -34,13 +34,28 @@ const Profile: React.FC = () => {
 	const ssnHandler = (event: any) => { setSsn(event.target.value); };
 	const usCitizenHandler = (event: any) => { setUsCitizen(event.target.value); };
 
-	const { loggedInUser } = useContext(AuthContext);
+	const { loggedInUser, updateInfo } = useContext(AuthContext);
 
 
 	const updateHandler = (event: any) => {
 		event.preventDefault();
 
-		// updateInfo(email, password);
+		const user: User = loggedInUser;
+
+		user.firstName = firstName;
+		user.lastName = lastName;
+		user.address = address;
+		user.city = city;
+		user.state = state;
+		user.zip = +zip;
+		user.phone = phone;
+		user.occupation = occupation;
+		user.income = +income;
+		user.dob = dob;
+		user.ssn = +ssn;
+		user.usCitizen = usCitizen.toLowerCase() == "true";
+
+		updateInfo(user);
 	};
 
 	return (
