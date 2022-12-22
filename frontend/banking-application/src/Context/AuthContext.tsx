@@ -59,13 +59,16 @@ const context = {
 	loggedInUser: defaultUser,
 	userAccounts: defaultAccount,
 	login: (email: string, password: string) => { },
-	logout: () => { },
-	register: (email: string, password: string) => { },
-	search: (value: string) => { },
-	findAccounts: () => { },
-	updateInfo: () => { },
+
+    logout: () => { },
+    register: (email: string, password: string) => { },
+    resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
+    search: (value: string) => {},
+    findAccounts: () => { },
+    updateInfo: () => {},
 	depositFunds: (account: Account) => { },
 	withdrawFunds: (account: Account) => { },
+
 };
 
 export const AuthContext = React.createContext(context);
@@ -124,10 +127,31 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 				}
 			);
 
+
 		} catch (error) {
 			console.log(error)
 		}
 	}
+
+
+    const resetPasswordHandler = async (userEmail: string, userSsn: string, userPassword: string) => {
+
+        try {
+
+            const { data } = await axios.put(
+                'http://localhost:8000/user/reset-password',
+                {
+                    email: userEmail,
+                    ssn: userSsn,
+                    password: userPassword
+                }
+            );
+
+        } catch (error) {
+            console.log(error)   
+        }
+    }
+
 
 	const searchHandler = async (searchValue: string) => {
 
@@ -224,11 +248,12 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		loggedInUser,
 		userAccounts,
 		login: loginHandler,
-		logout: logoutHandler,
-		register: registerHandler,
-		search: searchHandler,
-		findAccounts: findAccountsHandler,
-		updateInfo: updateInfoHandler,
+        logout: logoutHandler,
+        register: registerHandler,
+        resetPassword: resetPasswordHandler,
+        search: searchHandler,
+        findAccounts: findAccountsHandler,
+        updateInfo: updateInfoHandler,
 		depositFunds: depositFundsHandler,
 		withdrawFunds: withdrawFundsHandler,
 	};

@@ -27,6 +27,7 @@ public class AccountService {
 	private TransactionService transactionServ;
 
 	public Account createAccount(Account a) {
+		a.setBalance(BigDecimal.ZERO);
 		return accountRepo.save(a);
 	}
 

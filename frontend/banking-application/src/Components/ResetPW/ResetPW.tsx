@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
@@ -6,26 +7,28 @@ import Background from "../Background/Background";
 
 import Navigation from "../Navigation/Navigation";
 
-import "./Login.css";
-
-const Login = () => {
+const ResetPW: React.FC = () => {
 
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const { login } = useContext(AuthContext);
+    const [ssn, setSsn] = useState<string>("");
+	const { resetPassword } = useContext(AuthContext);
 
 	const emailHandler = (event: any) => {
 		setEmail(event.target.value);
+	};
+
+    const ssnHandler = (event: any) => {
+		setSsn(event.target.value);
 	};
 
 	const passwordHandler = (event: any) => {
 		setPassword(event.target.value);
 	};
 
-	const loginHandler = (event: any) => {
+	const resetHandler = (event: any) => {
 		event.preventDefault();
-
-		login(email, password);
+		resetPassword(email, ssn, password);
 	};
 
 	return (
@@ -34,9 +37,9 @@ const Login = () => {
 				<Background />
 				<Navigation />
 				<div className="content">
-					<div className="login box">
-						<h2>Login</h2>
-						<form className="form" onSubmit={loginHandler}>
+					<div className="register box">
+						<h2>Reset Password</h2>
+						<form className="form" onSubmit={resetHandler}>
 							<input
 								type="text"
 								name="email"
@@ -46,27 +49,28 @@ const Login = () => {
 							/>
 							<input
 								type="password"
+								name="ssn"
+								value={ssn}
+								placeholder="Social Security #"
+								onChange={ssnHandler}
+							/>
+                            <input
+								type="password"
 								name="password"
 								value={password}
-								placeholder="Password"
+								placeholder="New Password"
 								onChange={passwordHandler}
 							/>
-							<button className="login-button" type="submit">Login</button>
+							<button className="login-button" type="submit">Reset Password</button>
 						</form>
-						<h3 className="member">Forgot Your Password?</h3>
-						<div className="form">
-							<Link className="login-button" to="/reset">Reset Password</Link>
-						</div>
-						<h3 className="member">Don't Have An Account?</h3>
-						<div className="form">
-							<Link className="login-button" to="/register">Create An Account</Link>
-						</div>
+						<h3 className="member">Return to Login Page</h3>
+						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
 					</div>
 					<Advertisement />
 				</div>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default Login;
+export default ResetPW
