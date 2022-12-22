@@ -18,8 +18,17 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const depositUpdateHandler = (event: any) => {
 		event.preventDefault();
 
-		if (deposit) {
-			account.balance = Math.abs(+deposit);
+		let startIndex = 0;
+
+		while (startIndex < deposit.length && isNaN(+deposit[startIndex]))
+			startIndex++;
+		
+		let endIndex = deposit.indexOf('.');
+
+		endIndex = (endIndex >= 0 && endIndex + 3 < deposit.length) ? (endIndex + 3) : deposit.length;
+
+		if (startIndex < endIndex) {
+			account.balance = Math.abs(parseFloat(deposit.substring(startIndex, endIndex)));
 			depositFunds(account);
 			updateBalance(balance + account.balance);
 		}
@@ -28,8 +37,18 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const withdrawUpdateHandler = (event: any) => {
 		event.preventDefault();
 
-		if (withdraw) {
-			account.balance = Math.abs(+withdraw);
+		let startIndex = 0;
+
+		while (startIndex < withdraw.length && isNaN(+withdraw[startIndex]))
+			startIndex++;
+		
+		let endIndex = withdraw.indexOf('.');
+
+		endIndex = (endIndex >= 0 && endIndex + 3 < withdraw.length) ? (endIndex + 3) : withdraw.length;
+
+		if (startIndex < endIndex) {
+			account.balance = Math.abs(parseFloat(withdraw.substring(startIndex, endIndex)));
+			account.balance = Math.floor(account.balance * 100) / 100;
 			withdrawFunds(account);
 			updateBalance(balance - account.balance);
 		}
@@ -48,12 +67,12 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			<h2>Update</h2>
 			<h3>Deposit</h3>
 			<form className="form" onSubmit={depositUpdateHandler}>
-				<input type="text" name="deposit" value={deposit} placeholder="Deposit $" onChange={depositHandler} />
+				<input type="text" name="deposit" value={deposit} placeholder="$100.00" onChange={depositHandler} />
 				<button className="login-button" type="submit">Deposit Funds</button>
 			</form>
 			<h3>Withdraw</h3>
 			<form className="form" onSubmit={withdrawUpdateHandler}>
-				<input type="text" name="withdraw" value={withdraw} placeholder="Withdraw $" onChange={withdrawHandler} />
+				<input type="text" name="withdraw" value={withdraw} placeholder="$100.00" onChange={withdrawHandler} />
 				<button className="login-button" type="submit">Withdraw Funds</button>
 			</form>
 		</div>
