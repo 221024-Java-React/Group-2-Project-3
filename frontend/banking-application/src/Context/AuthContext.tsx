@@ -65,7 +65,7 @@ const context = {
     resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
     search: (value: string) => {},
     findAccounts: () => { },
-    updateInfo: (user: User) => {},
+    updateInfo: () => {},
 	depositFunds: (account: Account) => { },
 	withdrawFunds: (account: Account) => { },
 
