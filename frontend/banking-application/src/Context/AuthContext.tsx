@@ -61,6 +61,7 @@ const context = {
 	login: (email: string, password: string) => { },
     logout: () => { },
     register: (email: string, password: string) => { },
+    resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
     search: (value: string) => {},
     findAccounts: () => { },
     updateInfo: (user: User) => {}
@@ -118,6 +119,24 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
                 'http://localhost:8000/user/register',
                 {
                     email: userEmail,
+                    password: userPassword
+                }
+            );
+
+        } catch (error) {
+            console.log(error)   
+        }
+    }
+
+    const resetPasswordHandler = async (userEmail: string, userSsn: string, userPassword: string) => {
+
+        try {
+
+            const { data } = await axios.put(
+                'http://localhost:8000/user/reset-password',
+                {
+                    email: userEmail,
+                    ssn: userSsn,
                     password: userPassword
                 }
             );
@@ -188,6 +207,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		login: loginHandler,
         logout: logoutHandler,
         register: registerHandler,
+        resetPassword: resetPasswordHandler,
         search: searchHandler,
         findAccounts: findAccountsHandler,
         updateInfo: updateInfoHandler

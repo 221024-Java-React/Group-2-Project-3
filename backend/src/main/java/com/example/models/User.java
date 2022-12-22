@@ -47,7 +47,7 @@ public class User {
 	@Enumerated(EnumType.ORDINAL)
 	private UserType type;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")		//added this field for manual test
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Account> accounts;
 	
 	@Column(name="address")
@@ -77,8 +77,8 @@ public class User {
 	@Column(name="ssn")
 	private int ssn;
 	
-	@Column(name="us_citizen")
-	private boolean usCitizen;
+//	@Column(name="us_citizen")
+//	private boolean usCitizen;
 	
 	@Column(name="credit_score")
 	private int creditScore;
