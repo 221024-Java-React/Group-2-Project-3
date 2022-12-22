@@ -39,7 +39,26 @@ public class UserService {
 	}
 	
 	public User readUser(Integer id) {
+		System.out.println((userRepo.findById(id).get()).getDob().toString().substring(0, 10));
+		
 		return userRepo.findById(id).get();
+	}
+	
+	public User retrieveUsername(User requestingUser) {
+		
+		User originalUser = userRepo.getBySsn(requestingUser.getSsn()).get();
+		
+		if ( (requestingUser.getDob().toString().substring(0, 10)).equals(originalUser.getDob().toString().substring(0, 10)) ) {
+			return originalUser;
+		} else {
+			throw new InvalidCredentialsException();
+		}
+	}
+	
+	public User retrieveDob(User requestingUser) {  //this method is mainly for testing
+		User originalUser = userRepo.getBySsn(requestingUser.getSsn()).get();
+		
+		return originalUser;
 	}
 	
 	public User updatePassword(User updatedUser) {

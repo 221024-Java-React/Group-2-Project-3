@@ -9,6 +9,7 @@ import './App.css';
 import Register from './Components/Register/Register';
 import Profile from './Components/Profile/Profile';
 import ResetPW from "./Components/ResetPW/ResetPW";
+import RetrieveUsername from "./Components/RetrieveUsername/RetrieveUsername";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
           			<Route path="/register" element={<Register />} />
 					<Route path="/reset" element={<ResetPW />} />
+					<Route path="/retrieve" element={<RetrieveUsername />} />
 					<Route path="*" element={<Login />} />
 				</>
             )}

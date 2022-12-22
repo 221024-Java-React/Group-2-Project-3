@@ -63,6 +63,7 @@ const context = {
     logout: () => { },
     register: (email: string, password: string) => { },
     resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
+	retrieveUsername: (userSsn: string, userDob: string) => { },
     search: (value: string) => {},
     findAccounts: () => { },
     updateInfo: () => {},
@@ -133,8 +134,34 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		}
 	}
 
+	const retrieveUsernameHandler = async (userSsn: string, userDob: string) => {
 
-    const resetPasswordHandler = async (userEmail: string, userSsn: string, userPassword: string) => {
+		try {
+
+			const { data } = await axios.post<User>(
+				`http://localhost:8000/user/retrieve-username`,
+				{					
+					ssn: userSsn,
+					dob: userDob.substring(0,10) + "T00:00:00"
+				}
+			);
+
+			// const { data } = await axios.get<Account[]>(
+			// 	`http://localhost:8000/account/all?id=${loggedInUser.id}`,
+			// 	{
+			// 		headers: {
+			// 			Accept: 'application/json'
+			// 		}
+			// 	}
+			// );
+
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+
+    const resetPasswordHandler = async (userEmail: string, userSsn: string, userNewPassword: string) => {
 
         try {
 
@@ -143,9 +170,10 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
                 {
                     email: userEmail,
                     ssn: userSsn,
-                    password: userPassword
+                    password: userNewPassword
                 }
             );
+
 
         } catch (error) {
             console.log(error)   
@@ -250,6 +278,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		login: loginHandler,
         logout: logoutHandler,
         register: registerHandler,
+		retrieveUsername: retrieveUsernameHandler,
         resetPassword: resetPasswordHandler,
         search: searchHandler,
         findAccounts: findAccountsHandler,

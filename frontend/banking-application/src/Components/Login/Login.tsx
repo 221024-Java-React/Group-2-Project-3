@@ -53,6 +53,10 @@ const Login = () => {
 							/>
 							<button className="login-button" type="submit">Login</button>
 						</form>
+						<h3 className="member">Forgot Your Username?</h3>
+						<div className="form">
+							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
+						</div>
 						<h3 className="member">Forgot Your Password?</h3>
 						<div className="form">
 							<Link className="login-button" to="/reset">Reset Password</Link>
