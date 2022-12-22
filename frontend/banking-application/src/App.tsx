@@ -10,6 +10,8 @@ import Register from './Components/Register/Register';
 import Profile from './Components/Profile/Profile';
 import ResetPW from "./Components/ResetPW/ResetPW";
 import RetrieveUsername from "./Components/RetrieveUsername/RetrieveUsername";
+import AccountPage from "./Components/AccountPage/AccountPage";
+
 
 function App() {
 
@@ -21,7 +23,10 @@ function App() {
 				<>
 					<Route path="/" element={<Home />} />
 					<Route path="*" element={<Home />} />
-					<Route path='/profile' element={<Profile />} />
+                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/checking' element={<AccountPage type={0} />} />
+                    <Route path='/saving' element={<AccountPage type={1} />} />
+                    <Route path='/loan' element={<AccountPage type={2} />} />
 				</>
 			)}
 			{loggedInUser.id === -1 && (

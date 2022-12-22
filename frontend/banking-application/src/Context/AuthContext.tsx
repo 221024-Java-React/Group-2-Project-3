@@ -3,7 +3,7 @@ import axios from "axios";
 import User from "../Types/User";
 import { Account } from "../Types/Account";
 
-export const defaultUser: User = {
+const defaultUser: User = {
 	id: -1,
 	firstName: "",
 	lastName: "",
@@ -24,7 +24,7 @@ export const defaultUser: User = {
 	creditScore: -1
 }
 
-const defaultAccount: Account[] = [
+const defaultAccounts: Account[] = [
 	{
 		id: -1,
 		user: defaultUser,
@@ -57,7 +57,7 @@ const defaultAccount: Account[] = [
 
 const context = {
 	loggedInUser: defaultUser,
-	userAccounts: defaultAccount,
+	userAccounts: defaultAccounts,
 	login: (email: string, password: string) => { },
 
     logout: () => { },
@@ -78,7 +78,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 	const [loggedInUser, setLoggedInUser] = useState<User>(defaultUser);
 
-	const [userAccounts, setUserAccounts] = useState<Account[]>([]);
+	const [userAccounts, setUserAccounts] = useState<Account[]>(defaultAccounts);
 
 
 	const loginHandler = async (userEmail: string, userPassword: string) => {

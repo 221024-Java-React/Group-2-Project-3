@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import AccountCard from "../AccountCard/AccountCard";
+import AccountLink from "../AccountLink/AccountLink";
 
 import Background from "../Background/Background";
 import Navigation from "../Navigation/Navigation";
@@ -21,7 +21,7 @@ const Home = () => {
 			<div className="content">
 				<h2>Welcome, {loggedInUser.firstName}</h2>
 				{userAccounts.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map((account) => {
-					return (<AccountCard key={account.type} account={account} />)
+					return (<AccountLink key={account.type} account={account} />)
 				})}
 			</div>
 		</div>
