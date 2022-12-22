@@ -4,7 +4,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import './Profile.css';
 import Background from "../Background/Background";
 import Navigation from "../Navigation/Navigation";
-import User from "../../Types/User";
 
 const Profile: React.FC = () => {
 
@@ -19,7 +18,6 @@ const Profile: React.FC = () => {
 	const [income, setIncome] = useState<string>("");
 	const [dob, setDob] = useState<string>("");
 	const [ssn, setSsn] = useState<string>("");
-	const [usCitizen, setUsCitizen] = useState<string>("");
 
 	const firstNameHandler = (event: any) => { setFirstName(event.target.value); };
 	const lastNameHandler = (event: any) => { setLastName(event.target.value); };
@@ -32,30 +30,26 @@ const Profile: React.FC = () => {
 	const incomeHandler = (event: any) => { setIncome(event.target.value); };
 	const dobHandler = (event: any) => { setDob(event.target.value); };
 	const ssnHandler = (event: any) => { setSsn(event.target.value); };
-	const usCitizenHandler = (event: any) => { setUsCitizen(event.target.value); };
 
 	const { loggedInUser, updateInfo } = useContext(AuthContext);
 
 
 	const updateHandler = (event: any) => {
-		event.preventDefault();
+        event.preventDefault();
+        
+		loggedInUser.firstName = firstName ? firstName : loggedInUser.firstName;
+		loggedInUser.lastName = lastName ? lastName : loggedInUser.lastName;
+		loggedInUser.address = address ? address : loggedInUser.address;
+		loggedInUser.city = city ? city : loggedInUser.city;
+		loggedInUser.state = state ? state : loggedInUser.state;
+		loggedInUser.zip = zip ? +zip : loggedInUser.zip;
+		loggedInUser.phone = phone ? phone : loggedInUser.phone;
+		loggedInUser.occupation = occupation ? occupation : loggedInUser.occupation;
+		loggedInUser.income = income ? +income : loggedInUser.income;
+		loggedInUser.dob = dob ? dob : loggedInUser.dob;
+		loggedInUser.ssn = ssn ? +ssn : loggedInUser.ssn;
 
-		const user: User = loggedInUser;
-
-		user.firstName = firstName;
-		user.lastName = lastName;
-		user.address = address;
-		user.city = city;
-		user.state = state;
-		user.zip = +zip;
-		user.phone = phone;
-		user.occupation = occupation;
-		user.income = +income;
-		user.dob = dob;
-		user.ssn = +ssn;
-		user.usCitizen = usCitizen.toLowerCase() == "true";
-
-		updateInfo(user);
+		updateInfo();
 	};
 
 	return (
@@ -77,7 +71,6 @@ const Profile: React.FC = () => {
 						<input type="text" name="income" value={income} placeholder="Income" onChange={incomeHandler} />
 						<input type="text" name="dob" value={dob} placeholder="DOB" onChange={dobHandler} />
 						<input type="text" name="ssn" value={ssn} placeholder="SSN" onChange={ssnHandler} />
-						<input type="text" name="usCitizen" value={usCitizen} placeholder="US Citizen" onChange={usCitizenHandler} />
 						<button className="login-button" type="submit">Update Info</button>
 					</form>
 				</div>
