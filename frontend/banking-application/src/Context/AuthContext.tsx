@@ -63,7 +63,7 @@ const context = {
     register: (email: string, password: string) => { },
     search: (value: string) => {},
     findAccounts: () => { },
-    updateInfo: (user: User) => {}
+    updateInfo: () => {}
 };
 
 export const AuthContext = React.createContext(context);
@@ -163,21 +163,17 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         }
     }
 
-    const updateInfoHandler = async (user : User) => {
+    const updateInfoHandler = async () => {
 
         try {
-
-            // TODO make axios call
-
-            // const { data } = await axios.get<User>(
-            //     `http://localhost:8000/user/updateInfo`, user
-
-            // );
             
-            // setLoggedInUser(data);
+            const { data } = await axios.put<User>(
+                `http://localhost:8000/user/update`, loggedInUser);
+            
+            setLoggedInUser(data);
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
 
     }
