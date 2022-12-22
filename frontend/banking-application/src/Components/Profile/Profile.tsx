@@ -33,7 +33,6 @@ const Profile: React.FC = () => {
 
 	const { loggedInUser, updateInfo } = useContext(AuthContext);
 
-
 	const updateHandler = (event: any) => {
         event.preventDefault();
         

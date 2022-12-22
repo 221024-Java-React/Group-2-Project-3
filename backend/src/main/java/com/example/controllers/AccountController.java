@@ -1,11 +1,13 @@
 package com.example.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +45,18 @@ public class AccountController {
 	}
 	
 	@PutMapping("/update")
-	public Account updateAccount(@RequestBody Account a) {
-		return aServ.updateAccount(a);
+    public Account updateAccount(@RequestBody Account a) {
+        return aServ.updateAccount(a);
+    }
+
+    @PatchMapping("/deposit")
+    public Account depositFunds(@RequestBody Account account) {
+        return aServ.depositFunds(account);
+	}
+
+    @PatchMapping("/withdraw")
+	public Account withdrawFunds(@RequestBody Account account) {
+		return aServ.withdrawFunds(account);
 	}
 	
 	@DeleteMapping("/delete")
