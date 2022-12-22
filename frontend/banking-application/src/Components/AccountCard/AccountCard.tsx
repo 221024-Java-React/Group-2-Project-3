@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import { Account } from "../../Types/Account";
+import "./AccountCard.css"
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
