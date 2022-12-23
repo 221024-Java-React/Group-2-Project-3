@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
 import { Account } from "../../Types/Account";
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {

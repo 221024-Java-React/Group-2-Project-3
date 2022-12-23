@@ -18,7 +18,9 @@ const AccountPage: React.FC<{ type: number }> = ({ type }) => {
 		<div className="page">
 			<Background />
             <Navigation />
-            <AccountCard key={userAccounts[type].type} account={userAccounts[type]} />
+            <AccountCard key={type} account={userAccounts[userAccounts.findIndex(a => a.type == type
+                || (("" + a.type == "CHECKING" && type == 0) || ("" + a.type == "SAVINGS" && type == 1))
+                || ("" + a.type == "LOAN" && type == 2))]} />
 		</div>
 	);
 };
