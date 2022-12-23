@@ -42,7 +42,7 @@ public class UserController {
 		return uServ.readUser(id);
 	}
 	
-	@GetMapping("/retrieve-username")
+	@PostMapping("/retrieve-username")
 	public User retrieveUsername(@RequestBody User u) {
 		return uServ.retrieveUsername(u);
 	}

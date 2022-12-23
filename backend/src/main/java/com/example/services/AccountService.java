@@ -1,6 +1,7 @@
 package com.example.services;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,10 +65,23 @@ public class AccountService {
 	}
 
 	public Account depositFunds(Account account) {
+		
+		Transaction transaction = new Transaction(account, account.getBalance(), "Deposit", LocalDateTime.now());
+
+		transactionServ.createTransaction(transaction);
+		
 		return adjustBalance(account.getId(), account.getBalance().abs());
 	}
 
 	public Account withdrawFunds(Account account) {
+		
+		Transaction transaction = new Transaction(account,
+												account.getBalance().abs().multiply(BigDecimal.valueOf(-1.0)),
+												"Withdrawal",
+												LocalDateTime.now());
+
+		transactionServ.createTransaction(transaction);
+		
 		return adjustBalance(account.getId(), account.getBalance().abs().multiply(BigDecimal.valueOf(-1.0)));
 	}
 
