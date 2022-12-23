@@ -9,16 +9,16 @@ import Navigation from "../Navigation/Navigation";
 
 const RetrieveUsername: React.FC = () => {
 
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
+	// const [email, setEmail] = useState<string>("");
+	// const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
     const [dob, setDob] = useState<string>("");
-	const { resetPassword } = useContext(AuthContext);
+	// const { resetPassword } = useContext(AuthContext);
     const { retrieveUsername } = useContext(AuthContext);
 
-	const emailHandler = (event: any) => {
-		setEmail(event.target.value);
-	};
+	// const emailHandler = (event: any) => {
+	// 	setEmail(event.target.value);
+	// };
 
     const ssnHandler = (event: any) => {
 		setSsn(event.target.value);
@@ -28,14 +28,14 @@ const RetrieveUsername: React.FC = () => {
 		setDob(event.target.value);
 	};
 
-	const passwordHandler = (event: any) => {
-		setPassword(event.target.value);
-	};
+	// const passwordHandler = (event: any) => {
+	// 	setPassword(event.target.value);
+	// };
 
-	const resetHandler = (event: any) => {
-		event.preventDefault();
-		resetPassword(email, ssn, password);
-	};
+	// const resetHandler = (event: any) => {
+	// 	event.preventDefault();
+	// 	resetPassword(email, ssn, password);
+	// };
 
     const retrieveUsernameHandler = (event: any) => {
 		event.preventDefault();
