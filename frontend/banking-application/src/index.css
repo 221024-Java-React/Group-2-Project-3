@@ -24,6 +24,10 @@ h2 {
     margin-bottom: 0.5em;
 }
 
+a h2 {
+    color: white;
+}
+
 .member {
 	/* text-decoration: underline; */
 	margin-bottom: 0.5em;

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import { Account } from "../../Types/Account";
-import "./AccountCard.css"
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
@@ -57,24 +57,17 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	useEffect(() => {
 		updateBalance(account.balance);
 
-	}, []);
+    }, []);
 
 	return (
 
-		<div className="box">
-			<h2>{account.type}</h2>
+        <div className="box">
+            <Link to={
+                (account.type == 0 || ("" + account.type == "CHECKING")) ? '/checking' :
+                (account.type == 1 || ("" + account.type == "SAVINGS")) ? '/saving' :
+                (account.type == 2 || ("" + account.type == "LOAN")) ? '/loan' : '/'
+            }><h2>{account.type}</h2></Link>
 			<h3>Balance = ${balance}</h3>
-			<h2>Update</h2>
-			<h3>Deposit</h3>
-			<form className="form" onSubmit={depositUpdateHandler}>
-				<input type="text" name="deposit" value={deposit} placeholder="$100.00" onChange={depositHandler} />
-				<button className="login-button" type="submit">Deposit Funds</button>
-			</form>
-			<h3>Withdraw</h3>
-			<form className="form" onSubmit={withdrawUpdateHandler}>
-				<input type="text" name="withdraw" value={withdraw} placeholder="$100.00" onChange={withdrawHandler} />
-				<button className="login-button" type="submit">Withdraw Funds</button>
-			</form>
 		</div>
 	)
 }
