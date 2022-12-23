@@ -66,7 +66,11 @@ public class AccountService {
 
 	public Account depositFunds(Account account) {
 		
+		Account originalAccount = accountRepo.findById(account.getId()).get();
+		
 		Transaction transaction = new Transaction(account, account.getBalance(), "Deposit", LocalDateTime.now());
+		
+		transaction.setBalanceAfterTransaction((originalAccount.getBalance()).add(account.getBalance()));
 
 		transactionServ.createTransaction(transaction);
 		
@@ -75,10 +79,14 @@ public class AccountService {
 
 	public Account withdrawFunds(Account account) {
 		
+		Account originalAccount = accountRepo.findById(account.getId()).get();
+		
 		Transaction transaction = new Transaction(account,
 												account.getBalance().abs().multiply(BigDecimal.valueOf(-1.0)),
 												"Withdrawal",
 												LocalDateTime.now());
+		
+		transaction.setBalanceAfterTransaction((originalAccount.getBalance()).subtract(account.getBalance()));
 
 		transactionServ.createTransaction(transaction);
 		
