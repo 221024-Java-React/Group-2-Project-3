@@ -20,7 +20,7 @@ const Home = () => {
 			<Navigation />
 			<div className="content">
 				<h2>Welcome, {loggedInUser.firstName}</h2>
-				{userAccounts.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map((account) => {
+				{userAccounts.map((account) => {
 					return (<AccountLink key={account.type} account={account} />)
 				})}
 			</div>
