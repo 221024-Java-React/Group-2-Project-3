@@ -17,10 +17,8 @@ const AccountPage: React.FC<{ type: number }> = ({ type }) => {
 	return (
 		<div className="page">
 			<Background />
-			<Navigation />
-			<div className="content">
-				<AccountCard key={userAccounts[type].type} account={userAccounts[type]} />
-			</div>
+            <Navigation />
+            <AccountCard key={userAccounts[type].type} account={userAccounts[type]} />
 		</div>
 	);
 };
