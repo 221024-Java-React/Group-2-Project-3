@@ -42,6 +42,16 @@ public class UserController {
 		return uServ.readUser(id);
 	}
 	
+	@GetMapping("/retrieve-username")
+	public User retrieveUsername(@RequestBody User u) {
+		return uServ.retrieveUsername(u);
+	}
+	
+	@GetMapping("/retrieve-dob")		//this method is mainly for testing
+	public User retrieveDob(@RequestBody User u) {
+		return uServ.retrieveDob(u);
+	}
+	
 	@PutMapping("/update")
 	public User updateUser(@RequestBody User u) {
 		return uServ.updateUser(u);

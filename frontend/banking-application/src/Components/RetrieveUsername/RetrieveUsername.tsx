@@ -7,12 +7,14 @@ import Background from "../Background/Background";
 
 import Navigation from "../Navigation/Navigation";
 
-const ResetPW: React.FC = () => {
+const RetrieveUsername: React.FC = () => {
 
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
+    const [dob, setDob] = useState<string>("");
 	const { resetPassword } = useContext(AuthContext);
+    const { retrieveUsername } = useContext(AuthContext);
 
 	const emailHandler = (event: any) => {
 		setEmail(event.target.value);
@@ -22,13 +24,22 @@ const ResetPW: React.FC = () => {
 		setSsn(event.target.value);
 	};
 
+    const dobHandler = (event: any) => {
+		setDob(event.target.value);
+	};
+
 	const passwordHandler = (event: any) => {
 		setPassword(event.target.value);
 	};
 
-	const resetPasswordHandler = (event: any) => {
+	const resetHandler = (event: any) => {
 		event.preventDefault();
 		resetPassword(email, ssn, password);
+	};
+
+    const retrieveUsernameHandler = (event: any) => {
+		event.preventDefault();
+		retrieveUsername(ssn, dob);
 	};
 
 	return (
@@ -38,15 +49,8 @@ const ResetPW: React.FC = () => {
 				<Navigation />
 				<div className="content">
 					<div className="register box">
-						<h2>Reset Password</h2>
-						<form className="form" onSubmit={resetPasswordHandler}>
-							<input
-								type="text"
-								name="email"
-								value={email}
-								placeholder="Email"
-								onChange={emailHandler}
-							/>
+						<h2>Username Lookup</h2>
+						<form className="form" onSubmit={retrieveUsernameHandler}>
 							<input
 								type="password"
 								name="ssn"
@@ -55,13 +59,13 @@ const ResetPW: React.FC = () => {
 								onChange={ssnHandler}
 							/>
                             <input
-								type="password"
-								name="password"
-								value={password}
-								placeholder="New Password"
-								onChange={passwordHandler}
+								name="dob"
+								value={dob}
+                                placeholder="Date of Birth (mm / dd / yyyy)"
+								onFocus={(e) => (e.target.type = "date")}
+								onChange={dobHandler}
 							/>
-							<button className="login-button" type="submit">Reset Password</button>
+							<button className="login-button" type="submit">Retrieve Username</button>
 						</form>
 						<h3 className="member">Return to Login Page</h3>
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
@@ -73,4 +77,4 @@ const ResetPW: React.FC = () => {
 	)
 }
 
-export default ResetPW
+export default RetrieveUsername

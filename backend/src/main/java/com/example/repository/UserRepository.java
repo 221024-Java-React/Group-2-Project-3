@@ -10,4 +10,5 @@ import com.example.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	Optional<User> getByEmail(String email);
+	Optional<User> getBySsn(int ssn);
 }
