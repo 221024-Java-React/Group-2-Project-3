@@ -64,11 +64,11 @@ public class AccountService {
 		return adjustBalance(readAccount(id), amount);
 	}
 
-	public Account depositFunds(Account account) {
+	public Account depositFunds(Account account, String description) {
 		
 		Account originalAccount = accountRepo.findById(account.getId()).get();
 		
-		Transaction transaction = new Transaction(account, account.getBalance(), "Deposit", LocalDateTime.now());
+		Transaction transaction = new Transaction(account, account.getBalance(), description, LocalDateTime.now());
 		
 		transaction.setBalanceAfterTransaction((originalAccount.getBalance()).add(account.getBalance()));
 
@@ -77,13 +77,13 @@ public class AccountService {
 		return adjustBalance(account.getId(), account.getBalance().abs());
 	}
 
-	public Account withdrawFunds(Account account) {
+	public Account withdrawFunds(Account account, String description) {
 		
 		Account originalAccount = accountRepo.findById(account.getId()).get();
 		
 		Transaction transaction = new Transaction(account,
 												account.getBalance().abs().multiply(BigDecimal.valueOf(-1.0)),
-												"Withdrawal",
+												description,
 												LocalDateTime.now());
 		
 		transaction.setBalanceAfterTransaction((originalAccount.getBalance()).subtract(account.getBalance()));

@@ -51,13 +51,23 @@ public class AccountController {
 
     @PatchMapping("/deposit")
     public Account depositFunds(@RequestBody Account account) {
-        return aServ.depositFunds(account);
+        return aServ.depositFunds(account, "Deposit");
 	}
 
     @PatchMapping("/withdraw")
 	public Account withdrawFunds(@RequestBody Account account) {
-		return aServ.withdrawFunds(account);
+		return aServ.withdrawFunds(account, "Withdrawal");
 	}
+    
+    @PatchMapping("/deposit-transfer")
+    public Account depositTransfer(@RequestBody Account account) {    	
+    	return aServ.depositFunds(account, "Transfer");
+    }
+    
+    @PatchMapping("/withdraw-transfer")
+    public Account withdrawTransfer(@RequestBody Account account) {
+    	return aServ.withdrawFunds(account, "Transfer");
+    }
 	
 	@DeleteMapping("/delete")
 	public void deleteAccount(@RequestParam(name="id") Integer id) {
