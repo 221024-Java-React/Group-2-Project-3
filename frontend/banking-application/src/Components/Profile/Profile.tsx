@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
 		loggedInUser.ssn = ssn ? +ssn : loggedInUser.ssn;
 
 		updateInfo();
-	};
+    };
 
 	return (
 		<div className="page">
@@ -58,17 +58,28 @@ const Profile: React.FC = () => {
 			<div className="content">
 				<h2>Welcome, {loggedInUser.firstName}</h2>
 				<div className="box">
-					<form className="form" onSubmit={updateHandler}>
-						<input type="text" name="firstName" value={firstName} placeholder="First Name" onChange={firstNameHandler} />
-						<input type="text" name="lastName" value={lastName} placeholder="Last Name" onChange={lastNameHandler} />
-						<input type="text" name="address" value={address} placeholder="Address" onChange={addressHandler} />
-						<input type="text" name="city" value={city} placeholder="City" onChange={cityHandler} />
-						<input type="text" name="state" value={state} placeholder="State" onChange={stateHandler} />
-						<input type="text" name="zip" value={zip} placeholder="ZIP" onChange={zipHandler} />
-						<input type="text" name="phone" value={phone} placeholder="Phone #" onChange={phoneHandler} />
-						<input type="text" name="occupation" value={occupation} placeholder="Occupation" onChange={occupationHandler} />
-						<input type="text" name="income" value={income} placeholder="Income" onChange={incomeHandler} />
-						<input type="text" name="dob" value={dob} placeholder="DOB" onChange={dobHandler} />
+                    <form className="form" onSubmit={updateHandler}>
+                        <p className="left">First Name: {loggedInUser.firstName}</p>
+                        <input type="text" name="firstName" value={firstName} placeholder="First Name" onChange={firstNameHandler} />
+                        <p className="left">Last Name: {loggedInUser.lastName}</p>
+                        <input type="text" name="lastName" value={lastName} placeholder="Last Name" onChange={lastNameHandler} />
+                        <p className="left">Address: {loggedInUser.address}</p>
+                        <input type="text" name="address" value={address} placeholder="Address" onChange={addressHandler} />
+                        <p className="left">City: {loggedInUser.city}</p>
+                        <input type="text" name="city" value={city} placeholder="City" onChange={cityHandler} />
+                        <p className="left">State: {loggedInUser.state}</p>
+                        <input type="text" name="state" value={state} placeholder="State" onChange={stateHandler} />
+                        <p className="left">ZIP: {loggedInUser.zip != 0 && loggedInUser.zip}</p>
+                        <input type="text" name="zip" value={zip} placeholder="ZIP" onChange={zipHandler} />
+                        <p className="left">Phone #: {loggedInUser.phone}</p>
+                        <input type="text" name="phone" value={phone} placeholder="Phone #" onChange={phoneHandler} />
+                        <p className="left">Occupation: {loggedInUser.occupation}</p>
+                        <input type="text" name="occupation" value={occupation} placeholder="Occupation" onChange={occupationHandler} />
+                        <p className="left">Income: {loggedInUser.income}</p>
+                        <input type="text" name="income" value={income} placeholder="Income" onChange={incomeHandler} />
+                        <p className="left">DOB: {loggedInUser.dob}</p>
+                        <input type="text" name="dob" value={dob} placeholder="DOB" onChange={dobHandler} />
+                        <p className="left">SSN: {loggedInUser.ssn != 0 && loggedInUser.ssn}</p>
 						<input type="text" name="ssn" value={ssn} placeholder="SSN" onChange={ssnHandler} />
 						<button className="login-button" type="submit">Update Info</button>
 					</form>
