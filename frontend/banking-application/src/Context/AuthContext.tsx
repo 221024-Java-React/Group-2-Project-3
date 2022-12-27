@@ -69,6 +69,8 @@ const context = {
     updateInfo: () => {},
 	depositFunds: (account: Account) => { },
 	withdrawFunds: (account: Account) => { },
+	depositTransfer: (account: Account) => { },
+	withdrawTransfer: (account: Account) => { },
 
 };
 
@@ -272,6 +274,46 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 	}
 
+	const depositTransferHandler = async (account: Account) => {
+
+		try {
+
+			const { data } = await axios.patch<Account>(
+                `http://localhost:8000/account/deposit-transfer`, account);
+
+			for (let index = 0; index < userAccounts.length; index++) {
+				if (userAccounts[index].id == account.id) {
+					userAccounts[index] = data;
+					break;
+				}
+			}
+
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
+	const withdrawTransferHandler = async (account: Account) => {
+
+		try {
+
+			const { data } = await axios.patch<Account>(
+				`http://localhost:8000/account/withdraw-transfer`, account);
+
+			for (let index = 0; index < userAccounts.length; index++) {
+				if (userAccounts[index].id == account.id) {
+					userAccounts[index] = data;
+					break;
+				}
+			}
+
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
 	const contextValue = {
 		loggedInUser,
 		userAccounts,
@@ -285,6 +327,9 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         updateInfo: updateInfoHandler,
 		depositFunds: depositFundsHandler,
 		withdrawFunds: withdrawFundsHandler,
+		depositTransfer: depositTransferHandler,
+		withdrawTransfer: withdrawTransferHandler
+
 	};
 
 	return (

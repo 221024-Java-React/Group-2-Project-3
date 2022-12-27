@@ -17,7 +17,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const transferAccountHandler = (event: any) => { setTransferAccount(event.target.value); };
 	const transferFundsHandler = (event: any) => { setTransferFunds(event.target.value); };
 
-	const { userAccounts, depositFunds, withdrawFunds } = useContext(AuthContext);
+	const { userAccounts, depositFunds, withdrawFunds, depositTransfer, withdrawTransfer } = useContext(AuthContext);
 
 	const depositUpdateHandler = (event: any) => {
 		event.preventDefault();
@@ -111,11 +111,11 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
 				if (index < userAccounts.length)
 				{
-					withdrawFunds(account);
+					withdrawTransfer(account);
 
 					userAccounts[index].balance = account.balance;
 
-					depositFunds(userAccounts[index]);
+					depositTransfer(userAccounts[index]);
 
 					updateBalance(balance - account.balance);
 				}
