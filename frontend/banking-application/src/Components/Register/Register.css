@@ -1,0 +1,10 @@
+.invalid {
+    background-color: red;
+    margin: 0;
+    font-weight: 400;
+}
+
+.success {
+    font-weight: 700;
+    font-size: 1.2em;
+}
