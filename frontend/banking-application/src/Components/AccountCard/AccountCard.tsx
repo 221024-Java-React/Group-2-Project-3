@@ -74,43 +74,39 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			account.balance = Math.abs(parseFloat(transferFunds.substring(startIndex, endIndex)));
 			account.balance = Math.floor(account.balance * 100) / 100;
 
-			let typeNumber : number;
-			let typeString : string;
+			let typeNumber: number;
+			let typeString: string;
 
-			switch (transferAccount)
-			{
-			case "checking":
-				typeNumber = 0;
-				typeString = "CHECKING";
-				break;
-			case "saving":
-				typeNumber = 1;
-				typeString = "SAVINGS";
-				break;
-			case "loan":
-				typeNumber = 2;
-				typeString = "LOAN";
-				break;
-			default:
-				typeNumber = -1;
-				typeString = "";
-				break;
+			switch (transferAccount) {
+				case "checking":
+					typeNumber = 0;
+					typeString = "CHECKING";
+					break;
+				case "saving":
+					typeNumber = 1;
+					typeString = "SAVINGS";
+					break;
+				case "loan":
+					typeNumber = 2;
+					typeString = "LOAN";
+					break;
+				default:
+					typeNumber = -1;
+					typeString = "";
+					break;
 			}
 
-			if (typeNumber >= 0)
-			{
+			if (typeNumber >= 0) {
 				let index: number = 0;
-				
-				while (index < userAccounts.length)
-				{
+
+				while (index < userAccounts.length) {
 					if (userAccounts[index].type == typeNumber || "" + userAccounts[index].type == typeString)
 						break;
 					else
 						index++;
 				}
 
-				if (index < userAccounts.length)
-				{
+				if (index < userAccounts.length) {
 					withdrawTransfer(account);
 
 					userAccounts[index].balance = account.balance;
@@ -131,47 +127,51 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
 	return (
 
-		<div className="content">
-			<div className="box">
-				<h2>{account.type}</h2>
-                <h3>Balance = ${balance}</h3>
-                <h3>Transaction History</h3>
-                <ul>
-                {account.transactions.map((transaction) =>
-                    <li key={transaction.id}>
-                        <span>Type: {transaction.description}</span>
-                        <span>Amount: {transaction.amount}</span>
-                        <span>Date: {transaction.date}</span>
-                        <span>Balance: {transaction.balanceAfterTransaction}</span>
-                    </li>
-                )}
-                </ul>
+		<div className="">
+			<div className="flex-container">
+				<div className="flex-item">
+					<h2>{account.type}</h2>
+					<h3>Balance = ${balance}</h3>
+					<h3>Transaction History</h3>
+					{account.transactions.length == 0 && <p>No Transactions History For Account</p>}
+					<ul>
+						{account.transactions.map((transaction) =>
+							<li key={transaction.id}>
+								<span>Type: {transaction.description}</span>
+								<span>Amount: {transaction.amount}</span>
+								<span>Date: {transaction.date}</span>
+								<span>Balance: {transaction.balanceAfterTransaction}</span>
+							</li>
+						)}
+					</ul>
+				</div>
+				<div className="flex-item">
+					<h3>Deposit</h3>
+					<form className="form" onSubmit={depositUpdateHandler}>
+						<input type="text" name="deposit" value={deposit} placeholder="$100.00" onChange={depositHandler} />
+						<button className="login-button" type="submit">Deposit Funds</button>
+					</form>
+					<h3>Withdraw</h3>
+					<form className="form" onSubmit={withdrawUpdateHandler}>
+						<input type="text" name="withdraw" value={withdraw} placeholder="$100.00" onChange={withdrawHandler} />
+						<button className="login-button" type="submit">Withdraw Funds</button>
+					</form>
+				</div>
+				<div className="flex-item">
+					<h3>Transfer</h3>
+					<form className="form" onSubmit={transferUpdateHandler}>
+						<select name="transferAccounts" value={transferAccount} onChange={transferAccountHandler}>
+							<option value=""></option>
+							{(account.type != 0 && ("" + account.type != "CHECKING")) && <option value="checking">Checking</option>}
+							{(account.type != 1 && ("" + account.type != "SAVINGS")) && <option value="saving">Savings</option>}
+							{(account.type != 2 && ("" + account.type != "LOAN")) && <option value="loan">Loan</option>}
+						</select>
+						<input type="text" name="transferFunds" value={transferFunds} placeholder="$100.00" onChange={transferFundsHandler} />
+						<button className="login-button" type="submit">Transfer Funds</button>
+					</form>
+				</div>
 			</div>
-			<div className="box">
-				<h3>Deposit</h3>
-				<form className="form" onSubmit={depositUpdateHandler}>
-					<input type="text" name="deposit" value={deposit} placeholder="$100.00" onChange={depositHandler} />
-					<button className="login-button" type="submit">Deposit Funds</button>
-				</form>
-				<h3>Withdraw</h3>
-				<form className="form" onSubmit={withdrawUpdateHandler}>
-					<input type="text" name="withdraw" value={withdraw} placeholder="$100.00" onChange={withdrawHandler} />
-					<button className="login-button" type="submit">Withdraw Funds</button>
-				</form>
-			</div>
-			<div className="box">
-				<h3>Transfer</h3>
-				<form className="form" onSubmit={transferUpdateHandler}>
-					<select name="transferAccounts" value={transferAccount} onChange={transferAccountHandler}>
-						<option value=""></option>
-						{(account.type != 0 && ("" + account.type != "CHECKING")) && <option value="checking">Checking</option>}
-						{(account.type != 1 && ("" + account.type != "SAVINGS")) && <option value="saving">Savings</option>}
-						{(account.type != 2 && ("" + account.type != "LOAN")) && <option value="loan">Loan</option>}
-					</select>
-					<input type="text" name="transferFunds" value={transferFunds} placeholder="$100.00" onChange={transferFundsHandler} />
-					<button className="login-button" type="submit">Transfer Funds</button>
-				</form>
-			</div>
+
 		</div>
 	)
 }
