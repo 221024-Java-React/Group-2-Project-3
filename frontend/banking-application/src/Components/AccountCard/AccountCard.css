@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	/* font-size: 30px; */
+	text-align: center;
+	margin: 50px;
+}
+
+.flex-item {
+	color: white;
+	padding: 10px;
+	flex: 50%;
+	margin: 25px 50px;
+	background-color: var(--primary-theme1);
+}
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+@media (max-width: 800px) {
+	.flex-container {
+		flex-direction: column;
+	}
+}
