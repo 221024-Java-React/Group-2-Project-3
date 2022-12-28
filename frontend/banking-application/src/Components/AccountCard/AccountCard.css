@@ -11,11 +11,33 @@
 }
 
 .flex-item {
+	position: relative;
 	color: white;
 	padding: 10px;
 	flex: 50%;
 	margin: 25px 50px;
 	background-color: var(--primary-theme1);
+}
+
+.item {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+select {
+	height: 30px;
+}
+
+input {
+	margin-bottom: 0;
+}
+
+.center {
+	text-align: center;
 }
 
 /* Responsive layout - makes a one column-layout instead of two-column layout */
