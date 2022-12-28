@@ -148,7 +148,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 		<div className="content">
 			<div className="box">
 				<h2>{account.type}</h2>
-                <h3>Balance = ${balance}</h3>
+                <h3>Balance = ${(("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</h3>
                 <h3>Transaction History</h3>
                 <ul>
                 {account.transactions.map((transaction) =>
@@ -189,8 +189,13 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			<div className="box">
 				<h3>Account Details</h3>
 				<form className="form">
-					<p>{isViewable? (account.id + idOffset): "********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
-					<button className="login-button" onClick={viewDetailsHandler}>View Account Details</button>
+					<p>{"Routing #: 739389283"} </p>
+					<p>{isViewable? "Account #: " + ("" + account.id + idOffset): "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
+					<p>{"Date opened: " + account.creationDate.substring(0, 10)}</p>
+					<p>{"Account type: " + account.type}</p>
+					<p>{"Current balance: $" + (("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</p>
+					<p>{(account.type != 0 && ("" + account.type != "CHECKING")) && "Interest rate: " + (account.interestRate * 100) + "%"}</p>
+					<button className="login-button" onClick={viewDetailsHandler}>Show Full Account Number</button>
 				</form>
 			</div>
 		</div>
