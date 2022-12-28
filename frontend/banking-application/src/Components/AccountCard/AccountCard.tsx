@@ -12,9 +12,9 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const [transferAccount, setTransferAccount] = useState<string>("");
 	const [transferFunds, setTransferFunds] = useState<string>("");
 	const [isViewable, setIsViewable] = useState<boolean>(false);
-	const idOffset: number = (account.type === 0 || ("" + account.type === "CHECKING"))? 178661410496:
-	(account.type === 1 || ("" + account.type === "SAVINGS"))? 577924434622:
-	(account.type === 2 || ("" + account.type === "LOAN"))? 231627902615: 0;
+	const idOffset: number = (account.type === 0 || ("" + account.type === "CHECKING")) ? 178661410496 :
+		(account.type === 1 || ("" + account.type === "SAVINGS")) ? 577924434622 :
+			(account.type === 2 || ("" + account.type === "LOAN")) ? 231627902615 : 0;
 
 	const depositHandler = (event: any) => { setDeposit(event.target.value); };
 	const withdrawHandler = (event: any) => { setWithdraw(event.target.value); };
@@ -26,7 +26,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const viewDetailsHandler = (event: any) => {
 		event.preventDefault();
 		console.log(isViewable);
-		if(isViewable) setIsViewable(false);
+		if (isViewable) setIsViewable(false);
 		else setIsViewable(true)
 	};
 
@@ -142,16 +142,16 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			<div className="flex-container">
 				<div className="flex-item">
 					<h2>{account.type}</h2>
-					<h3>Balance = ${(("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</h3>
+					<h3>Balance: ${(("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</h3>
 					<h3>Transaction History</h3>
 					{account.transactions.length == 0 && <p>No Transactions History For Account</p>}
 					<ul>
 						{account.transactions.map((transaction) =>
 							<li key={transaction.id}>
-								<span>Type: {transaction.description}</span>
-								<span>Amount: {transaction.amount}</span>
-								<span>Date: {transaction.date}</span>
-								<span>Balance: {transaction.balanceAfterTransaction}</span>
+								<p>Type: {transaction.description}</p>
+								<p>Amount: {transaction.amount}</p>
+								<p>Date: {transaction.date}</p>
+								<p>Balance: {transaction.balanceAfterTransaction}</p>
 							</li>
 						)}
 					</ul>
@@ -172,7 +172,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 				</div> */}
 				<div className="flex-item">
 					<div className="item">
-						<h3>Transfer</h3>
+						<h3>Transfer Funds</h3>
 						<form className="form" onSubmit={transferUpdateHandler}>
 							<select name="transferAccounts" value={transferAccount} onChange={transferAccountHandler}>
 								<option value="" className="center">------- Select Account -------</option>
@@ -189,23 +189,16 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					<div className="item">
 						<h3>Account Details</h3>
 						<form className="form">
-							<p>{isViewable? (account.id + idOffset): "********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
-							<button className="login-button" onClick={viewDetailsHandler}>View Account Details</button>
+							<p>{"Routing #: 739389283"} </p>
+							<p>{isViewable ? "Account #: " + ("" + account.id + idOffset) : "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
+							<p>{"Date opened: " + account.creationDate.substring(0, 10)}</p>
+							<p>{"Account type: " + account.type}</p>
+							<p>{"Current balance: $" + (("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</p>
+							<p>{(account.type != 0 && ("" + account.type != "CHECKING")) && "Interest rate: " + (account.interestRate * 100) + "%"}</p>
+							<button className="login-button" onClick={viewDetailsHandler}>{isViewable ? "Hide" : "Show"} Account Number</button>
 						</form>
 					</div>
 				</div>
-			</div>
-			<div className="box">
-				<h3>Account Details</h3>
-				<form className="form">
-					<p>{"Routing #: 739389283"} </p>
-					<p>{isViewable? "Account #: " + ("" + account.id + idOffset): "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
-					<p>{"Date opened: " + account.creationDate.substring(0, 10)}</p>
-					<p>{"Account type: " + account.type}</p>
-					<p>{"Current balance: $" + (("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</p>
-					<p>{(account.type != 0 && ("" + account.type != "CHECKING")) && "Interest rate: " + (account.interestRate * 100) + "%"}</p>
-					<button className="login-button" onClick={viewDetailsHandler}>Show Full Account Number</button>
-				</form>
 			</div>
 		</div>
 	)
