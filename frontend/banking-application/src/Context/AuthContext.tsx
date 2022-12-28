@@ -70,7 +70,7 @@ const context = {
 	depositFunds: (account: Account) => { },
 	withdrawFunds: (account: Account) => { },
 	depositTransfer: (account: Account) => { },
-	withdrawTransfer: (account: Account) => { },
+    withdrawTransfer: (account: Account) => { },
 
 };
 

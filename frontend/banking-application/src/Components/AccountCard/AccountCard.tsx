@@ -134,7 +134,18 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 		<div className="content">
 			<div className="box">
 				<h2>{account.type}</h2>
-				<h3>Balance = ${balance}</h3>
+                <h3>Balance = ${balance}</h3>
+                <h3>Transaction History</h3>
+                <ul>
+                {account.transactions.map((transaction) =>
+                    <li key={transaction.id}>
+                        <span>Type: {transaction.description}</span>
+                        <span>Amount: {transaction.amount}</span>
+                        <span>Date: {transaction.date}</span>
+                        <span>Balance: {transaction.balanceAfterTransaction}</span>
+                    </li>
+                )}
+                </ul>
 			</div>
 			<div className="box">
 				<h3>Deposit</h3>
@@ -142,8 +153,6 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					<input type="text" name="deposit" value={deposit} placeholder="$100.00" onChange={depositHandler} />
 					<button className="login-button" type="submit">Deposit Funds</button>
 				</form>
-			</div>
-			<div className="box">
 				<h3>Withdraw</h3>
 				<form className="form" onSubmit={withdrawUpdateHandler}>
 					<input type="text" name="withdraw" value={withdraw} placeholder="$100.00" onChange={withdrawHandler} />
