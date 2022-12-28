@@ -56,7 +56,6 @@ const Register: React.FC = () => {
 
         if (valid)
         {
-            console.log("registering account");
             register(email, password);
             setSuccessfulRegister(true); // TODO check if successfully created account from response
         }
