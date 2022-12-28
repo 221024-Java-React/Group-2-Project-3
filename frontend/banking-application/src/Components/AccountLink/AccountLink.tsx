@@ -13,7 +13,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
 	return (
 
-        <div className="box">
+        <div className="flex-item">
             <Link to={
                 (account.type == 0 || ("" + account.type == "CHECKING")) ? '/checking' :
                 (account.type == 1 || ("" + account.type == "SAVINGS")) ? '/saving' :

@@ -3,6 +3,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import AccountLink from "../AccountLink/AccountLink";
 
 import Background from "../Background/Background";
+import Footer from "../Footer/Footer";
 import Navigation from "../Navigation/Navigation";
 
 const Home = () => {
@@ -19,11 +20,14 @@ const Home = () => {
 			<Background />
 			<Navigation />
 			<div className="content">
-				<h2>Welcome, {loggedInUser.firstName}</h2>
-				{userAccounts.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map((account) => {
+                <h2>Welcome, {loggedInUser.firstName}</h2>
+            </div>
+            <div className="flex-container">
+                {userAccounts.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map((account) => {
 					return (<AccountLink key={account.type} account={account} />)
 				})}
-			</div>
+            </div>
+            <Footer />
 		</div>
 	);
 };
