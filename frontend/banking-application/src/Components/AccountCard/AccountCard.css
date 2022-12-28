@@ -10,6 +10,10 @@
 	margin: 50px;
 }
 
+h3 {
+	font-size: 1.5em;
+}
+
 .flex-item {
 	position: relative;
 	color: white;
