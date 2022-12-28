@@ -11,6 +11,13 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const [withdraw, setWithdraw] = useState<string>("");
 	const [transferAccount, setTransferAccount] = useState<string>("");
 	const [transferFunds, setTransferFunds] = useState<string>("");
+	const [isViewable, setIsViewable] = useState<boolean>(false);
+	const idOffset: number = (account.type === 0 || ("" + account.type === "CHECKING"))? 178661410496:
+	(account.type === 1 || ("" + account.type === "SAVINGS"))? 577924434622:
+	(account.type === 2 || ("" + account.type === "LOAN"))? 231627902615: 0;
+
+
+
 
 	const depositHandler = (event: any) => { setDeposit(event.target.value); };
 	const withdrawHandler = (event: any) => { setWithdraw(event.target.value); };
@@ -18,6 +25,13 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const transferFundsHandler = (event: any) => { setTransferFunds(event.target.value); };
 
 	const { userAccounts, depositFunds, withdrawFunds, depositTransfer, withdrawTransfer } = useContext(AuthContext);
+
+	const viewDetailsHandler = (event: any) => {
+		event.preventDefault();
+		console.log(isViewable);
+		if(isViewable) setIsViewable(false);
+		else setIsViewable(true)
+	};
 
 	const depositUpdateHandler = (event: any) => {
 		event.preventDefault();
@@ -171,7 +185,13 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					</form>
 				</div>
 			</div>
-
+			<div className="box">
+				<h3>Account Details</h3>
+				<form className="form">
+					<p>{isViewable? (account.id + idOffset): "********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
+					<button className="login-button" onClick={viewDetailsHandler}>View Account Details</button>
+				</form>
+			</div>
 		</div>
 	)
 }
