@@ -51,7 +51,7 @@ public class Account {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account")		//added this field for manual test
     private List<Transaction> transactions;
 	
-	@Column(name="interest_rate")
+	@Column(name="interest_rate", precision = 19, scale = 4)
 	private BigDecimal interestRate;
 	
 	@Column(name="creation_date")
@@ -60,6 +60,13 @@ public class Account {
 	public Account(User user, AccountType type) {
 		this.user = user;
 		this.type = type;
+	}
+	
+	public Account(User user, AccountType type, BigDecimal interestRate, LocalDateTime creationDate) {
+		this.user = user;
+		this.type = type;
+		this.interestRate = interestRate;
+		this.creationDate = creationDate;
 	}
 	
 	
