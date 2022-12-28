@@ -93,7 +93,9 @@ const Profile: React.FC = () => {
           style={{ display: showModal ? "block" : "none" }}
         >
           <h2>Your changes have been made</h2>
-          <button onClick={hideModal}>close</button>
+          <button className="login-button modal-button" onClick={hideModal}>
+            close
+          </button>
         </div>
         <div className="box">
           <form className="form" onSubmit={updateHandler}>
