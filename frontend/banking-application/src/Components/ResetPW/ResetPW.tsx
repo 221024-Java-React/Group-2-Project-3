@@ -13,7 +13,7 @@ const ResetPW: React.FC = () => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
-	const { resetPassword } = useContext(AuthContext);
+	const { resetPassword, checkedUser } = useContext(AuthContext);
 
 	const emailHandler = (event: any) => {
 		setEmail(event.target.value);
@@ -64,6 +64,7 @@ const ResetPW: React.FC = () => {
 							/>
 							<button className="login-button" type="submit">Reset Password</button>
 						</form>
+						{<p>{checkedUser.email != "" ? "Password reset successfully." : "Enter correct information above to reset your password."} </p>}
 						<h3 className="member">Return to Login Page</h3>
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
 					</div>

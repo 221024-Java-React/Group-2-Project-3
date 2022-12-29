@@ -57,6 +57,7 @@ const defaultAccounts: Account[] = [
 
 const context = {
     loggedInUser: defaultUser,
+	checkedUser: defaultUser,
     userAccounts: defaultAccounts,
     login: (email: string, password: string) => { },
 
@@ -79,6 +80,8 @@ export const AuthContext = React.createContext(context);
 export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children }) => {
 
 	const [loggedInUser, setLoggedInUser] = useState<User>(defaultUser);
+
+	const [checkedUser, setCheckedUser] = useState<User>(defaultUser);
 
 	const [userAccounts, setUserAccounts] = useState<Account[]>(defaultAccounts);
 
@@ -135,7 +138,11 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 					ssn: userSsn,
 					dob: userDob.substring(0,10) + "T00:00:00"
 				}
+				
 			);
+			setCheckedUser(data);
+
+			console.log(data);
 
 			// const { data } = await axios.get<Account[]>(
 			// 	`http://localhost:8000/account/all?id=${loggedInUser.id}`,
@@ -164,6 +171,10 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
                     password: userNewPassword
                 }
             );
+
+			setCheckedUser(data);
+
+			console.log(data);
 
 
         } catch (error) {
@@ -306,6 +317,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 	const contextValue = {
 		loggedInUser,
 		userAccounts,
+		checkedUser,
 		login: loginHandler,
         logout: logoutHandler,
         register: registerHandler,
@@ -318,6 +330,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		withdrawFunds: withdrawFundsHandler,
 		depositTransfer: depositTransferHandler,
 		withdrawTransfer: withdrawTransferHandler
+		
 
 	};
 
