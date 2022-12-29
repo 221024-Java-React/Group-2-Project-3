@@ -13,6 +13,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	const [transferAccount, setTransferAccount] = useState<string>("");
 	const [transferFunds, setTransferFunds] = useState<string>("");
 	const [isViewable, setIsViewable] = useState<boolean>(false);
+
 	const idOffset: number =
 		account.type === 0 || "" + account.type === "CHECKING"
 			? 178661410496
