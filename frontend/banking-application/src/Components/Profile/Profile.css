@@ -14,11 +14,10 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: 0;
   transform: translate(-50%, -50%);
-  width: 40%;
+  width: 70%;
 
-  background-color: var(--very-light-grey);
+  background-color: var(--secondary-theme1);
   padding: 6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);

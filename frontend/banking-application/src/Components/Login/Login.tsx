@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import Advertisement from "../Advertisement/Advertisement";
 import Background from "../Background/Background";
-import Footer from "../Footer/Footer";
 
 import Navigation from "../Navigation/Navigation";
 
@@ -28,6 +27,7 @@ const Login = () => {
     login(email, password);
   };
 
+<<<<<<< HEAD
   return (
     <>
       <div className="page">
@@ -56,12 +56,41 @@ const Login = () => {
               </Link>
             </form>
             {/* <h3 className="member">Forgot Your Username?</h3>
+=======
+	return (
+		<>
+			<div className="page">
+				<Background />
+				<Navigation />
+				<div className="content">
+					<div className="login box">
+						<h2>Login</h2>
+						<form className="form">
+							<input
+								type="text"
+								name="email"
+								value={email}
+								placeholder="Email"
+								onChange={emailHandler}
+							/>
+							<input
+								type="password"
+								name="password"
+								value={password}
+								placeholder="Password"
+								onChange={passwordHandler}
+                            />
+                            <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
+						</form>
+						<h3 className="member">Forgot Your Username?</h3>
+>>>>>>> parent of acdf3f9 (Merge branch 'develop' into adriantestbranch)
 						<div className="form">
 							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
 						</div>
 						<h3 className="member">Forgot Your Password?</h3>
 						<div className="form">
 							<Link className="login-button" to="/reset">Reset Password</Link>
+<<<<<<< HEAD
 						</div> */}
             <h3 className="member">Don't Have An Account?</h3>
             <div className="form">
@@ -76,6 +105,19 @@ const Login = () => {
       </div>
     </>
   );
+=======
+						</div>
+						<h3 className="member">Don't Have An Account?</h3>
+						<div className="form">
+							<Link className="login-button" to="/register">Create An Account</Link>
+						</div>
+					</div>
+					<Advertisement />
+				</div>
+			</div>
+		</>
+	);
+>>>>>>> parent of acdf3f9 (Merge branch 'develop' into adriantestbranch)
 };
 
 export default Login;
