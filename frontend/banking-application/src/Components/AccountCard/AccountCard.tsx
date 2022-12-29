@@ -5,7 +5,8 @@ import "./AccountCard.css"
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
-	const [balance, updateBalance] = useState<number>(0.0);
+    const [balance, updateBalance] = useState<number>(0.0);
+    const [balanceString, updateBalanceString] = useState<string>("");
 
 	const [deposit, setDeposit] = useState<string>("");
 	const [withdraw, setWithdraw] = useState<string>("");
@@ -28,7 +29,32 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 		console.log(isViewable);
 		if (isViewable) setIsViewable(false);
 		else setIsViewable(true)
-	};
+    };
+
+    const convertValueToString = (value: number): string => {
+        let valueString : string;
+
+        if (value < 0) {
+            value *= -1;
+            valueString = "-$";
+        }
+        else
+        valueString = "$";
+
+        valueString += value;
+        const endIndex : number = valueString.indexOf('.');
+
+        valueString = (endIndex < 0) ? (valueString + ".00") :
+            valueString.substring(0, (endIndex >= valueString.length) ? valueString.length : (endIndex + 3));
+        
+        return valueString;
+    }
+    
+    const updateBalanceHandler = (newBalance: number) => {
+        updateBalance(newBalance);
+        
+        updateBalanceString(convertValueToString(newBalance));
+    }
 
 	const depositUpdateHandler = (event: any) => {
 		event.preventDefault();
@@ -45,7 +71,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 		if (startIndex < endIndex) {
 			account.balance = Math.abs(parseFloat(deposit.substring(startIndex, endIndex)));
 			depositFunds(account);
-			updateBalance(balance + account.balance);
+			updateBalanceHandler(balance + account.balance);
 		}
 	};
 
@@ -65,7 +91,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			account.balance = Math.abs(parseFloat(withdraw.substring(startIndex, endIndex)));
 			account.balance = Math.floor(account.balance * 100) / 100;
 			withdrawFunds(account);
-			updateBalance(balance - account.balance);
+			updateBalanceHandler(balance - account.balance);
 		}
 	};
 
@@ -124,7 +150,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 
 					depositTransfer(userAccounts[index]);
 
-					updateBalance(balance - account.balance);
+					updateBalanceHandler(balance - account.balance);
 				}
 			}
 		}
@@ -132,7 +158,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 	};
 
 	useEffect(() => {
-		updateBalance(account.balance);
+		updateBalanceHandler(account.balance);
 
 	}, []);
 
@@ -142,16 +168,16 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 			<div className="flex-container">
 				<div className="flex-item">
 					<h2>{account.type}</h2>
-					<h3>Balance: ${(("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</h3>
+                    <h3>Balance: {balanceString}</h3>
 					<h3>Transaction History</h3>
 					{account.transactions.length == 0 && <p>No Transactions History For Account</p>}
 					<ul>
 						{account.transactions.map((transaction) =>
 							<li key={transaction.id}>
 								<p>Type: {transaction.description}</p>
-								<p>Amount: {transaction.amount}</p>
+								<p>Amount: {convertValueToString(transaction.amount)}</p>
 								<p>Date: {transaction.date}</p>
-								<p>Balance: {transaction.balanceAfterTransaction}</p>
+								<p>Balance: {convertValueToString(transaction.balanceAfterTransaction)}</p>
 							</li>
 						)}
 					</ul>
@@ -189,11 +215,11 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					<div className="item">
 						<h3>Account Details</h3>
 						<form className="form">
-							<p>{"Routing #: 739389283"} </p>
+							<p>Routing #: 739389283</p>
 							<p>{isViewable ? "Account #: " + ("" + (account.id + idOffset)) : "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
-							<p>{"Date opened: " + account.creationDate.substring(0, 10)}</p>
-							<p>{"Account type: " + account.type}</p>
-							<p>{"Current balance: $" + (("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</p>
+							<p>Date opened: {account.creationDate.substring(0, 10)}</p>
+							<p>Account type: {account.type}</p>
+							<p>Current balance: {balanceString}</p>
 							<p>{(account.type != 0 && ("" + account.type != "CHECKING")) && "Interest rate: " + (account.interestRate * 100) + "%"}</p>
 							<button className="login-button" onClick={viewDetailsHandler}>{isViewable ? "Hide" : "Show"} Account Number</button>
 						</form>
