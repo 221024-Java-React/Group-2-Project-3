@@ -10,7 +10,7 @@ import "./Navigation.css";
 const Navigation = () => {
 
 	const [searchValue, setSearchValue] = useState<string>("");
-	const { loggedInUser, search, logout } = useContext(AuthContext);
+    const { loggedInUser, search, logout } = useContext(AuthContext);
 
 	const searchValueHandler = (event: any) => {
 		setSearchValue(event.target.value);
@@ -23,7 +23,7 @@ const Navigation = () => {
 	};
 
 	const logoutHandler = (event: any) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		logout();
 	}
@@ -44,8 +44,8 @@ const Navigation = () => {
 					<button className="icon-button" type="submit"><FontAwesomeIcon icon={faSearch} /></button>
 					</form> */}
 				{loggedInUser.id != -1 && (
-					<Link to="/login" onClick={logoutHandler}>
-						<span className="text">Logout </span>
+					<Link to="/login">
+						<span className="text" onClick={logoutHandler}>Logout </span>
 						<button className="icon-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
 					</Link>
 				)}
