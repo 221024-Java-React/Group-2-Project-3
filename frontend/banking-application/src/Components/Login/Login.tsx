@@ -24,8 +24,6 @@ const Login = () => {
 	};
 
 	const loginHandler = (event: any) => {
-        event.preventDefault();
-        
 		login(email, password);
 	};
 
