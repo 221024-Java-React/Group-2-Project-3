@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import Advertisement from "../Advertisement/Advertisement";
 import Background from "../Background/Background";
+import Footer from "../Footer/Footer";
 
 import Navigation from "../Navigation/Navigation";
 
@@ -53,21 +54,22 @@ const Login = () => {
                             />
                             <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
 						</form>
-						<h3 className="member">Forgot Your Username?</h3>
+						{/* <h3 className="member">Forgot Your Username?</h3>
 						<div className="form">
 							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
 						</div>
 						<h3 className="member">Forgot Your Password?</h3>
 						<div className="form">
 							<Link className="login-button" to="/reset">Reset Password</Link>
-						</div>
+						</div> */}
 						<h3 className="member">Don't Have An Account?</h3>
 						<div className="form">
 							<Link className="login-button" to="/register">Create An Account</Link>
 						</div>
 					</div>
 					<Advertisement />
-				</div>
+                </div>
+                <Footer />
 			</div>
 		</>
 	);
