@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import Advertisement from "../Advertisement/Advertisement";
 import Background from "../Background/Background";
+import Footer from "../Footer/Footer";
 
 import Navigation from "../Navigation/Navigation";
 
@@ -67,7 +68,8 @@ const ResetPW: React.FC = () => {
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
 					</div>
 					<Advertisement />
-				</div>
+                </div>
+                <Footer />
 			</div>
 		</>
 	)
