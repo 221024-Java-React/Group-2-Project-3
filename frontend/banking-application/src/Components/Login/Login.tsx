@@ -23,8 +23,8 @@ const Login = () => {
 	};
 
 	const loginHandler = (event: any) => {
-		event.preventDefault();
-
+        event.preventDefault();
+        
 		login(email, password);
 	};
 
@@ -36,7 +36,7 @@ const Login = () => {
 				<div className="content">
 					<div className="login box">
 						<h2>Login</h2>
-						<form className="form" onSubmit={loginHandler}>
+						<form className="form">
 							<input
 								type="text"
 								name="email"
@@ -50,8 +50,8 @@ const Login = () => {
 								value={password}
 								placeholder="Password"
 								onChange={passwordHandler}
-							/>
-							<button className="login-button" type="submit">Login</button>
+                            />
+                            <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
 						</form>
 						<h3 className="member">Forgot Your Username?</h3>
 						<div className="form">

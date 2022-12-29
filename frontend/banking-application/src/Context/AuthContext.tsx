@@ -56,21 +56,21 @@ const defaultAccounts: Account[] = [
 
 
 const context = {
-	loggedInUser: defaultUser,
-	userAccounts: defaultAccounts,
-	login: (email: string, password: string) => { },
+    loggedInUser: defaultUser,
+    userAccounts: defaultAccounts,
+    login: (email: string, password: string) => { },
 
     logout: () => { },
     register: (email: string, password: string) => { },
     resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
-	retrieveUsername: (userSsn: string, userDob: string) => { },
-    search: (value: string) => {},
+    retrieveUsername: (userSsn: string, userDob: string) => { },
+    search: (value: string) => { },
     findAccounts: () => { },
     updateInfo: () => {},
 	depositFunds: (account: Account) => { },
 	withdrawFunds: (account: Account) => { },
 	depositTransfer: (account: Account) => { },
-	withdrawTransfer: (account: Account) => { },
+    withdrawTransfer: (account: Account) => { },
 
 };
 
@@ -103,17 +103,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 	};
 
 	const logoutHandler = async () => {
-
-		try {
-
-			// const { data } = await axios.post(
-			//     'http://localhost:8000/user/logout',
-			//     {}
-			// );
-
-		} catch (e) {
-			console.log(e);
-		}
 
 		setLoggedInUser(defaultUser);
 	};

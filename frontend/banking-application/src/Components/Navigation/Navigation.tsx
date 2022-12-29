@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import "./Navigation.css";
 
 const Navigation = () => {
 
 	const [searchValue, setSearchValue] = useState<string>("");
-	const { loggedInUser, search } = useContext(AuthContext);
+	const { loggedInUser, search, logout } = useContext(AuthContext);
 
 	const searchValueHandler = (event: any) => {
         setSearchValue(event.target.value);
@@ -20,7 +20,13 @@ const Navigation = () => {
 		event.preventDefault();
 
 		search(searchValue);
-	};
+    };
+    
+    const logoutHandler = (event: any) => {
+        event.preventDefault();
+
+        logout();
+    }
 
 	return (
 		<div className="navbar">
@@ -33,7 +39,7 @@ const Navigation = () => {
 			</Link>
 			{ loggedInUser.id != -1 && (
 				<div className="nav">
-					<form onSubmit={searchHandler}>
+					{/* <form onSubmit={searchHandler}>
 					<input
                         type="text"
                         name="search"
@@ -42,7 +48,11 @@ const Navigation = () => {
                         onChange={searchValueHandler}
                     />
 					<button className="icon-button" type="submit"><FontAwesomeIcon icon={faSearch} /></button>
-					</form>
+					</form> */}
+                    <Link to="/login" onClick={logoutHandler}>
+                        <span className="text">Logout </span>
+                        <button className="icon-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
+			        </Link>
 				</div>
 			)}
 		</div>

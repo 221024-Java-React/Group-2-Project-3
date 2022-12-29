@@ -1,5 +1,8 @@
 package com.example.services;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -27,9 +30,12 @@ public class UserService {
 	
 	public User createUserAndAccounts(User u) {
 		
-		Account checking = new Account(u, AccountType.CHECKING);
-		Account savings = new Account(u, AccountType.SAVINGS);
-		Account loan = new Account(u, AccountType.LOAN);
+		BigDecimal savingsInterestRate = new BigDecimal(0.002);
+		BigDecimal loanInterestRate = new BigDecimal(0.10);
+		
+		Account checking = new Account(u, AccountType.CHECKING, BigDecimal.ZERO, LocalDateTime.now());
+		Account savings = new Account(u, AccountType.SAVINGS, savingsInterestRate, LocalDateTime.now());
+		Account loan = new Account(u, AccountType.LOAN, loanInterestRate, LocalDateTime.now());
 		
 		accountServ.createAccount(checking);
 		accountServ.createAccount(savings);
