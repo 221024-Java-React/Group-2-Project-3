@@ -207,8 +207,8 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 						<p>No Transactions History For Account</p>
 					)}
 					<ul>
-						{account.transactions.sort((a, b) => b.id - a.id).map((transaction, index) => (
-							<li key={index} className="transaction-card">
+						{account.transactions.sort((a, b) => b.id - a.id).map((transaction) => (
+							<li key={transaction.id} className="transaction-card">
 								<p>{transaction.description}</p>
 								<hr />
 								<p>Amount: {convertValueToString(transaction.amount)}</p>
