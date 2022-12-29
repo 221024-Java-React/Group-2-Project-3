@@ -29,3 +29,7 @@
 .footer-flex-container a:visited {
     color: white;
 }
+
+.footer-flex-container a:hover {
+	color: var(--dark-grey);
+}
