@@ -25,3 +25,7 @@
 	margin: 25px 50px;
 	background-color: var(--primary-theme1);
 }
+
+.footer-flex-container a:visited {
+    color: white;
+}
