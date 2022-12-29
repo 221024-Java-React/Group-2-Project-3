@@ -13,8 +13,9 @@ const RetrieveUsername: React.FC = () => {
 	// const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
     const [dob, setDob] = useState<string>("");
+	const [displayUsername, setDisplayUsername] = useState<boolean>(false);
 	// const { resetPassword } = useContext(AuthContext);
-    const { retrieveUsername } = useContext(AuthContext);
+    const { retrieveUsername, checkedUser } = useContext(AuthContext);
 
 	// const emailHandler = (event: any) => {
 	// 	setEmail(event.target.value);
@@ -40,6 +41,9 @@ const RetrieveUsername: React.FC = () => {
     const retrieveUsernameHandler = (event: any) => {
 		event.preventDefault();
 		retrieveUsername(ssn, dob);
+		console.log(displayUsername);
+		if (displayUsername) setDisplayUsername(false);
+		else setDisplayUsername(true)
 	};
 
 	return (
@@ -67,6 +71,7 @@ const RetrieveUsername: React.FC = () => {
 							/>
 							<button className="login-button" type="submit">Retrieve Username</button>
 						</form>
+						{<p>{checkedUser.email != "" ? "Username: " + (checkedUser.email) : "Enter correct information above to display your username."} </p>}
 						<h3 className="member">Return to Login Page</h3>
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
 					</div>

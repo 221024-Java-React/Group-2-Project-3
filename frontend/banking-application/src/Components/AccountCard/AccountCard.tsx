@@ -190,7 +190,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 						<h3>Account Details</h3>
 						<form className="form">
 							<p>{"Routing #: 739389283"} </p>
-							<p>{isViewable ? "Account #: " + ("" + account.id + idOffset) : "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
+							<p>{isViewable ? "Account #: " + ("" + (account.id + idOffset)) : "Account #: ********" + ("" + (account.id + idOffset)).substring(8, 12)} </p>
 							<p>{"Date opened: " + account.creationDate.substring(0, 10)}</p>
 							<p>{"Account type: " + account.type}</p>
 							<p>{"Current balance: $" + (("" + balance).indexOf('.') != -1 ? ("" + balance).substring(0, ("" + balance).indexOf('.') + 3) : (balance + ".00"))}</p>
