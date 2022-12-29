@@ -217,7 +217,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
               <li key={transaction.id}>
                 <p>{transaction.description}</p>
                 <hr />
-                <p>Amount: ${convertValueToString(transaction.amount)}</p>
+                <p>Amount: {convertValueToString(transaction.amount)}</p>
                 <p>Date: {transaction.date}</p>
                 <p>
                   Balance:{" "}
