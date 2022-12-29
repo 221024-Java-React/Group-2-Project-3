@@ -10,51 +10,52 @@ import Navigation from "../Navigation/Navigation";
 import "./Login.css";
 
 const Login = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { login } = useContext(AuthContext);
 
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
-	const { login } = useContext(AuthContext);
+  const emailHandler = (event: any) => {
+    setEmail(event.target.value);
+  };
 
-	const emailHandler = (event: any) => {
-		setEmail(event.target.value);
-	};
+  const passwordHandler = (event: any) => {
+    setPassword(event.target.value);
+  };
 
-	const passwordHandler = (event: any) => {
-		setPassword(event.target.value);
-	};
+  const loginHandler = (event: any) => {
+    event.preventDefault();
 
-	const loginHandler = (event: any) => {
-        event.preventDefault();
-        
-		login(email, password);
-	};
+    login(email, password);
+  };
 
-	return (
-		<>
-			<div className="page">
-				<Background />
-				<Navigation />
-				<div className="content">
-					<div className="login box">
-						<h2>Login</h2>
-						<form className="form">
-							<input
-								type="text"
-								name="email"
-								value={email}
-								placeholder="Email"
-								onChange={emailHandler}
-							/>
-							<input
-								type="password"
-								name="password"
-								value={password}
-								placeholder="Password"
-								onChange={passwordHandler}
-                            />
-                            <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
-						</form>
-						{/* <h3 className="member">Forgot Your Username?</h3>
+  return (
+    <>
+      <div className="page">
+        <Background />
+        <Navigation />
+        <div className="content">
+          <div className="login box">
+            <h2>Login</h2>
+            <form className="form">
+              <input
+                type="text"
+                name="email"
+                value={email}
+                placeholder="Email"
+                onChange={emailHandler}
+              />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                placeholder="Password"
+                onChange={passwordHandler}
+              />
+              <Link className="login-button" to="/" onClick={loginHandler}>
+                Login
+              </Link>
+            </form>
+            {/* <h3 className="member">Forgot Your Username?</h3>
 						<div className="form">
 							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
 						</div>
@@ -62,17 +63,19 @@ const Login = () => {
 						<div className="form">
 							<Link className="login-button" to="/reset">Reset Password</Link>
 						</div> */}
-						<h3 className="member">Don't Have An Account?</h3>
-						<div className="form">
-							<Link className="login-button" to="/register">Create An Account</Link>
-						</div>
-					</div>
-					<Advertisement />
-                </div>
-                <Footer />
-			</div>
-		</>
-	);
+            <h3 className="member">Don't Have An Account?</h3>
+            <div className="form">
+              <Link className="login-button" to="/register">
+                Create An Account
+              </Link>
+            </div>
+          </div>
+          {/* <Advertisement /> */}
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
 };
 
 export default Login;
