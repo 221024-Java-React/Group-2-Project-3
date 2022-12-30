@@ -25,9 +25,9 @@ public class LoanApplication {
     @JsonIgnore
     private User user;
 
-    private String description;
+    private String purpose;
 
     private BigDecimal amount;
 
-    private boolean accepted;
+    private boolean isApproved;
 }
