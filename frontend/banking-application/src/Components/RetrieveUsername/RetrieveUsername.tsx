@@ -10,23 +10,25 @@ import Navigation from "../Navigation/Navigation";
 
 const RetrieveUsername: React.FC = () => {
 
+	const [checked, setChecked] = useState<boolean>(false);
+
 	// const [email, setEmail] = useState<string>("");
 	// const [password, setPassword] = useState<string>("");
-    const [ssn, setSsn] = useState<string>("");
-    const [dob, setDob] = useState<string>("");
+	const [ssn, setSsn] = useState<string>("");
+	const [dob, setDob] = useState<string>("");
 	const [displayUsername, setDisplayUsername] = useState<boolean>(false);
 	// const { resetPassword } = useContext(AuthContext);
-    const { retrieveUsername, checkedUser } = useContext(AuthContext);
+	const { retrieveUsername, checkedUser } = useContext(AuthContext);
 
 	// const emailHandler = (event: any) => {
 	// 	setEmail(event.target.value);
 	// };
 
-    const ssnHandler = (event: any) => {
+	const ssnHandler = (event: any) => {
 		setSsn(event.target.value);
 	};
 
-    const dobHandler = (event: any) => {
+	const dobHandler = (event: any) => {
 		setDob(event.target.value);
 	};
 
@@ -39,12 +41,13 @@ const RetrieveUsername: React.FC = () => {
 	// 	resetPassword(email, ssn, password);
 	// };
 
-    const retrieveUsernameHandler = (event: any) => {
+	const retrieveUsernameHandler = (event: any) => {
 		event.preventDefault();
 		retrieveUsername(ssn, dob);
 		console.log(displayUsername);
 		if (displayUsername) setDisplayUsername(false);
-		else setDisplayUsername(true)
+		else setDisplayUsername(true);
+		setChecked(true);
 	};
 
 	return (
@@ -56,6 +59,9 @@ const RetrieveUsername: React.FC = () => {
 					<div className="register box">
 						<h2>Username Lookup</h2>
 						<form className="form" onSubmit={retrieveUsernameHandler}>
+							{(checkedUser.email == "" && checked) && (
+								<p className="invalid">Incorrect SSN or DOB</p>
+							)}
 							<input
 								type="password"
 								name="ssn"
@@ -63,10 +69,10 @@ const RetrieveUsername: React.FC = () => {
 								placeholder="SSN (#########)"
 								onChange={ssnHandler}
 							/>
-                            <input
+							<input
 								name="dob"
 								value={dob}
-                                placeholder="Date of Birth (mm / dd / yyyy)"
+								placeholder="Date of Birth (mm / dd / yyyy)"
 								onFocus={(e) => (e.target.type = "date")}
 								onChange={dobHandler}
 							/>
@@ -76,9 +82,9 @@ const RetrieveUsername: React.FC = () => {
 						<h3 className="member">Return to Login Page</h3>
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
 					</div>
-					<Advertisement />
-                </div>
-                <Footer />
+					{/* <Advertisement /> */}
+				</div>
+				<Footer />
 			</div>
 		</>
 	)

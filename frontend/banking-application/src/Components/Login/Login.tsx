@@ -40,7 +40,7 @@ const Login = () => {
             <h2>Login</h2>
             <form className="form">
               {!validForm && (
-                <p className="invalid">Invalid Email Or Password</p>
+                <p className="invalid">Incorrect Email or Password</p>
               )}
               <input
                 type="text"
