@@ -62,7 +62,7 @@ const context = {
     login: (email: string, password: string) => { },
 
     logout: () => { },
-    register: (email: string, password: string) => { },
+    register: async (email: string, password: string) : Promise<boolean> => { return false },
     resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
     retrieveUsername: (userSsn: string, userDob: string) => { },
     search: (value: string) => { },
@@ -84,7 +84,6 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 	const [checkedUser, setCheckedUser] = useState<User>(defaultUser);
 
 	const [userAccounts, setUserAccounts] = useState<Account[]>(defaultAccounts);
-
 
 	const loginHandler = async (userEmail: string, userPassword: string) => {
 
@@ -110,7 +109,9 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		setLoggedInUser(defaultUser);
 	};
 
-	const registerHandler = async (userEmail: string, userPassword: string) => {
+    const registerHandler = async (userEmail: string, userPassword: string): Promise<boolean> => {
+        
+        let success = false;
 
 		try {
 
@@ -120,12 +121,16 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 					email: userEmail,
 					password: userPassword
 				}
-			);
+            );
 
+            if (data)
+                success = true;
 
 		} catch (error) {
 			console.log(error)
-		}
+        }
+        
+        return success;
 	}
 
 	const retrieveUsernameHandler = async (userSsn: string, userDob: string) => {
