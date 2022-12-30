@@ -29,18 +29,34 @@ const Navigation = () => {
 	}
 
 	return (
-        <div className="navbar">
-            <div className="side">
-            {loggedInUser.id != -1 && (
+        <div className="nav-row-container">
+            <div className="nav-col-container left">
+                <div>
+                {loggedInUser.id != -1 && (
 					<Link to="/profile"><FontAwesomeIcon className="profile" icon={faUser} /></Link>
                 )}
             </div>
-            <Link to="/">
-                <img className="logo" src="https://media.discordapp.net/attachments/1053413630856679518/1058440136255352903/MAJIC_BANK.png" />
-                {/* <h1 className="brand">MAJIC BANK</h1> */}
-            </Link>
-			<div className="side right">
-				{/* <form onSubmit={searchHandler}>
+            </div>
+            <div className="nav-col-container">
+                <h1>
+                    <Link to="/">
+                        <img className="logo" src="https://cdn.discordapp.com/attachments/1053408347803627550/1058478463893377134/image.png" title="MAJIC Bank" />
+                </Link>
+            </h1>
+                
+            </div>
+            <div className="nav-col-container right">
+            <div>
+				{loggedInUser.id != -1 && (
+					<Link to="/login" onClick={logoutHandler}>
+						<span className="text">Logout </span>
+						<button className="icon-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
+					</Link>
+                    )}
+                    </div>
+            </div>
+            
+            {/* <form onSubmit={searchHandler}>
 					<input
                         type="text"
                         name="search"
@@ -50,13 +66,6 @@ const Navigation = () => {
                     />
 					<button className="icon-button" type="submit"><FontAwesomeIcon icon={faSearch} /></button>
 					</form> */}
-				{loggedInUser.id != -1 && (
-					<Link to="/login" onClick={logoutHandler}>
-						<span className="text">Logout </span>
-						<button className="icon-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
-					</Link>
-				)}
-			</div>
 		</div>
 	);
 };
