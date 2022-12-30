@@ -174,14 +174,14 @@ const Profile: React.FC = () => {
               placeholder="Income"
               onChange={incomeHandler}
             />
-            <p className="left">DOB: {loggedInUser.dob}</p>
-            <input
+            {/* <p className="left">DOB: {loggedInUser.dob}</p> */}
+            {/* <input
               type="text"
               name="dob"
               value={dob}
               placeholder="DOB"
               onChange={dobHandler}
-            />
+            /> */}
             <p className="left">
               SSN: {loggedInUser.ssn != 0 && loggedInUser.ssn}
             </p>
