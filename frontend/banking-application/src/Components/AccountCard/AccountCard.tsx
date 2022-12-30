@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Account } from "../../Types/Account";
+
 import "./AccountCard.css";
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
@@ -188,6 +189,8 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					depositTransfer(userAccounts[index]);
 
 					updateBalanceHandler(balance - account.balance);
+
+					window.location.reload();
 				}
 			}
 		}

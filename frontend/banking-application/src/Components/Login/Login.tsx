@@ -11,9 +11,10 @@ import "./Login.css";
 
 const Login = () => {
 
+    const [validForm, setValidForm] = useState<boolean>(true);
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const { login } = useContext(AuthContext);
+	const { login, loggedInUser } = useContext(AuthContext);
 
 	const emailHandler = (event: any) => {
 		setEmail(event.target.value);
@@ -24,7 +25,12 @@ const Login = () => {
 	};
 
 	const loginHandler = (event: any) => {
-		login(email, password);
+        login(email, password);
+
+        if (loggedInUser.id != -1)
+            setValidForm(true);
+        else
+            setValidForm(false);
 	};
 
 	return (
@@ -35,7 +41,8 @@ const Login = () => {
 				<div className="content">
 					<div className="login box">
 						<h2>Login</h2>
-						<form className="form">
+                        <form className="form">
+                            {!validForm && <p className="invalid">Invalid Email Or Password</p>}
 							<input
 								type="text"
 								name="email"
