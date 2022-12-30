@@ -10,61 +10,57 @@ import Navigation from "../Navigation/Navigation";
 import "./Login.css";
 
 const Login = () => {
+  const [validForm, setValidForm] = useState<boolean>(true);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { login } = useContext(AuthContext);
-
-
-    const [validForm, setValidForm] = useState<boolean>(true);
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
-	const { login, loggedInUser } = useContext(AuthContext);
-
+  const { login, loggedInUser } = useContext(AuthContext);
 
   const passwordHandler = (event: any) => {
     setPassword(event.target.value);
   };
 
+  const emailHandler = (event: any) => {
+    setEmail(event.target.value);
+  };
+
   const loginHandler = (event: any) => {
-    event.preventDefault();
+    login(email, password);
 
+    if (loggedInUser.id != -1) setValidForm(true);
+    else setValidForm(false);
+  };
 
-	const loginHandler = (event: any) => {
-        login(email, password);
-
-        if (loggedInUser.id != -1)
-            setValidForm(true);
-        else
-            setValidForm(false);
-	};
-
-	return (
-		<>
-			<div className="page">
-				<Background />
-				<Navigation />
-				<div className="content">
-					<div className="login box">
-						<h2>Login</h2>
-                        <form className="form">
-                            {!validForm && <p className="invalid">Invalid Email Or Password</p>}
-							<input
-								type="text"
-								name="email"
-								value={email}
-								placeholder="Email"
-								onChange={emailHandler}
-							/>
-							<input
-								type="password"
-								name="password"
-								value={password}
-								placeholder="Password"
-								onChange={passwordHandler}
-                            />
-                            <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
-						</form>
-						{/* <h3 className="member">Forgot Your Username?</h3>
+  return (
+    <>
+      <div className="page">
+        <Background />
+        <Navigation />
+        <div className="content">
+          <div className="login box">
+            <h2>Login</h2>
+            <form className="form">
+              {!validForm && (
+                <p className="invalid">Invalid Email Or Password</p>
+              )}
+              <input
+                type="text"
+                name="email"
+                value={email}
+                placeholder="Email"
+                onChange={emailHandler}
+              />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                placeholder="Password"
+                onChange={passwordHandler}
+              />
+              <Link className="login-button" to="/" onClick={loginHandler}>
+                Login
+              </Link>
+            </form>
+            {/* <h3 className="member">Forgot Your Username?</h3>
 
 						<div className="form">
 							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
