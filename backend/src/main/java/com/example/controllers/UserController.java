@@ -1,6 +1,8 @@
 package com.example.controllers;
 
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.models.LoanApplication;
 import com.example.models.User;
 import com.example.services.UserService;
 
@@ -45,6 +48,11 @@ public class UserController {
 	@PostMapping("/retrieve-username")
 	public User retrieveUsername(@RequestBody User u) {
 		return uServ.retrieveUsername(u);
+	}
+	
+	@PostMapping("/loan-application")
+	public LoanApplication applyForLoan(@RequestBody User u) {
+		return uServ.applyForLoan(u);
 	}
 	
 	@GetMapping("/retrieve-dob")		//this method is mainly for testing

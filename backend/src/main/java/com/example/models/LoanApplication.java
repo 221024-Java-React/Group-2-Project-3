@@ -1,9 +1,11 @@
 package com.example.models;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,11 +27,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="accounts")
+@Table(name="loan-applications")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class LoanApplication {
 	
 	
 	@Id
@@ -36,37 +39,23 @@ public class Account {
 	@Column(name="id")
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id")
+	@OneToOne(mappedBy = "loanApplication")
 	@JsonIgnore
-	private User user;
-
-	@Column(name="balance")
-	private BigDecimal balance;
+    private User user;
 	
-	@Enumerated(EnumType.ORDINAL)
-	private AccountType type;
+	@Column(name="amount")
+	private BigDecimal amount;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")		//added this field for manual test
-    private List<Transaction> transactions;
+	@Column(name="purpose")
+	private String purpose;
 	
-	@Column(name="interest_rate", precision = 19, scale = 4)
-	private BigDecimal interestRate;
+	@Column(name="approval-status")
+	private boolean approvalStatus;
 	
-	@Column(name="creation_date")
-	private LocalDateTime creationDate;
 	
-	public Account(User user, AccountType type) {
+	
+	public LoanApplication(User user, BigDecimal amount) {
 		this.user = user;
-		this.type = type;
+		this.amount = amount;
 	}
-	
-	public Account(User user, AccountType type, BigDecimal interestRate, LocalDateTime creationDate) {
-		this.user = user;
-		this.type = type;
-		this.interestRate = interestRate;
-		this.creationDate = creationDate;
-	}
-	
-	
 }
