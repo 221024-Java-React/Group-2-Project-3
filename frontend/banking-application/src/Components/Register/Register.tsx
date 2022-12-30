@@ -77,7 +77,7 @@ const Register: React.FC = () => {
 						<h2>Register</h2>
                         <form className="form" onSubmit={registerHandler}>
                             {successfulRegister && <p className="success">Account Creation Successful!</p>}
-                            {accountExists && <p className="invalid">An Account Already Exists For The Provided Email</p>}
+                            {accountExists && <p className="invalid">Account Already Exists For Email</p>}
                             {!validEmail && <p className="invalid">Invalid Email</p>}
 							<input
 								type="text"

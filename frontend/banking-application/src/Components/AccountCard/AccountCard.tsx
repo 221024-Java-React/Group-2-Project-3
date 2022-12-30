@@ -5,234 +5,225 @@ import { Account } from "../../Types/Account";
 import "./AccountCard.css";
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
-  const [balance, updateBalance] = useState<number>(0.0);
-  const [balanceString, updateBalanceString] = useState<string>("");
 
-  const [deposit, setDeposit] = useState<string>("");
-  const [withdraw, setWithdraw] = useState<string>("");
-  const [transferAccount, setTransferAccount] = useState<string>("");
-  const [transferFunds, setTransferFunds] = useState<string>("");
-  const [isViewable, setIsViewable] = useState<boolean>(false);
+	const [balance, updateBalance] = useState<number>(0.0);
+	const [balanceString, updateBalanceString] = useState<string>("");
 
-  const idOffset: number =
-    account.type === 0 || "" + account.type === "CHECKING"
-      ? 178661410496
-      : account.type === 1 || "" + account.type === "SAVINGS"
-      ? 577924434622
-      : account.type === 2 || "" + account.type === "LOAN"
-      ? 231627902615
-      : 0;
+	const [deposit, setDeposit] = useState<string>("");
+	const [withdraw, setWithdraw] = useState<string>("");
+	const [transferAccount, setTransferAccount] = useState<string>("");
+	const [transferFunds, setTransferFunds] = useState<string>("");
+	const [isViewable, setIsViewable] = useState<boolean>(false);
 
-  const depositHandler = (event: any) => {
-    setDeposit(event.target.value);
-  };
-  const withdrawHandler = (event: any) => {
-    setWithdraw(event.target.value);
-  };
-  const transferAccountHandler = (event: any) => {
-    setTransferAccount(event.target.value);
-  };
-  const transferFundsHandler = (event: any) => {
-    setTransferFunds(event.target.value);
-  };
+	const idOffset: number =
+		account.type === 0 || "" + account.type === "CHECKING"
+			? 178661410496
+			: account.type === 1 || "" + account.type === "SAVINGS"
+				? 577924434622
+				: account.type === 2 || "" + account.type === "LOAN"
+					? 231627902615
+					: 0;
 
-  const {
-    userAccounts,
-    depositFunds,
-    withdrawFunds,
-    depositTransfer,
-    withdrawTransfer,
-  } = useContext(AuthContext);
+	const depositHandler = (event: any) => {
+		setDeposit(event.target.value);
+	};
+	const withdrawHandler = (event: any) => {
+		setWithdraw(event.target.value);
+	};
+	const transferAccountHandler = (event: any) => {
+		setTransferAccount(event.target.value);
+	};
+	const transferFundsHandler = (event: any) => {
+		setTransferFunds(event.target.value);
+	};
 
-  const viewDetailsHandler = (event: any) => {
-    event.preventDefault();
-    console.log(isViewable);
-    if (isViewable) setIsViewable(false);
-    else setIsViewable(true);
-  };
+	const { userAccounts, depositFunds, withdrawFunds, depositTransfer, withdrawTransfer } = useContext(AuthContext);
 
-  const convertValueToString = (value: number): string => {
-    let valueString: string;
+	const viewDetailsHandler = (event: any) => {
+		event.preventDefault();
+		console.log(isViewable);
+		if (isViewable) setIsViewable(false);
+		else setIsViewable(true);
+	};
 
-    if (value < 0) {
-      value *= -1;
-      valueString = "-$";
-    } else valueString = "$";
+	const convertValueToString = (value: number): string => {
+		let valueString: string;
 
-    valueString += value;
-    const endIndex: number = valueString.indexOf(".");
+		if (value < 0) {
+			value *= -1;
+			valueString = "-$";
+		} else valueString = "$";
 
-    valueString =
-      endIndex < 0
-        ? valueString + ".00"
-        : valueString.substring(
-            0,
-            endIndex >= valueString.length ? valueString.length : endIndex + 3
-          );
+		valueString += value;
+		const endIndex: number = valueString.indexOf(".");
 
-    return valueString;
-  };
+		valueString =
+			endIndex < 0
+				? valueString + ".00"
+				: valueString.substring(
+					0,
+					endIndex >= valueString.length ? valueString.length : endIndex + 3
+				);
 
-  const updateBalanceHandler = (newBalance: number) => {
-    updateBalance(newBalance);
+		return valueString;
+	};
 
-    updateBalanceString(convertValueToString(newBalance));
-  };
+	const updateBalanceHandler = (newBalance: number) => {
+		updateBalance(newBalance);
 
-  const depositUpdateHandler = (event: any) => {
-    event.preventDefault();
+		updateBalanceString(convertValueToString(newBalance));
+	};
 
-    let startIndex = 0;
+	const depositUpdateHandler = (event: any) => {
+		event.preventDefault();
 
-    while (startIndex < deposit.length && isNaN(+deposit[startIndex]))
-      startIndex++;
+		let startIndex = 0;
 
-    let endIndex = deposit.indexOf(".");
+		while (startIndex < deposit.length && isNaN(+deposit[startIndex]))
+			startIndex++;
 
-    endIndex =
-      endIndex >= 0 && endIndex + 3 < deposit.length
-        ? endIndex + 3
-        : deposit.length;
+		let endIndex = deposit.indexOf(".");
 
-    if (startIndex < endIndex) {
-      account.balance = Math.abs(
-        parseFloat(deposit.substring(startIndex, endIndex))
-      );
-      depositFunds(account);
-      updateBalanceHandler(balance + account.balance);
-    }
-  };
+		endIndex =
+			endIndex >= 0 && endIndex + 3 < deposit.length
+				? endIndex + 3
+				: deposit.length;
 
-  const withdrawUpdateHandler = (event: any) => {
-    event.preventDefault();
+		if (startIndex < endIndex) {
+			account.balance = Math.abs(
+				parseFloat(deposit.substring(startIndex, endIndex))
+			);
+			depositFunds(account);
+			updateBalanceHandler(balance + account.balance);
+		}
+	};
 
-    let startIndex = 0;
+	const withdrawUpdateHandler = (event: any) => {
+		event.preventDefault();
 
-    while (startIndex < withdraw.length && isNaN(+withdraw[startIndex]))
-      startIndex++;
+		let startIndex = 0;
 
-    let endIndex = withdraw.indexOf(".");
+		while (startIndex < withdraw.length && isNaN(+withdraw[startIndex]))
+			startIndex++;
 
-    endIndex =
-      endIndex >= 0 && endIndex + 3 < withdraw.length
-        ? endIndex + 3
-        : withdraw.length;
+		let endIndex = withdraw.indexOf(".");
 
-    if (startIndex < endIndex) {
-      account.balance = Math.abs(
-        parseFloat(withdraw.substring(startIndex, endIndex))
-      );
-      account.balance = Math.floor(account.balance * 100) / 100;
-      withdrawFunds(account);
-      updateBalanceHandler(balance - account.balance);
-    }
-  };
+		endIndex =
+			endIndex >= 0 && endIndex + 3 < withdraw.length
+				? endIndex + 3
+				: withdraw.length;
 
-  const transferUpdateHandler = (event: any) => {
-    event.preventDefault();
+		if (startIndex < endIndex) {
+			account.balance = Math.abs(
+				parseFloat(withdraw.substring(startIndex, endIndex))
+			);
+			account.balance = Math.floor(account.balance * 100) / 100;
+			withdrawFunds(account);
+			updateBalanceHandler(balance - account.balance);
+		}
+	};
 
-    let startIndex = 0;
+	const transferUpdateHandler = (event: any) => {
+		event.preventDefault();
 
-    while (
-      startIndex < transferFunds.length &&
-      isNaN(+transferFunds[startIndex])
-    )
-      startIndex++;
+		let startIndex = 0;
 
-    let endIndex = transferFunds.indexOf(".");
+		while (
+			startIndex < transferFunds.length &&
+			isNaN(+transferFunds[startIndex])
+		)
+			startIndex++;
 
-    endIndex =
-      endIndex >= 0 && endIndex + 3 < transferFunds.length
-        ? endIndex + 3
-        : transferFunds.length;
+		let endIndex = transferFunds.indexOf(".");
 
-    if (startIndex < endIndex) {
-      account.balance = Math.abs(
-        parseFloat(transferFunds.substring(startIndex, endIndex))
-      );
-      account.balance = Math.floor(account.balance * 100) / 100;
+		endIndex =
+			endIndex >= 0 && endIndex + 3 < transferFunds.length
+				? endIndex + 3
+				: transferFunds.length;
 
-      let typeNumber: number;
-      let typeString: string;
+		if (startIndex < endIndex) {
+			account.balance = Math.abs(
+				parseFloat(transferFunds.substring(startIndex, endIndex))
+			);
+			account.balance = Math.floor(account.balance * 100) / 100;
 
-      switch (transferAccount) {
-        case "checking":
-          typeNumber = 0;
-          typeString = "CHECKING";
-          break;
-        case "saving":
-          typeNumber = 1;
-          typeString = "SAVINGS";
-          break;
-        case "loan":
-          typeNumber = 2;
-          typeString = "LOAN";
-          break;
-        default:
-          typeNumber = -1;
-          typeString = "";
-          break;
-      }
+			let typeNumber: number;
+			let typeString: string;
 
-      if (typeNumber >= 0) {
-        let index: number = 0;
+			switch (transferAccount) {
+				case "checking":
+					typeNumber = 0;
+					typeString = "CHECKING";
+					break;
+				case "saving":
+					typeNumber = 1;
+					typeString = "SAVINGS";
+					break;
+				case "loan":
+					typeNumber = 2;
+					typeString = "LOAN";
+					break;
+				default:
+					typeNumber = -1;
+					typeString = "";
+					break;
+			}
 
-        while (index < userAccounts.length) {
-          if (
-            userAccounts[index].type == typeNumber ||
-            "" + userAccounts[index].type == typeString
-          )
-            break;
-          else index++;
-        }
+			if (typeNumber >= 0) {
+				let index: number = 0;
 
-        if (index < userAccounts.length) {
-          withdrawTransfer(account);
+				while (index < userAccounts.length) {
+					if (
+						userAccounts[index].type == typeNumber ||
+						"" + userAccounts[index].type == typeString
+					)
+						break;
+					else index++;
+				}
 
-          userAccounts[index].balance = account.balance;
+				if (index < userAccounts.length) {
+					withdrawTransfer(account);
 
-          depositTransfer(userAccounts[index]);
+					userAccounts[index].balance = account.balance;
 
-          updateBalanceHandler(balance - account.balance);
+					depositTransfer(userAccounts[index]);
 
-          window.location.reload();
-        }
-      }
-    }
-  };
+					updateBalanceHandler(balance - account.balance);
+				}
+			}
+		}
+	};
 
-  useEffect(() => {
-    updateBalanceHandler(account.balance);
-  }, []);
+	useEffect(() => {
+		updateBalanceHandler(account.balance);
+	}, []);
 
-  return (
-    <div className="">
-      <div className="flex-container">
-        <div className="flex-item">
-          <h2>{account.type}</h2>
-          <h3>Balance: {balanceString}</h3>
-          <h3>Transaction History</h3>
-          {account.transactions.length == 0 && (
-            <p>No Transactions History For Account</p>
-          )}
-          <ul>
-            {account.transactions
-              .sort((a, b) => b.id - a.id)
-              .map((transaction) => (
-                <li key={transaction.id} className="transaction-card">
-                  <p>{transaction.description}</p>
-                  <hr />
-                  <p>Amount: {convertValueToString(transaction.amount)}</p>
-                  <p>Date: {transaction.date}</p>
-                  <p>
-                    Balance:{" "}
-                    {convertValueToString(transaction.balanceAfterTransaction)}
-                  </p>
-                </li>
-              ))}
-          </ul>
-        </div>
-        {/* <div className="flex-item">
+	return (
+		<div className="">
+			<div className="flex-container">
+				<div className="flex-item">
+					<h2>{account.type}</h2>
+					<h3>Balance: {balanceString}</h3>
+					<h3>Transaction History</h3>
+					{account.transactions.length == 0 && (
+						<p>No Transactions History For Account</p>
+					)}
+					<ul>
+						{account.transactions.sort((a, b) => b.id - a.id).map((transaction) => (
+							<li key={transaction.id} className="transaction-card">
+								<p>{transaction.description}</p>
+								<hr />
+								<p>Amount: {convertValueToString(transaction.amount)}</p>
+								<p>Date: {transaction.date}</p>
+								<p>
+									Balance:{" "}
+									{convertValueToString(transaction.balanceAfterTransaction)}
+								</p>
+							</li>
+						))}
+					</ul>
+				</div>
+				{/* <div className="flex-item">
 					<div>
 						<h3>Deposit</h3>
 						<form className="form" onSubmit={depositUpdateHandler}>
@@ -247,69 +238,69 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					</div>
 				</div> */}
 
-        <div className="flex-item">
-          <div className="item">
-            <h3>Transfer Funds</h3>
-            <form className="form" onSubmit={transferUpdateHandler}>
-              <select
-                name="transferAccounts"
-                value={transferAccount}
-                onChange={transferAccountHandler}
-              >
-                <option value="" className="center">
-                  ------- Select Account -------
-                </option>
-                {account.type != 0 && "" + account.type != "CHECKING" && (
-                  <option value="checking">Checking</option>
-                )}
-                {account.type != 1 && "" + account.type != "SAVINGS" && (
-                  <option value="saving">Savings</option>
-                )}
-                {account.type != 2 && "" + account.type != "LOAN" && (
-                  <option value="loan">Loan</option>
-                )}
-              </select>
-              <input
-                type="text"
-                name="transferFunds"
-                value={transferFunds}
-                placeholder="$100.00"
-                onChange={transferFundsHandler}
-              />
-              <button className="login-button" type="submit">
-                Transfer Funds
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="flex-item center-container">
-          <div className="item">
-            <h3>Account Details</h3>
-            <form className="form">
-              <p>Routing #: 739389283</p>
-              <p>
-                {isViewable
-                  ? "Account #: " + ("" + (account.id + idOffset))
-                  : "Account #: ********" +
-                    ("" + (account.id + idOffset)).substring(8, 12)}{" "}
-              </p>
-              <p>Date opened: {account.creationDate.substring(0, 10)}</p>
-              <p>Account type: {account.type}</p>
-              <p>Current balance: {balanceString}</p>
-              <p>
-                {account.type != 0 &&
-                  "" + account.type != "CHECKING" &&
-                  "Interest rate: " + account.interestRate * 100 + "%"}
-              </p>
-              <button className="login-button" onClick={viewDetailsHandler}>
-                {isViewable ? "Hide" : "Show"} Account Number
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+				<div className="flex-item">
+					<div className="item">
+						<h3>Transfer Funds</h3>
+						<form className="form" onSubmit={transferUpdateHandler}>
+							<select
+								name="transferAccounts"
+								value={transferAccount}
+								onChange={transferAccountHandler}
+							>
+								<option value="" className="center">
+									------- Select Account -------
+								</option>
+								{account.type != 0 && "" + account.type != "CHECKING" && (
+									<option value="checking">Checking</option>
+								)}
+								{account.type != 1 && "" + account.type != "SAVINGS" && (
+									<option value="saving">Savings</option>
+								)}
+								{account.type != 2 && "" + account.type != "LOAN" && (
+									<option value="loan">Loan</option>
+								)}
+							</select>
+							<input
+								type="text"
+								name="transferFunds"
+								value={transferFunds}
+								placeholder="$100.00"
+								onChange={transferFundsHandler}
+							/>
+							<button className="login-button" type="submit">
+								Transfer Funds
+							</button>
+						</form>
+					</div>
+				</div>
+				<div className="flex-item center-container">
+					<div className="item">
+						<h3>Account Details</h3>
+						<form className="form">
+							<p>Routing #: 739389283</p>
+							<p>
+								{isViewable
+									? "Account #: " + ("" + (account.id + idOffset))
+									: "Account #: ********" +
+									("" + (account.id + idOffset)).substring(8, 12)}{" "}
+							</p>
+							<p>Date opened: {account.creationDate.substring(0, 10)}</p>
+							<p>Account type: {account.type}</p>
+							<p>Current balance: {balanceString}</p>
+							<p>
+								{account.type != 0 &&
+									"" + account.type != "CHECKING" &&
+									"Interest rate: " + account.interestRate * 100 + "%"}
+							</p>
+							<button className="login-button" onClick={viewDetailsHandler}>
+								{isViewable ? "Hide" : "Show"} Account Number
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default AccountCard;

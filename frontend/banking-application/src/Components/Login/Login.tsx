@@ -24,10 +24,12 @@ const Login = () => {
   };
 
   const loginHandler = (event: any) => {
-    login(email, password);
-
-    if (loggedInUser.id != -1) setValidForm(true);
-    else setValidForm(false);
+    login(email, password).then(success => {
+        if (success)
+            setValidForm(true);
+        else
+            setValidForm(false)
+    });
   };
 
   return (
@@ -40,7 +42,7 @@ const Login = () => {
             <h2>Login</h2>
             <form className="form">
               {!validForm && (
-                <p className="invalid">Invalid Email Or Password</p>
+                <p className="invalid">Incorrect Email or Password</p>
               )}
               <input
                 type="text"
