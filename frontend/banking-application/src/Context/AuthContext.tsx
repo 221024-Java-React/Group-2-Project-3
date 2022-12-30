@@ -59,10 +59,9 @@ const context = {
     loggedInUser: defaultUser,
 	checkedUser: defaultUser,
     userAccounts: defaultAccounts,
-    login: (email: string, password: string) => { },
-
+    login: async (email: string, password: string) : Promise<boolean> => { return false; },
     logout: () => { },
-    register: async (email: string, password: string) : Promise<boolean> => { return false },
+    register: async (email: string, password: string): Promise<boolean> => { return false; },
     resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
     retrieveUsername: (userSsn: string, userDob: string) => { },
     search: (value: string) => { },
@@ -85,7 +84,9 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 	const [userAccounts, setUserAccounts] = useState<Account[]>(defaultAccounts);
 
-	const loginHandler = async (userEmail: string, userPassword: string) => {
+	const loginHandler = async (userEmail: string, userPassword: string) : Promise<boolean> => {
+
+        let success = false;
 
 		try {
 
@@ -97,11 +98,16 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 				}
 			);
 
-			setLoggedInUser(data);
+            setLoggedInUser(data);
+            
+            if (data.id != -1)
+                success = true;
 
 		} catch (e) {
 			console.log(e);
-		}
+        }
+        
+        return success;
 	};
 
 	const logoutHandler = async () => {
