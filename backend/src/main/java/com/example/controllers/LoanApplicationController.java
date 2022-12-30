@@ -1,10 +1,13 @@
 package com.example.controllers;
 
 import com.example.models.LoanApplication;
+import com.example.models.User;
 import com.example.services.LoanApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedHashMap;
 
 @RestController
 @RequestMapping("loan")
