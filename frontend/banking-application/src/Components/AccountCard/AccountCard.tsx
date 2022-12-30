@@ -189,8 +189,6 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 					depositTransfer(userAccounts[index]);
 
 					updateBalanceHandler(balance - account.balance);
-
-					window.location.reload();
 				}
 			}
 		}

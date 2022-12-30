@@ -30,7 +30,7 @@ const Navigation = () => {
 
 	return (
         <div className="navbar">
-            <div>
+            <div className="side">
             {loggedInUser.id != -1 && (
 					<Link to="/profile"><FontAwesomeIcon className="profile" icon={faUser} /></Link>
                 )}
@@ -39,7 +39,7 @@ const Navigation = () => {
                 <img className="logo" src="https://media.discordapp.net/attachments/1053413630856679518/1058440136255352903/MAJIC_BANK.png" />
                 {/* <h1 className="brand">MAJIC BANK</h1> */}
             </Link>
-			<div className="nav">
+			<div className="side right">
 				{/* <form onSubmit={searchHandler}>
 					<input
                         type="text"
