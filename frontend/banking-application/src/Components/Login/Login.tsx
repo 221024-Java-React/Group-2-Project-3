@@ -10,19 +10,24 @@ import Navigation from "../Navigation/Navigation";
 import "./Login.css";
 
 const Login = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { login } = useContext(AuthContext);
+
 
     const [validForm, setValidForm] = useState<boolean>(true);
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const { login, loggedInUser } = useContext(AuthContext);
 
-	const emailHandler = (event: any) => {
-		setEmail(event.target.value);
-	};
 
-	const passwordHandler = (event: any) => {
-		setPassword(event.target.value);
-	};
+  const passwordHandler = (event: any) => {
+    setPassword(event.target.value);
+  };
+
+  const loginHandler = (event: any) => {
+    event.preventDefault();
+
 
 	const loginHandler = (event: any) => {
         login(email, password);
@@ -60,6 +65,7 @@ const Login = () => {
                             <Link className="login-button" to="/" onClick={loginHandler}>Login</Link>
 						</form>
 						{/* <h3 className="member">Forgot Your Username?</h3>
+
 						<div className="form">
 							<Link className="login-button" to="/retrieve">Retrieve Username</Link>
 						</div>
@@ -67,17 +73,19 @@ const Login = () => {
 						<div className="form">
 							<Link className="login-button" to="/reset">Reset Password</Link>
 						</div> */}
-						<h3 className="member">Don't Have An Account?</h3>
-						<div className="form">
-							<Link className="login-button" to="/register">Create An Account</Link>
-						</div>
-					</div>
-					<Advertisement />
-                </div>
-                <Footer />
-			</div>
-		</>
-	);
+            <h3 className="member">Don't Have An Account?</h3>
+            <div className="form">
+              <Link className="login-button" to="/register">
+                Create An Account
+              </Link>
+            </div>
+          </div>
+          {/* <Advertisement /> */}
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
 };
 
 export default Login;

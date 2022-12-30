@@ -104,6 +104,8 @@ public class UserService {
 		if(updatedUser.getPhone() != null) originalUser.setPhone(updatedUser.getPhone());
 		if(updatedUser.getOccupation() != null) originalUser.setOccupation(updatedUser.getOccupation());
 		if(updatedUser.getIncome() != null) originalUser.setIncome(updatedUser.getIncome());
+		if(updatedUser.getDob() != null) originalUser.setDob(updatedUser.getDob());
+		if(updatedUser.getSsn() != 0) originalUser.setSsn(updatedUser.getSsn());
 		
 		return userRepo.save(originalUser);
 	}
