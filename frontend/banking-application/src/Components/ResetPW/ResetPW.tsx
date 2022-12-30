@@ -10,70 +10,75 @@ import Navigation from "../Navigation/Navigation";
 
 const ResetPW: React.FC = () => {
 
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
+    const [checked, setChecked] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
-	const { resetPassword, checkedUser } = useContext(AuthContext);
+    const { resetPassword, checkedUser } = useContext(AuthContext);
 
-	const emailHandler = (event: any) => {
-		setEmail(event.target.value);
-	};
+    const emailHandler = (event: any) => {
+        setEmail(event.target.value);
+    };
 
     const ssnHandler = (event: any) => {
-		setSsn(event.target.value);
-	};
+        setSsn(event.target.value);
+    };
 
-	const passwordHandler = (event: any) => {
-		setPassword(event.target.value);
-	};
+    const passwordHandler = (event: any) => {
+        setPassword(event.target.value);
+    };
 
-	const resetPasswordHandler = (event: any) => {
-		event.preventDefault();
-		resetPassword(email, ssn, password);
-	};
+    const resetPasswordHandler = (event: any) => {
+        event.preventDefault();
+        resetPassword(email, ssn, password);
+        setChecked(true);
+    };
 
-	return (
-		<>
-			<div className="page">
-				<Background />
-				<Navigation />
-				<div className="content">
-					<div className="register box">
-						<h2>Reset Password</h2>
-						<form className="form" onSubmit={resetPasswordHandler}>
-							<input
-								type="text"
-								name="email"
-								value={email}
-								placeholder="Email"
-								onChange={emailHandler}
-							/>
-							<input
-								type="password"
-								name="ssn"
-								value={ssn}
-								placeholder="SSN (#########)"
-								onChange={ssnHandler}
-							/>
+    return (
+        <>
+            <div className="page">
+                <Background />
+                <Navigation />
+                <div className="content">
+                    <div className="register box">
+                        <h2>Reset Password</h2>
+                        <form className="form" onSubmit={resetPasswordHandler}>
+                            {(checkedUser.email == "" && checked) && (
+                                <p className="invalid">Incorrect Email or SSN</p>
+                            )}
                             <input
-								type="password"
-								name="password"
-								value={password}
-								placeholder="New Password"
-								onChange={passwordHandler}
-							/>
-							<button className="login-button" type="submit">Reset Password</button>
-						</form>
-						{<p>{checkedUser.email != "" ? "Password reset successfully." : "Enter correct information above to reset your password."} </p>}
-						<h3 className="member">Return to Login Page</h3>
-						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
-					</div>
-					<Advertisement />
+                                type="text"
+                                name="email"
+                                value={email}
+                                placeholder="Email"
+                                onChange={emailHandler}
+                            />
+                            <input
+                                type="password"
+                                name="ssn"
+                                value={ssn}
+                                placeholder="SSN (#########)"
+                                onChange={ssnHandler}
+                            />
+                            <input
+                                type="password"
+                                name="password"
+                                value={password}
+                                placeholder="New Password"
+                                onChange={passwordHandler}
+                            />
+                            <button className="login-button" type="submit">Reset Password</button>
+                        </form>
+                        {<p>{checkedUser.email != "" ? "Password reset successfully." : "Enter correct information above to reset your password."} </p>}
+                        <h3 className="member">Return to Login Page</h3>
+                        <div className="form"><Link className="login-button" to="/login">Login</Link></div>
+                    </div>
+                    <Advertisement />
                 </div>
                 <Footer />
-			</div>
-		</>
-	)
+            </div>
+        </>
+    )
 }
 
 export default ResetPW
