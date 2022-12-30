@@ -9,18 +9,20 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "loan-application")
+@Table(name="loan_applications")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoanApplication {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
 
     private String description;

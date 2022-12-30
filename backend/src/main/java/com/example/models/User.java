@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +50,7 @@ public class User {
 	private UserType type;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@JsonIgnore
     private List<Account> accounts;
 	
 	@Column(name="address")
@@ -83,7 +86,7 @@ public class User {
 	@Column(name="credit_score")
 	private int creditScore;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<LoanApplication> loanApplications;
 	
 	
