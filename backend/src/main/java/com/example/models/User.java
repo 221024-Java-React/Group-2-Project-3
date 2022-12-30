@@ -82,6 +82,9 @@ public class User {
 	
 	@Column(name="credit_score")
 	private int creditScore;
+
+	@OneToMany(mappedBy = "user")
+	private List<LoanApplication> loanApplications;
 	
 	
 	
