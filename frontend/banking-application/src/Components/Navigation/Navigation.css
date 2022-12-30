@@ -1,50 +1,59 @@
-.navbar {
+.nav-row-container {
 	background-color: var(--primary-theme1);
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-    /* width: 80%; */
-    margin: auto;
+  flex-direction: row;
+  text-align: center;
 }
 
-.side {
-    width: 200px;
-    margin: 0;
+.nav-col-container {
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 50%;
+}
+
+.left {
+	float: left;
+	margin-left: 12px;
 }
 
 .right {
-    position: relative;
-  float: right;
+	float: right;
+	margin-right: 12px;
+}
+
+.logo {
+	height: 140px;
+	margin: 0;
 }
 
 .profile {
-    background-color: white;
-    padding: 10px;
-    height: 35px;
-    width: 35px;
-    border-radius: 100px;
-    margin-left: 12px;
+	background-color: white;
+	padding: 10px;
+	height: 35px;
+	width: 35px;
+	border-radius: 100px;
 }
 
 .brand {
 	padding-left: 0.75em;
-    font-size: 2em;
-    font-family: sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: white;
+	font-size: 2em;
+	font-family: sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.2em;
+	color: white;
 }
 
-.logo {
-    width: 200px;
-    border-radius: 20px;
-  }
+h1 {
+	padding: 0;
+	margin: 0;
+}
 
 .text {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: white;
-    /* padding-right: 10%; */
+	font-size: 1.5em;
+	font-weight: 600;
+	color: white;
+	/* padding-right: 10%; */
 }
 
 a:visited {
@@ -60,7 +69,7 @@ a {
 }
 
 .navbar input {
-    background-color: white;
+	background-color: white;
 }
 
 .navbar input:focus {
