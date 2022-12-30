@@ -28,7 +28,10 @@ public class UserService {
 	@Autowired
 	private AccountService accountServ;
 	
-	public User createUserAndAccounts(User u) {
+    public User createUserAndAccounts(User u) {
+
+        if (userRepo.getByEmail(u.getEmail()).isPresent())
+            return null;
 		
 		BigDecimal savingsInterestRate = new BigDecimal(0.002);
 		BigDecimal loanInterestRate = new BigDecimal(0.10);
@@ -87,7 +90,6 @@ public class UserService {
 			throw new InvalidCredentialsException();
 		}
 	}
-	
 	
 	public User updateUser(User updatedUser) {
 		User originalUser = userRepo.findById(updatedUser.getId()).get();

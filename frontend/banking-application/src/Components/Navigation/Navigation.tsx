@@ -29,8 +29,12 @@ const Navigation = () => {
 	}
 
 	return (
-		<div className="navbar">
-			<Link to="/profile"><FontAwesomeIcon className="profile" icon={faUser} /></Link>
+        <div className="navbar">
+            <div>
+            {loggedInUser.id != -1 && (
+					<Link to="/profile"><FontAwesomeIcon className="profile" icon={faUser} /></Link>
+                )}
+            </div>
 			<Link to="/"><h1 className="brand">MAJIC BANK</h1></Link>
 			<div className="nav">
 				{/* <form onSubmit={searchHandler}>
@@ -44,8 +48,8 @@ const Navigation = () => {
 					<button className="icon-button" type="submit"><FontAwesomeIcon icon={faSearch} /></button>
 					</form> */}
 				{loggedInUser.id != -1 && (
-					<Link to="/login">
-						<span className="text" onClick={logoutHandler}>Logout </span>
+					<Link to="/login" onClick={logoutHandler}>
+						<span className="text">Logout </span>
 						<button className="icon-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
 					</Link>
 				)}
