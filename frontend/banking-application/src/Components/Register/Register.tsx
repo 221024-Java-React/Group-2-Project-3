@@ -12,6 +12,7 @@ import './Register.css'
 
 const Register: React.FC = () => {
 
+    const [accountExists, setAccountExists] = useState<boolean>(false);
     const [validEmail, setValidEmail] = useState<boolean>(true);
     const [validPassword, setValidPassword] = useState<boolean>(true);
     const [successfulRegister, setSuccessfulRegister] = useState<boolean>(false);
@@ -57,8 +58,12 @@ const Register: React.FC = () => {
 
         if (valid)
         {
-            register(email, password);
-            setSuccessfulRegister(true); // TODO check if successfully created account from response
+            register(email, password).then(success => {
+                if (success)
+                    setSuccessfulRegister(true);
+                else
+                    setAccountExists(true);
+            });
         }
 	};
 
@@ -72,6 +77,7 @@ const Register: React.FC = () => {
 						<h2>Register</h2>
                         <form className="form" onSubmit={registerHandler}>
                             {successfulRegister && <p className="success">Account Creation Successful!</p>}
+                            {accountExists && <p className="invalid">An Account Already Exists For The Provided Email</p>}
                             {!validEmail && <p className="invalid">Invalid Email</p>}
 							<input
 								type="text"
