@@ -24,10 +24,12 @@ const Login = () => {
   };
 
   const loginHandler = (event: any) => {
-    login(email, password);
-
-    if (loggedInUser.id != -1) setValidForm(true);
-    else setValidForm(false);
+    login(email, password).then(success => {
+        if (success)
+            setValidForm(true);
+        else
+            setValidForm(false)
+    });
   };
 
   return (
