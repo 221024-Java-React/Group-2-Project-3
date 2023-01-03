@@ -32,32 +32,41 @@ const LoanRequestPage: React.FC = () => {
   const submitHandler = () => {
     applyForLoan(loggedInUser, amount, loanDescription)
   }
+
   
   return (
     <div>
       <Background />
       <Navigation />
       <div className="container">
+        <label >Name </label>
         <label className="select label">
-          Loan application for{" "}
           {`${loggedInUser.firstName} ${loggedInUser.lastName}`}
         </label>
-
-        <label className="label">SSN: {loggedInUser.ssn}</label>
-        <label className="label">DOB: {loggedInUser.dob}</label>
-        <label className="label">Occupation: {loggedInUser.occupation}</label>
-        <label className="label">Income: {loggedInUser.income}</label>
-        <select className="select label" onChange={ownerShipHandler} name="" id="">
-          <option value="property-ownership">Property Ownership</option>
-          <option value="own">Own</option>
-          <option value="rent">Rent</option>
+        <label >SSN </label>
+        <label className="select label">{loggedInUser.ssn}</label>
+        <label >Birth Date </label>
+        <label className="select label">{loggedInUser.dob}</label>
+        <label >Occupation</label>
+        <label className="select label">{loggedInUser.occupation}</label>
+        <label >Income</label>
+        <label className="select label">{loggedInUser.income}</label>
+        <select className="label" onChange={ownerShipHandler} name="" id="">
+          <option value="Purpose of Loan">Purpose of Loan</option>
+          <option value="home">Home</option>
+          <option value="car">Car</option>
+          <option value="other">Other (please specify below)</option>
         </select>
-        <label className="label">Purpose of Loan</label>
-        <textarea onChange={descriptionHandler} name="description"></textarea>
+        <textarea placeholder="If 'other' please specify reason for loan here" onChange={descriptionHandler} name="description"></textarea>
         <br />
         <br />
         <label className="label">Loan Amount</label>
         <input className="select label" type="number" onChange={amountHandler} name="amount"/>
+        <select className="label" onChange={ownerShipHandler} name="" id="">
+          <option value="property-ownership">Property Ownership</option>
+          <option value="own">Own</option>
+          <option value="rent">Rent</option>
+        </select>
         <button className="loan-button" onClick={submitHandler}>Apply now</button>
       </div>
       <Footer />
