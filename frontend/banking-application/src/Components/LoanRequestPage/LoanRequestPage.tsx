@@ -38,25 +38,27 @@ const LoanRequestPage: React.FC = () => {
       <Background />
       <Navigation />
       <div className="container">
-        <label className="label">
+        <label className="select label">
           Loan application for{" "}
           {`${loggedInUser.firstName} ${loggedInUser.lastName}`}
         </label>
 
-        <label className="label">{loggedInUser.ssn}</label>
-        <label className="label">{loggedInUser.dob}</label>
-        <label className="label">{loggedInUser.occupation}</label>
-        <label className="label">{loggedInUser.income}</label>
-        <select onChange={ownerShipHandler} name="" id="">
+        <label className="label">SSN: {loggedInUser.ssn}</label>
+        <label className="label">DOB: {loggedInUser.dob}</label>
+        <label className="label">Occupation: {loggedInUser.occupation}</label>
+        <label className="label">Income: {loggedInUser.income}</label>
+        <select className="select label" onChange={ownerShipHandler} name="" id="">
           <option value="property-ownership">Property Ownership</option>
           <option value="own">Own</option>
           <option value="rent">Rent</option>
         </select>
         <label className="label">Purpose of Loan</label>
         <textarea onChange={descriptionHandler} name="description"></textarea>
-        
-        <input type="number" onChange={amountHandler} name="amount"/>
-        <button onClick={submitHandler}>Apply now</button>
+        <br />
+        <br />
+        <label className="label">Loan Amount</label>
+        <input className="select label" type="number" onChange={amountHandler} name="amount"/>
+        <button className="loan-button" onClick={submitHandler}>Apply now</button>
       </div>
       <Footer />
     </div>
