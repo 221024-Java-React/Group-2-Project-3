@@ -45,6 +45,10 @@ public class LoanApplicationController {
     public Boolean approveLoanApplication(@RequestBody Integer appId) {
         return loanServ.approve(appId);
     }
-
+    
+    @PutMapping("/reject")
+    public Boolean rejectLoanApplication(@RequestBody Integer appId) {
+        return loanServ.reject(appId);
+    }
 
 }

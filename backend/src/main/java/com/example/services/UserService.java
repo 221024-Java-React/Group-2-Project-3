@@ -2,6 +2,7 @@ package com.example.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +33,8 @@ public class UserService {
 
         if (userRepo.getByEmail(u.getEmail()).isPresent())
             return null;
+        
+        u.setDob(LocalDateTime.of(2000, Month.JANUARY, 01, 0, 0, 0));
 		
 		BigDecimal savingsInterestRate = new BigDecimal(0.002);
 		BigDecimal loanInterestRate = new BigDecimal(0.10);
