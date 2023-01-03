@@ -30,4 +30,5 @@ public class LoanApplication {
     private BigDecimal amount;
 
     private boolean isApproved;
+    
 }

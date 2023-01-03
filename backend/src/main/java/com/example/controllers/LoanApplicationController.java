@@ -42,8 +42,8 @@ public class LoanApplicationController {
     }
 
     @PutMapping("/approve")
-    public Boolean approveLoanApplication(@RequestBody LoanApplication id) {
-        return loanServ.approve(id);
+    public Boolean approveLoanApplication(@RequestBody Integer appId) {
+        return loanServ.approve(appId);
     }
 
 
