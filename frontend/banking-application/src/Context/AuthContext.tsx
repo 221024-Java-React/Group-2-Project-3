@@ -62,8 +62,8 @@ const context = {
     login: async (email: string, password: string) : Promise<boolean> => { return false; },
     logout: () => { },
     register: async (email: string, password: string): Promise<boolean> => { return false; },
-    resetPassword: (userEmail: string, userSsn: string, userPassword: string) => { },
-    retrieveUsername: (userSsn: string, userDob: string) => { },
+    resetPassword: async (userEmail: string, userSsn: string, userPassword: string): Promise<boolean> => { return false; },
+    retrieveUsername: async (userSsn: string, userDob: string):  Promise<boolean> => { return false; },
     search: (value: string) => { },
     findAccounts: () => { },
     updateInfo: () => {},
@@ -72,6 +72,7 @@ const context = {
 	depositTransfer: (account: Account) => { },
     withdrawTransfer: (account: Account) => { },
 	applyForLoan: (user: User, amount: number, purpose: string) => { },
+	resetCheckedUser: () => {},
 
 };
 
@@ -140,7 +141,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
         return success;
 	}
 
-	const retrieveUsernameHandler = async (userSsn: string, userDob: string) => {
+	const retrieveUsernameHandler = async (userSsn: string, userDob: string): Promise<boolean> => {
 
 		try {
 
@@ -153,8 +154,8 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 				
 			);
 			setCheckedUser(data);
-
-			console.log(data);
+			
+			return true;
 
 			// const { data } = await axios.get<Account[]>(
 			// 	`http://localhost:8000/account/all?id=${loggedInUser.id}`,
@@ -168,10 +169,16 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		} catch (error) {
 			console.log(error)
 		}
+
+		return false;
+	}
+
+	const resetCheckedUserHandler = () => {
+		setCheckedUser(defaultUser);
 	}
 
 
-    const resetPasswordHandler = async (userEmail: string, userSsn: string, userNewPassword: string) => {
+    const resetPasswordHandler = async (userEmail: string, userSsn: string, userNewPassword: string): Promise<boolean> => {
 
         try {
 
@@ -186,12 +193,14 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 			setCheckedUser(data);
 
-			console.log(data);
+			return true;
 
 
         } catch (error) {
             console.log(error)   
         }
+
+		return false;
     }
 
 
@@ -359,7 +368,8 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		withdrawFunds: withdrawFundsHandler,
 		depositTransfer: depositTransferHandler,
 		withdrawTransfer: withdrawTransferHandler,
-		applyForLoan: applyForLoanHandler
+		applyForLoan: applyForLoanHandler,
+		resetCheckedUser: resetCheckedUserHandler,
 
 	};
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
@@ -10,7 +10,7 @@ import Navigation from "../Navigation/Navigation";
 
 const ResetPW: React.FC = () => {
 
-    const [checked, setChecked] = useState<boolean>(false);
+    const [checked, setChecked] = useState<boolean>(true);
     const [validPassword, setValidPassword] = useState<boolean>(true);
     const [validConfirmPassword, setValidConfirmPassword] = useState<boolean>(true);
 
@@ -18,7 +18,7 @@ const ResetPW: React.FC = () => {
     const [ssn, setSsn] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
-    const { resetPassword, checkedUser } = useContext(AuthContext);
+    const { resetPassword, checkedUser, resetCheckedUser } = useContext(AuthContext);
 
     const emailHandler = (event: any) => {
         setEmail(event.target.value);
@@ -67,11 +67,19 @@ const ResetPW: React.FC = () => {
 
         if (valid)
         {
-            resetPassword(email, ssn, password);
+            resetPassword(email, ssn, password).then(success => {
+                if (success)
+                    setChecked(true);
+                else
+                    setChecked(false);
+            });
         }
         
-        setChecked(true);
     };
+
+    useEffect(() => {
+        resetCheckedUser();
+    },[])
 
     return (
         <>
@@ -83,7 +91,7 @@ const ResetPW: React.FC = () => {
                         <div className="login-box">
                         <h2>Reset Password</h2>
                         <form className="form" onSubmit={resetPasswordHandler}>
-                            {(checkedUser.email == "" && checked) && (
+                            {(!checked) && (
                                 <p className="invalid">Incorrect Email or SSN</p>
                             )}
                             <input

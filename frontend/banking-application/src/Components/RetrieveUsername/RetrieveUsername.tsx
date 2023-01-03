@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import Advertisement from "../Advertisement/Advertisement";
@@ -10,7 +10,7 @@ import Navigation from "../Navigation/Navigation";
 
 const RetrieveUsername: React.FC = () => {
 
-    const [checked, setChecked] = useState<boolean>(false);
+    const [checked, setChecked] = useState<boolean>(true);
 
     // const [email, setEmail] = useState<string>("");
     // const [password, setPassword] = useState<string>("");
@@ -18,7 +18,7 @@ const RetrieveUsername: React.FC = () => {
     const [dob, setDob] = useState<string>("");
     const [displayUsername, setDisplayUsername] = useState<boolean>(false);
     // const { resetPassword } = useContext(AuthContext);
-    const { retrieveUsername, checkedUser } = useContext(AuthContext);
+    const { retrieveUsername, checkedUser, resetCheckedUser } = useContext(AuthContext);
 
     // const emailHandler = (event: any) => {
     // 	setEmail(event.target.value);
@@ -43,12 +43,20 @@ const RetrieveUsername: React.FC = () => {
 
     const retrieveUsernameHandler = (event: any) => {
         event.preventDefault();
-        retrieveUsername(ssn, dob);
+        retrieveUsername(ssn, dob).then(success => {
+            if (success)
+                setChecked(true);
+            else
+                setChecked(false);
+        });
         console.log(displayUsername);
         if (displayUsername) setDisplayUsername(false);
         else setDisplayUsername(true);
-        setChecked(true);
     };
+
+    useEffect(() => {
+        resetCheckedUser();
+    },[])
 
     return (
         <>
@@ -60,7 +68,7 @@ const RetrieveUsername: React.FC = () => {
                         <div className="login-box">
                             <h2>Username Lookup</h2>
                             <form className="form" onSubmit={retrieveUsernameHandler}>
-                                {(checkedUser.email == "" && checked) && (
+                                {(!checked) && (
                                     <p className="invalid">Incorrect SSN or DOB</p>
                                 )}
                                 <input

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -45,8 +46,15 @@ public class LoanApplicationService {
         
         int userId = loanToApprove.getUser().getId();
 
-        Account userLoanAccount = accountService.readAccountByUserId(userId).get(2);
-
+        List<Account> userAccounts = accountService.readAccountByUserId(userId);
+        
+        Account userLoanAccount = userAccounts.get(2);
+        for(Account account : userAccounts) {
+        	if(account.getType() == AccountType.LOAN) {
+        		userLoanAccount = account;
+        		break;
+        	}
+        }
         accountService.adjustBalance(userLoanAccount, loanAmount);
         
         Transaction transaction = new Transaction(userLoanAccount, loanAmount, "LOAN", LocalDateTime.now());
