@@ -39,3 +39,27 @@ p {
   backdrop-filter: blur(3px);
   z-index: 5;
 }
+
+.profile-flex-container {
+	/* display: flex;
+	flex-direction: row;
+    flex-wrap: flex;
+    background-color: var(--primary-theme1); */
+    width: 90%;
+    margin: auto;
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--primary-theme1);
+}
+
+.profile-flex-item {
+    width: 16%;
+    height: 50px;
+    margin-right: 0.65%;
+    margin-top: 15px;
+}
+
+.flex-content {
+    width: 90%;
+}

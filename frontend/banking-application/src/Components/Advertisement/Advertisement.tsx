@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Advertisement.css";
 
 const Advertisement = () => {
@@ -14,8 +15,9 @@ const Advertisement = () => {
 				comes from our client's success.</em></p>
 			<br />
 			<div className="nav-row-container">
-				<div className="nav-col-container left"><h4>Download Our App</h4></div>
-				<div className="nav-col-container right"><strong>MAJIC Mobile App</strong></div>
+                <div className="nav-col-container left">
+                    <Link to="/"><strong>Download Our MAJIC Mobile App</strong></Link>
+                </div>
 			</div>
 			<div className="nav-row-container">
 				<div className="nav-col-container left"><h4>Branch Hours</h4>

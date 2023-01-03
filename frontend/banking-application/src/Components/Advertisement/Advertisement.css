@@ -14,6 +14,15 @@
 
 }
 
+.advertisement a {
+    color: white;
+}
+
+.advertisement a:hover {
+    color: black;
+    -webkit-text-stroke: 0.6px white;
+}
+
 .logo-small {
 	height: 140px;
     margin: 0;
