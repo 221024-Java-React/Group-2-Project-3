@@ -37,39 +37,41 @@ const Login = () => {
 			<div className="page">
 				<Background />
 				<Navigation />
-				<div className="flex-container">
-				<div className="login box">
-							<h2>Login</h2>
-							<form className="form">
-								{!validForm && (
-									<p className="invalid">Incorrect Email or Password</p>
-								)}
-								<input
-									type="text"
-									name="email"
-									value={email}
-									placeholder="Email"
-									onChange={emailHandler}
-								/>
-								<input
-									type="password"
-									name="password"
-									value={password}
-									placeholder="Password"
-									onChange={passwordHandler}
-								/>
-								<Link className="login-button" to="/" onClick={loginHandler}>
-									Login
-								</Link>
-							</form>
-							<h3 className="member">Don't Have An Account?</h3>
-							<div className="form">
-								<Link className="login-button" to="/register">
-									Create An Account
-								</Link>
-							</div>
+				<div className="login-flex-container">
+					<div className="login-flex-1">
+					<div className="login-box">
+						<h2>Login</h2>
+						<form className="form">
+							{!validForm && (
+								<p className="invalid">Incorrect Email or Password</p>
+							)}
+							<input
+								type="text"
+								name="email"
+								value={email}
+								placeholder="Email"
+								onChange={emailHandler}
+							/>
+							<input
+								type="password"
+								name="password"
+								value={password}
+								placeholder="Password"
+								onChange={passwordHandler}
+							/>
+							<Link className="login-button" to="/" onClick={loginHandler}>
+								Login
+							</Link>
+						</form>
+						<h3 className="member">Don't Have An Account?</h3>
+						<div className="form">
+							<Link className="login-button" to="/register">
+								Create An Account
+							</Link>
 						</div>
-					<div className="flex-item">
+					</div>
+					</div>
+					<div className="login-flex-2">
 						<Advertisement />
 					</div>
 				</div>

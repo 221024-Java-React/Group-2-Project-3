@@ -6,12 +6,12 @@ const Advertisement = () => {
 		<div className="advertisement">
 			<img className="logo-small" src="https://cdn.discordapp.com/attachments/1053408347803627550/1058478463893377134/image.png" title="MAJIC Bank" />
 			<h2>About Us</h2>
-			<p>MAJIC Bank's vision is to allow our customers to bank with ease.
+			<p><em>MAJIC Bank's vision is to allow our customers to bank with ease.
 				We strive to be the most trusted and accessible bank to our clients.
 				The clients are the heart of the experience and so we want to create products and services which help
 				them meet their financial needs with no hidden fees or minimum balance requirements.
 				Our core value is to learn what matters the most to our clients because we recognize that our success
-				comes from our client's success.</p>
+				comes from our client's success.</em></p>
 			<br />
 			<div className="nav-row-container">
 				<div className="nav-col-container left"><h4>Download Our App</h4></div>
@@ -41,8 +41,6 @@ const Advertisement = () => {
 					</pre>
 				</div>
 			</div>
-			<br />
-			<br />
 		</div>
 	);
 };

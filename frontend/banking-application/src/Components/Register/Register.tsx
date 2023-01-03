@@ -71,10 +71,11 @@ const Register: React.FC = () => {
 		<>
 			<div className="page">
 				<Background />
-				<Navigation />
-				<div className="content">
-					<div className="register box">
-						<h2>Register</h2>
+                <Navigation />
+                <div className="login-flex-container">
+					<div className="login-flex-1">
+                        <div className="login-box">
+                        <h2>Register</h2>
                         <form className="form" onSubmit={registerHandler}>
                             {successfulRegister && <p className="success">Account Creation Successful!</p>}
                             {accountExists && <p className="invalid">Account Already Exists For Email</p>}
@@ -98,8 +99,11 @@ const Register: React.FC = () => {
 						</form>
 						<h3 className="member">Already Have An Account?</h3>
 						<div className="form"><Link className="login-button" to="/login">Login</Link></div>
+                        </div>
+                    </div>
+                    <div className="login-flex-2">
+						<Advertisement />
 					</div>
-					<Advertisement />
                 </div>
                 <Footer />
 			</div>

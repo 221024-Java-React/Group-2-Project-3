@@ -39,8 +39,9 @@ const ResetPW: React.FC = () => {
             <div className="page">
                 <Background />
                 <Navigation />
-                <div className="content">
-                    <div className="register box">
+                <div className="login-flex-container">
+					<div className="login-flex-1">
+                        <div className="login-box">
                         <h2>Reset Password</h2>
                         <form className="form" onSubmit={resetPasswordHandler}>
                             {(checkedUser.email == "" && checked) && (
@@ -69,11 +70,15 @@ const ResetPW: React.FC = () => {
                             />
                             <button className="login-button" type="submit">Reset Password</button>
                         </form>
-                        {<p>{checkedUser.email != "" ? "Password reset successfully." : "Enter correct information above to reset your password."} </p>}
+                            {<p>{checkedUser.email != "" ? "Password reset successfully." : ""
+                        /* "Enter correct information above to reset your password." */} </p>}
                         <h3 className="member">Return to Login Page</h3>
                         <div className="form"><Link className="login-button" to="/login">Login</Link></div>
+                        </div>
                     </div>
-                    <Advertisement />
+                    <div className="login-flex-2">
+						<Advertisement />
+					</div>
                 </div>
                 <Footer />
             </div>
