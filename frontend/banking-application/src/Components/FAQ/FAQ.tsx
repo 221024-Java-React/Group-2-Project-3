@@ -11,7 +11,7 @@ const FAQ = () => {
 			<Background />
 			<Navigation />
 			<div className="content">
-				<h2>Frequently Asked Questions</h2>
+				<h2 className="content-header">Frequently Asked Questions</h2>
 			</div>
 			<div className="flex-column-container">
 				<div className="flex-item">
