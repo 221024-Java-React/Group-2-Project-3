@@ -49,7 +49,7 @@ public class AccountService {
 		return userAccounts;
 	}
 
-	private Account adjustBalance(Account updatedAccount, BigDecimal adjustment) {
+	public Account adjustBalance(Account updatedAccount, BigDecimal adjustment) {
 		Account originalAccount = accountRepo.findById(updatedAccount.getId()).get();
 
 		if (updatedAccount.getBalance() != null)
@@ -60,7 +60,7 @@ public class AccountService {
 		return accountRepo.save(originalAccount);
 	}
 
-	private Account adjustBalance(Integer id, BigDecimal amount) {
+	public Account adjustBalance(Integer id, BigDecimal amount) {
 		return adjustBalance(readAccount(id), amount);
 	}
 
