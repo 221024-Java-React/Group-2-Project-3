@@ -71,6 +71,7 @@ const context = {
 	withdrawFunds: (account: Account) => { },
 	depositTransfer: (account: Account) => { },
     withdrawTransfer: (account: Account) => { },
+	applyForLoan: (user: User, amount: number, purpose: string) => { },
 
 };
 
@@ -325,6 +326,23 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 
 	}
 
+	const applyForLoanHandler = async (user: User, amount: number, purpose: string) => {
+		try {
+			const {data} = await axios.post<User>(
+				`http://localhost:8000/loan/create`,
+				{
+					"amount": amount,
+					"purpose": purpose,
+					"accepted": false,
+					"user_id": user.id
+
+				}
+			)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	const contextValue = {
 		loggedInUser,
 		userAccounts,
@@ -340,8 +358,8 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 		depositFunds: depositFundsHandler,
 		withdrawFunds: withdrawFundsHandler,
 		depositTransfer: depositTransferHandler,
-		withdrawTransfer: withdrawTransferHandler
-		
+		withdrawTransfer: withdrawTransferHandler,
+		applyForLoan: applyForLoanHandler
 
 	};
 

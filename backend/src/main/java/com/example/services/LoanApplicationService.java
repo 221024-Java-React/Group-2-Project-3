@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.models.Account;
+import com.example.models.AccountType;
 import com.example.models.LoanApplication;
 import com.example.models.Transaction;
 import com.example.models.User;
@@ -48,6 +49,7 @@ public class LoanApplicationService {
         
         //edit to readLoanAccountByUserId?
         Account userLoanAccount = accountService.readAccountByUserId(userId).get(2);
+
         
 //        System.out.println(userLoanAccount.getInterestRate());
 
@@ -58,6 +60,7 @@ public class LoanApplicationService {
         transaction.setBalanceAfterTransaction(userLoanAccount.getBalance());
         
         transactionServ.createTransaction(transaction);
+
 
         return true;
     }

@@ -26,12 +26,14 @@ public class LoanApplicationController {
     @PostMapping("/create")
     public LoanApplication createLoanApplication(@RequestBody LinkedHashMap<Object, Object> body) {
         LoanApplication loanApp = new LoanApplication();
-        Integer amount = (Integer) body.get("amount");
+        String amount = (String) body.get("amount");
+        Integer integerAmount = Integer.parseInt(amount);
         String purpose = (String) body.get("purpose");
         Integer userId = (Integer) body.get("user_id");
         User user = userService.readUser(userId);
-
-        loanApp.setAmount(BigDecimal.valueOf(amount));
+        
+        
+        loanApp.setAmount(BigDecimal.valueOf(integerAmount));
         loanApp.setPurpose(purpose);
         loanApp.setApproved(false);
         loanApp.setUser(user);

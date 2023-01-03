@@ -9,26 +9,15 @@ const About = () => {
 	return (
 		<div className="page">
 			<Background />
-			<Navigation />
-			<div className="">
-				<div className="flex-container">
-					<div className="flex-item">
-						<h2>About Us</h2>
-						<p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</div>
-				</div>
+            <Navigation />
+            <div className="content">
+                <h2>About Us</h2>
+                <p className="description">MAJIC Bank's vision is to allow our customers to bank with ease.
+                        We strive to be the most trusted and accessible bank to our clients.
+                        The clients are the heart of the experience and so we want to create products and services which help
+                        them meet their financial needs with no hidden fees or minimum balance requirements.
+                        Our core value is to learn what matters the most to our clients because we recognize that our success
+                        comes from our client's success.</p>
 			</div>
 			<Footer />
 		</div>

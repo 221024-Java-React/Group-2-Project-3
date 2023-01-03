@@ -18,6 +18,9 @@ const Footer = () => {
                     <Link to="/retrieve" className="footer-flex-item">Forgot Username</Link>
                     <Link to="/reset" className="footer-flex-item">Forgot Password</Link>
                 </>}
+                {loggedInUser.id !== -1 && <>
+                    <Link to="/loanrequest" className="footer-flex-item">Apply for Loan</Link>
+                </>}
             </div>
 		</div>
 	);
