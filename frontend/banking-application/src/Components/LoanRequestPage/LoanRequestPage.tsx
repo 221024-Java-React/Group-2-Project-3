@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 const LoanRequestPage: React.FC = () => {
-  const { loggedInUser, findAccounts } = useContext(AuthContext);
+  const { loggedInUser, findAccounts, applyForLoan } = useContext(AuthContext);
 
   const [loanDescription, setLoanDescription] = useState<string>("");
   const [ownership, setOwnership] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
+
   const descriptionHandler = (event: any) => {
     setLoanDescription(event.target.value);
   };
@@ -14,14 +16,20 @@ const LoanRequestPage: React.FC = () => {
     setOwnership(event.target.value);
   };
 
+  const amountHandler = (event: any) => {
+    setAmount(event.target.value);
+  }
+
   useEffect(() => {
     findAccounts();
   }, []);
 
   console.log(ownership);
 
-  // react component to create a loanApplication on the back end. Use postman to select the loanApp id and approve/deny which then adds money to users loan account
-
+  const submitHandler = () => {
+    applyForLoan(loggedInUser, amount, loanDescription)
+  }
+  
   return (
     <div>
       <label>
@@ -40,6 +48,8 @@ const LoanRequestPage: React.FC = () => {
         <option value="own">Own</option>
         <option value="rent">Rent</option>
       </select>
+      <input type="number" onChange={amountHandler} name="amount"/>
+      <button onClick={submitHandler}>Apply now</button>
     </div>
   );
 };
