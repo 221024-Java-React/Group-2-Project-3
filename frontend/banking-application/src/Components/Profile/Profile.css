@@ -57,16 +57,7 @@ p {
     width: 16%;
     height: 50px;
     margin-right: 0.65%;
-    /* position: relative;
-    width: 20%; */
-    
-	/* display: flex;
-	flex-direction: column;
-	justify-content: center;
-	color: white;
-	padding: 10px;
-	flex: 20%;
-	margin: 0 25px; */
+    margin-top: 15px;
 }
 
 .flex-content {
