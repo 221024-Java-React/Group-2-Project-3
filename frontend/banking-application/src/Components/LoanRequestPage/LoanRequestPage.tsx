@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
+import Background from "../Background/Background";
+import Footer from "../Footer/Footer";
+import Navigation from "../Navigation/Navigation";
+
+import "./LoanRequestPage.css"
 
 const LoanRequestPage: React.FC = () => {
   const { loggedInUser, findAccounts, applyForLoan } = useContext(AuthContext);
@@ -24,32 +29,36 @@ const LoanRequestPage: React.FC = () => {
     findAccounts();
   }, []);
 
-  console.log(ownership);
-
   const submitHandler = () => {
     applyForLoan(loggedInUser, amount, loanDescription)
   }
   
   return (
     <div>
-      <label>
-        Loan application for{" "}
-        {`${loggedInUser.firstName} ${loggedInUser.lastName}`}
-      </label>
+      <Background />
+      <Navigation />
+      <div className="container">
+        <label className="label">
+          Loan application for{" "}
+          {`${loggedInUser.firstName} ${loggedInUser.lastName}`}
+        </label>
 
-      <label>{loggedInUser.ssn}</label>
-      <label>{loggedInUser.dob}</label>
-      <label>{loggedInUser.occupation}</label>
-      <label>{loggedInUser.income}</label>
-      <label>Purpose of Loan</label>
-      <textarea onChange={descriptionHandler} name="description"></textarea>
-      <select onChange={ownerShipHandler} name="" id="">
-        <option value="property-ownership">Property Ownership</option>
-        <option value="own">Own</option>
-        <option value="rent">Rent</option>
-      </select>
-      <input type="number" onChange={amountHandler} name="amount"/>
-      <button onClick={submitHandler}>Apply now</button>
+        <label className="label">{loggedInUser.ssn}</label>
+        <label className="label">{loggedInUser.dob}</label>
+        <label className="label">{loggedInUser.occupation}</label>
+        <label className="label">{loggedInUser.income}</label>
+        <select onChange={ownerShipHandler} name="" id="">
+          <option value="property-ownership">Property Ownership</option>
+          <option value="own">Own</option>
+          <option value="rent">Rent</option>
+        </select>
+        <label className="label">Purpose of Loan</label>
+        <textarea onChange={descriptionHandler} name="description"></textarea>
+        
+        <input type="number" onChange={amountHandler} name="amount"/>
+        <button onClick={submitHandler}>Apply now</button>
+      </div>
+      <Footer />
     </div>
   );
 };
