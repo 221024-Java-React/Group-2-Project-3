@@ -1,6 +1,7 @@
 import Background from '../Background/Background';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
+import { Link } from 'react-router-dom';
 
 import '../AccountCard/AccountCard.css';
 import Advertisement from '../Advertisement/Advertisement';
@@ -25,12 +26,19 @@ const About = () => {
 							comes from our client's success.</em></p>
 						<br />
 						<div className="nav-row-container">
-							<div className="nav-col-container left"><h4>Download Our App</h4></div>
-							<div className="nav-col-container right"><strong>MAJIC Mobile App</strong></div>
+							<div className="nav-col-container left"><h4>Download Our MAJIC Mobile App click link below</h4>
+								<br />
+								<Link to="/"><strong><u>Android</u></strong></Link>
+								<br />
+								<Link to="/"><strong><u>iOS</u></strong></Link></div>
+
 						</div>
 						<div className="nav-row-container">
 							<div className="nav-col-container left"><h4>Branch Hours</h4>
+							<Link to="/"><strong><u>Find location near me</u></strong></Link>
+							
 								<pre>
+								<br />
 									Sun:  CLOSED<br />
 									Mon:  CLOSED<br />
 									Tue:  9:00AM - 5:00PM<br />
@@ -41,14 +49,18 @@ const About = () => {
 								</pre>
 							</div>
 							<div className="nav-col-container right"><h4>ATM Hours</h4>
+								<Link to="/"><strong><u>Find location near me</u></strong></Link>
 								<pre>
-									Open 24 Hours<br />
+									<br />
+									Open 24 Hours
 									<br />
 									<br />
 									<br />
 									<br />
 									<br />
 									Address
+
+
 								</pre>
 							</div>
 						</div>

@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Account } from "../../Types/Account";
 
 const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
-
-    const [balance, updateBalance] = useState<number>(0.0);
     
     const convertValueToString = (value: number): string => {
 		let valueString: string;
@@ -28,10 +26,6 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
 		return valueString;
 	};
 
-	useEffect(() => {
-		updateBalance(account.balance);
-
-    }, []);
 
 	return (
 
@@ -41,7 +35,7 @@ const AccountCard: React.FC<{ account: Account }> = ({ account }) => {
                 (account.type == 1 || ("" + account.type == "SAVINGS")) ? '/saving' :
                 (account.type == 2 || ("" + account.type == "LOAN")) ? '/loan' : '/'
             }><h2>{account.type}</h2></Link>
-			<h3>Balance: {convertValueToString(balance)}</h3>
+			<h3>Balance: {convertValueToString(account.balance)}</h3>
 		</div>
 	)
 }
