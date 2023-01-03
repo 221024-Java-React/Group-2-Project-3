@@ -332,7 +332,7 @@ export const AuthContextProvider: FC<{ children: JSX.Element }> = ({ children })
 				`http://localhost:8000/loan/create`,
 				{
 					"amount": amount,
-					"purpose": purpose,
+					"purpose": "Loan purpose: " + purpose,
 					"accepted": false,
 					"user_id": user.id
 
