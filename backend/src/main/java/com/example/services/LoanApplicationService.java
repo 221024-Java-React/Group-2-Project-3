@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.models.Account;
+import com.example.models.AccountType;
 import com.example.models.LoanApplication;
 import com.example.models.User;
 import com.example.repository.LoanApplicationRepository;
@@ -34,7 +35,7 @@ public class LoanApplicationService {
         loanToApprove.setApproved(true);
         int userId = loanToApprove.getUser().getId();
         Account userLoanAccount = accountService.readAccountByUserId(userId).get(2);
-
+        userLoanAccount.setType(AccountType.LOAN);
         accountService.depositFunds(userLoanAccount,"Loan");
 
         return true;
