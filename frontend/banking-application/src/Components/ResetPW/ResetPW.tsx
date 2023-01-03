@@ -11,9 +11,13 @@ import Navigation from "../Navigation/Navigation";
 const ResetPW: React.FC = () => {
 
     const [checked, setChecked] = useState<boolean>(false);
+    const [validPassword, setValidPassword] = useState<boolean>(true);
+    const [validConfirmPassword, setValidConfirmPassword] = useState<boolean>(true);
+
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
     const [ssn, setSsn] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const { resetPassword, checkedUser } = useContext(AuthContext);
 
     const emailHandler = (event: any) => {
@@ -28,9 +32,44 @@ const ResetPW: React.FC = () => {
         setPassword(event.target.value);
     };
 
+    const confirmPasswordHandler = (event: any) => {
+        setConfirmPassword(event.target.value);
+    }
+
+    const isValidPassword = (password: string): boolean => {
+        return (/[^\n\s\t\r]+/).test(password);
+    }
+
     const resetPasswordHandler = (event: any) => {
         event.preventDefault();
-        resetPassword(email, ssn, password);
+
+        let valid = true;
+        
+        if (isValidPassword(password))
+        {
+            setValidPassword(true);
+
+            if (password == confirmPassword)
+            {
+                setValidConfirmPassword(true);
+            }
+            else
+            {
+                setValidConfirmPassword(false);
+                valid = false;
+            }
+        }
+        else {
+            setValidPassword(false);
+            setValidConfirmPassword(true);
+            valid = false;
+        }
+
+        if (valid)
+        {
+            resetPassword(email, ssn, password);
+        }
+        
         setChecked(true);
     };
 
@@ -60,14 +99,23 @@ const ResetPW: React.FC = () => {
                                 value={ssn}
                                 placeholder="SSN (#########)"
                                 onChange={ssnHandler}
-                            />
+                                />
+                                {!validPassword && <p className="invalid">Invalid Password</p>}
+                                {!validConfirmPassword && <p className="invalid">Password And Confirm Password Must Match</p>}
                             <input
                                 type="password"
                                 name="password"
                                 value={password}
                                 placeholder="New Password"
                                 onChange={passwordHandler}
-                            />
+                                />
+                                <input
+								type="password"
+								name="confirm-password"
+								value={confirmPassword}
+								placeholder="Confirm Password"
+								onChange={confirmPasswordHandler}
+                            />  
                             <button className="login-button" type="submit">Reset Password</button>
                         </form>
                             {<p>{checkedUser.email != "" ? "Password reset successfully." : ""

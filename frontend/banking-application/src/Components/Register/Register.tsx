@@ -15,10 +15,12 @@ const Register: React.FC = () => {
     const [accountExists, setAccountExists] = useState<boolean>(false);
     const [validEmail, setValidEmail] = useState<boolean>(true);
     const [validPassword, setValidPassword] = useState<boolean>(true);
+    const [validConfirmPassword, setValidConfirmPassword] = useState<boolean>(true);
     const [successfulRegister, setSuccessfulRegister] = useState<boolean>(false);
 
 	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 	const { register } = useContext(AuthContext);
 
 	const emailHandler = (event: any) => {
@@ -27,6 +29,10 @@ const Register: React.FC = () => {
 
 	const passwordHandler = (event: any) => {
 		setPassword(event.target.value);
+    };
+
+    const confirmPasswordHandler = (event: any) => {
+		setConfirmPassword(event.target.value);
     };
     
     const isValidEmail = (email: string) : boolean => {
@@ -50,9 +56,22 @@ const Register: React.FC = () => {
         }
         
         if (isValidPassword(password))
+        {
             setValidPassword(true);
+
+            if (password == confirmPassword)
+            {
+                setValidConfirmPassword(true);
+            }
+            else
+            {
+                setValidConfirmPassword(false);
+                valid = false;
+            }
+        }
         else {
             setValidPassword(false);
+            setValidConfirmPassword(true);
             valid = false;
         }
 
@@ -87,14 +106,22 @@ const Register: React.FC = () => {
 								placeholder="Email"
 								onChange={emailHandler}
                             />
-                            {!validPassword && <p className="invalid">Invalid Password</p>}
+                                {!validPassword && <p className="invalid">Invalid Password</p>}
+                                {!validConfirmPassword && <p className="invalid">Password And Confirm Password Must Match</p>}
 							<input
 								type="password"
 								name="password"
 								value={password}
 								placeholder="Password"
 								onChange={passwordHandler}
-                            />
+                                />
+                            <input
+								type="password"
+								name="confirm-password"
+								value={confirmPassword}
+								placeholder="Confirm Password"
+								onChange={confirmPasswordHandler}
+                            />    
 							<button className="login-button" type="submit">Create Account</button>
 						</form>
 						<h3 className="member">Already Have An Account?</h3>
