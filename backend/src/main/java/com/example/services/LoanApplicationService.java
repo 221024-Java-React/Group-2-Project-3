@@ -40,18 +40,12 @@ public class LoanApplicationService {
     public Boolean approve(Integer appId) {
         LoanApplication loanToApprove = loanRepo.findById(appId).get();
         BigDecimal loanAmount = loanToApprove.getAmount();
-//        System.out.println(loanAmount);
         
         loanToApprove.setApproved(true);
         
         int userId = loanToApprove.getUser().getId();
-//        System.out.println(userId);
-        
-        //edit to readLoanAccountByUserId?
-        Account userLoanAccount = accountService.readAccountByUserId(userId).get(2);
 
-        
-//        System.out.println(userLoanAccount.getInterestRate());
+        Account userLoanAccount = accountService.readAccountByUserId(userId).get(2);
 
         accountService.adjustBalance(userLoanAccount, loanAmount);
         
@@ -63,5 +57,12 @@ public class LoanApplicationService {
 
 
         return true;
+    }
+    
+    public Boolean reject(Integer appId) {
+    	LoanApplication loanToReject = loanRepo.findById(appId).get();
+    	loanToReject.setPurpose("REJECTED");
+    	
+    	return true;
     }
 }
