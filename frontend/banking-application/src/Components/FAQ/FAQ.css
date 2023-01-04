@@ -1,0 +1,14 @@
+.faq a {
+    color: white;
+    text-decoration: underline;
+}
+
+.faq a:hover {
+    color: black;
+    -webkit-text-stroke: 0.6px white;
+}
+
+.faq p {
+    font-size: 1.4em;
+    font-weight: 600;
+}

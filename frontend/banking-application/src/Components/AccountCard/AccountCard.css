@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  /* font-size: 30px; */
+  text-align: center;
+  margin: 50px;
+}
+
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+    /* font-size: 30px; */
+    text-align: center;
+    margin: 50px;
+  }
+
+.description {
+    font-size: 1.5em;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 1);
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+.flex-item {
+  position: relative;
+  color: white;
+  padding: 10px;
+  flex: 50%;
+  margin: 25px 50px;
+  background-color: var(--primary-theme1);
+}
+
+.flex-item p {
+    font-size: 1.25em;
+}
+
+.item {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+select {
+  height: 30px;
+}
+
+input {
+  margin-bottom: 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.transaction-card {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  padding: 0;
+}
+
+.transaction-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}

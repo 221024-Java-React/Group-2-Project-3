@@ -1,0 +1,55 @@
+.advertisement {
+	/* border: 5px solid var(--grey); */
+	border-radius: 1px;
+	/* position: relative; */
+	display: inline-block;
+	/* padding: 1em; */
+	background-color: var(--primary-theme1);
+    text-align: left;
+    /* margin-left: 10%;
+    margin-right: 20%; */
+    margin: 50px 50px;
+    /* width: 20%; */
+    /* margin: auto; */
+
+}
+
+.advertisement a {
+    color: white;
+}
+
+.advertisement a:hover {
+    color: black;
+    -webkit-text-stroke: 0.6px white;
+}
+
+.logo-small {
+	height: 140px;
+    margin: 0;
+    margin-top: -30px;
+	margin-left: -30px;
+    margin-bottom: -25px;
+}
+
+pre {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 400;
+}
+
+.advertisement p {
+    font-size: 1.45em;
+    font-weight: 400;
+}
+
+.advertisement .left {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 400;
+}
+
+.advertisement .right {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 400;
+}
